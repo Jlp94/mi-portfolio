@@ -1,14 +1,10 @@
 <header
-  class="fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out backdrop-blur-md border-b"
-  style="background: color-mix(in srgb, var(--color-cyan-50) 80%, transparent); border-color: color-mix(in srgb, var(--color-sky-700) 10%, transparent);"
-  [class.translate-y-0]="isVisible()"
-  [class.opacity-100]="isVisible()"
-  [class.pointer-events-auto]="isVisible()"
-  [class.-translate-y-full]="!isVisible()"
-  [class.opacity-0]="!isVisible()"
-  [class.pointer-events-none]="!isVisible()"
+  class="navbar-header fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out border-b"
+  [class.navbar-scrolled]="isScrolled()"
 >
-  <div class="max-w-6xl mx-auto px-6 h-12 flex items-center justify-center">
+  <div class="max-w-6xl mx-auto px-6 h-12 flex items-center justify-between">
+    <div class="w-8 h-8 md:flex-1"></div>
+
     <nav class="hidden md:flex items-center gap-10" aria-label="Navegación de escritorio">
       <a href="#about-me" class="nav-link text-xs tracking-wide focus:outline-none focus-visible:ring-1 rounded px-2 py-1">
         Sobre Mí
@@ -27,28 +23,42 @@
       </a>
     </nav>
 
-    <button
-      (click)="toggleMenu()"
-      class="md:hidden w-8 h-8 flex flex-col items-center justify-center gap-1 focus:outline-none focus-visible:ring-1 rounded transition-colors" style="color: #193741;"
-      [attr.aria-expanded]="isMenuOpen()"
-      aria-controls="mobile-nav"
-      aria-label="Menú de navegación"
-    >
-      <span
-        class="w-4.5 h-0.5 bg-current transition-all duration-300"
-        [class.rotate-45]="isMenuOpen()"
-        [class.translate-y-1.5]="isMenuOpen()"
-      ></span>
-      <span
-        class="w-4.5 h-0.5 bg-current transition-all duration-300"
-        [class.opacity-0]="isMenuOpen()"
-      ></span>
-      <span
-        class="w-4.5 h-0.5 bg-current transition-all duration-300"
-        [class.-rotate-45]="isMenuOpen()"
-        [class.-translate-y-1.5]="isMenuOpen()"
-      ></span>
-    </button>
+    <div class="flex items-center gap-4 md:flex-1 justify-end">
+      <button
+        (click)="toggleTheme()"
+        class="theme-toggle-btn w-8 h-8 flex items-center justify-center rounded-full transition-colors focus:outline-none focus-visible:ring-1 cursor-pointer"
+        [attr.aria-label]="themeService.currentTheme() === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'"
+      >
+        @if (themeService.currentTheme() === 'dark') {
+          <fa-icon [icon]="faSun" class="text-sm"></fa-icon>
+        } @else {
+          <fa-icon [icon]="faMoon" class="text-sm"></fa-icon>
+        }
+      </button>
+
+      <button
+        (click)="toggleMenu()"
+        class="burger-btn md:hidden w-8 h-8 flex flex-col items-center justify-center gap-1 focus:outline-none focus-visible:ring-1 rounded transition-colors"
+        [attr.aria-expanded]="isMenuOpen()"
+        aria-controls="mobile-nav"
+        aria-label="Menú de navegación"
+      >
+        <span
+          class="w-4.5 h-0.5 bg-current transition-all duration-300"
+          [class.rotate-45]="isMenuOpen()"
+          [class.translate-y-1.5]="isMenuOpen()"
+        ></span>
+        <span
+          class="w-4.5 h-0.5 bg-current transition-all duration-300"
+          [class.opacity-0]="isMenuOpen()"
+        ></span>
+        <span
+          class="w-4.5 h-0.5 bg-current transition-all duration-300"
+          [class.-rotate-45]="isMenuOpen()"
+          [class.-translate-y-1.5]="isMenuOpen()"
+        ></span>
+      </button>
+    </div>
   </div>
 
   <div

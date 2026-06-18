@@ -1,41 +1,53 @@
 <div class="hero-section relative w-full min-h-screen flex items-center overflow-hidden px-8 md:px-16">
 
   <div
-    class="hero-blob hero-blob-one absolute w-[700px] h-[700px] rounded-full pointer-events-none"
+    class="hero-blob hero-blob-one absolute w-[300px] h-[300px] md:w-[700px] md:h-[700px] rounded-full pointer-events-none"
     [style]="blobStyles().one"
     aria-hidden="true"
   ></div>
 
   <div
-    class="hero-blob hero-blob-two absolute w-[550px] h-[550px] rounded-full pointer-events-none"
+    class="hero-blob hero-blob-two absolute w-[250px] h-[250px] md:w-[550px] md:h-[550px] rounded-full pointer-events-none"
     [style]="blobStyles().two"
     aria-hidden="true"
   ></div>
 
   <div
-    class="hero-blob hero-blob-three absolute w-[400px] h-[400px] rounded-full pointer-events-none"
+    class="hero-blob hero-blob-three absolute w-[180px] h-[180px] md:w-[400px] md:h-[400px] rounded-full pointer-events-none"
     [style]="blobStyles().three"
     aria-hidden="true"
   ></div>
 
   <div
-    class="hero-blob hero-blob-four absolute w-[450px] h-[450px] rounded-full pointer-events-none"
+    class="hero-blob hero-blob-four absolute w-[200px] h-[200px] md:w-[450px] md:h-[450px] rounded-full pointer-events-none"
     [style]="blobStyles().four"
     aria-hidden="true"
   ></div>
 
   <div
-    class="hero-blob hero-blob-five absolute w-[350px] h-[350px] rounded-full pointer-events-none"
+    class="hero-blob hero-blob-five absolute w-[150px] h-[150px] md:w-[350px] md:h-[350px] rounded-full pointer-events-none"
     [style]="blobStyles().five"
+    aria-hidden="true"
+  ></div>
+
+  <div
+    class="hero-blob hero-blob-six absolute w-[160px] h-[160px] md:w-[380px] md:h-[380px] rounded-full pointer-events-none"
+    [style]="blobStyles().six"
+    aria-hidden="true"
+  ></div>
+
+  <div
+    class="hero-blob hero-blob-seven absolute w-[140px] h-[140px] md:w-[320px] md:h-[320px] rounded-full pointer-events-none"
+    [style]="blobStyles().seven"
     aria-hidden="true"
   ></div>
 
   <div class="relative z-10 w-full max-w-6xl mx-auto flex flex-col gap-10">
     <div class="flex flex-col">
-      <span class="hero-subtitle hero-slide-in hero-slide-in-1 font-display font-medium text-xl md:text-2xl tracking-widest uppercase mb-4 lg:-ml-14">
+      <span class="hero-subtitle hero-slide-in hero-slide-in-1 font-display font-medium text-xl md:text-2xl tracking-widest mb-4 lg:-ml-14">
         Hola, soy
       </span>
-      <h1 class="hero-title font-display font-medium tracking-tight uppercase">
+      <h1 class="hero-title font-display font-medium tracking-tight">
         <span class="hero-slide-in hero-slide-in-2 block text-5xl md:text-7xl lg:text-[8rem] mb-2 lg:-ml-8">Jose</span>
         <span class="hero-slide-in hero-slide-in-3 block text-5xl md:text-7xl lg:text-[8rem] ml-10 md:ml-20 lg:ml-28 mb-2">Luis</span>
         <span class="hero-slide-in hero-slide-in-4 block text-5xl md:text-7xl lg:text-[8rem] ml-16 md:ml-28 lg:ml-48">Prieto</span>
@@ -43,23 +55,18 @@
     </div>
 
     <div class="flex flex-col items-center w-full">
-      <p class="hero-role hero-slide-in hero-slide-in-5 font-display font-semibold text-lg md:text-xl tracking-widest uppercase mb-8">
-        Desarrollador Full Stack
-      </p>
-      <div class="hero-slide-in hero-slide-in-6 flex flex-wrap gap-4 justify-center w-full">
+      <div class="hero-slide-in hero-slide-in-5 flex items-center justify-center gap-4 mb-8">
+        <p class="hero-role font-display font-semibold text-lg md:text-xl tracking-widest">
+          Desarrollador Full Stack
+        </p>
         <a
           href="/CvJoseLuisPrieto2026.pdf"
           download="CvJoseLuisPrieto2026.pdf"
-          class="hero-btn-primary px-8 py-3 font-display font-bold text-sm tracking-widest uppercase rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 hover:opacity-80 active:scale-[0.98] flex items-center gap-2"
+          class="hero-cv-btn flex items-center justify-center rounded-full border transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+          aria-label="Descargar CV"
         >
-          <i class="pi pi-download"></i>
-          CV
-        </a>
-        <a
-          href="#projects"
-          class="hero-btn-secondary px-8 py-3 font-display font-semibold text-sm tracking-widest uppercase rounded-full border transition-all duration-200 focus:outline-none focus-visible:ring-2 hover:opacity-70"
-        >
-          Ver Proyectos
+          <fa-icon [icon]="faFilePdf" class="text-2xl"></fa-icon>
+          <span class="hero-cv-text">CV</span>
         </a>
       </div>
     </div>

@@ -1,81 +1,155 @@
 .hero-section {
-  background: var(--color-cyan-50);
+  background: var(--theme-body-bg);
+  transition: background-color 0.5s ease;
 }
 
 .hero-blob {
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), background-image 0.5s ease;
   will-change: transform;
 }
 
 .hero-blob-one {
-  background: radial-gradient(circle, var(--color-teal-400) 0%, var(--color-teal-300) 50%, transparent 70%);
+  background: var(--theme-blob-one-bg);
   top: -20%;
   left: -15%;
-  opacity: 0.65;
-  filter: blur(80px);
+  opacity: var(--theme-blob-one-opacity);
+  filter: blur(70px);
   animation: float-one 22s ease-in-out infinite;
 }
 
 .hero-blob-two {
-  background: radial-gradient(circle, var(--color-indigo-400) 0%, var(--color-indigo-300) 50%, transparent 70%);
+  background: var(--theme-blob-two-bg);
   bottom: -15%;
   right: -5%;
-  opacity: 0.55;
-  filter: blur(90px);
+  opacity: var(--theme-blob-two-opacity);
+  filter: blur(80px);
   animation: float-two 26s ease-in-out infinite;
 }
 
 .hero-blob-three {
-  background: radial-gradient(circle, var(--color-violet-400) 0%, transparent 70%);
+  background: var(--theme-blob-three-bg);
   top: 35%;
   right: 15%;
-  opacity: 0.45;
-  filter: blur(70px);
+  opacity: var(--theme-blob-three-opacity);
+  filter: blur(60px);
   animation: float-three 20s ease-in-out infinite;
 }
 
 .hero-blob-four {
-  background: radial-gradient(circle, var(--color-indigo-300) 0%, var(--color-teal-300) 50%, transparent 70%);
+  background: var(--theme-blob-four-bg);
   top: 10%;
   right: 5%;
-  opacity: 0.4;
-  filter: blur(100px);
+  opacity: var(--theme-blob-four-opacity);
+  filter: blur(85px);
   animation: float-four 24s ease-in-out infinite;
 }
 
 .hero-blob-five {
-  background: radial-gradient(circle, var(--color-violet-300) 0%, var(--color-indigo-300) 50%, transparent 70%);
+  background: var(--theme-blob-five-bg);
   bottom: 10%;
   left: 20%;
-  opacity: 0.35;
-  filter: blur(90px);
+  opacity: var(--theme-blob-five-opacity);
+  filter: blur(80px);
   animation: float-five 21s ease-in-out infinite;
 }
 
+.hero-blob-six {
+  background: var(--theme-blob-six-bg);
+  top: 15%;
+  left: 30%;
+  opacity: var(--theme-blob-six-opacity);
+  filter: blur(65px);
+  animation: float-two 24s ease-in-out infinite reverse;
+}
+
+.hero-blob-seven {
+  background: var(--theme-blob-seven-bg);
+  bottom: 25%;
+  left: 10%;
+  opacity: var(--theme-blob-seven-opacity);
+  filter: blur(75px);
+  animation: float-three 22s ease-in-out infinite reverse;
+}
+
 .hero-subtitle {
-  color: var(--color-sky-600);
+  color: var(--theme-hero-subtitle);
   opacity: 0.7;
+  transition: color 0.5s ease;
 }
 
 .hero-title {
-  color: var(--color-sky-950);
+  color: var(--theme-body-color);
   line-height: 1.05;
+  transition: color 0.5s ease;
+}
+
+.hero-title span:nth-child(1) {
+  color: var(--theme-name-jose);
+  transition: color 0.5s ease;
+}
+
+.hero-title span:nth-child(2) {
+  color: var(--theme-name-luis);
+  transition: color 0.5s ease;
+}
+
+.hero-title span:nth-child(3) {
+  color: var(--theme-name-prieto);
+  transition: color 0.5s ease;
 }
 
 .hero-role {
-  color: var(--color-cyan-700);
+  color: var(--theme-hero-role);
   opacity: 0.8;
+  transition: color 0.5s ease;
 }
 
-.hero-btn-primary {
-  background: var(--color-sky-700);
-  color: white;
-}
-
-.hero-btn-secondary {
+.hero-cv-btn {
+  width: 2.75rem;
+  height: 2.75rem;
+  color: var(--theme-hero-btn-secondary-color);
+  border: 1.5px solid transparent;
   background: transparent;
-  color: var(--color-sky-800);
-  border-color: var(--color-sky-800);
+  gap: 0;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s ease;
+  animation: bounce-soft 3s ease-in-out infinite;
+}
+
+.hero-cv-text {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+}
+
+.hero-cv-btn:hover {
+  width: 5.5rem;
+  gap: 0.5rem;
+  animation: none;
+  background: color-mix(in srgb, var(--theme-hero-btn-secondary-color) 10%, transparent);
+}
+
+.hero-cv-btn:hover .hero-cv-text {
+  max-width: 3rem;
+  opacity: 1;
+}
+
+@keyframes bounce-soft {
+  0%, 100%, 20%, 50%, 80% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-8px);
+  }
+  60% {
+    transform: translateY(-4px);
+  }
 }
 
 @keyframes slide-from-left {

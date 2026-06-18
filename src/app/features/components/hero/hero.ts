@@ -1,17 +1,20 @@
 import { Component, signal, computed } from '@angular/core';
 
 import { ScrollBadge } from '../../../shared/components/scroll-badge/scroll-badge';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { faFilePdf } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-hero',
   host: {
     '(window:mousemove)': 'onMouseMove($event)',
   },
-  imports: [ScrollBadge],
+  imports: [ScrollBadge, FaIconComponent],
   templateUrl: './hero.html',
   styleUrl: './hero.css',
 })
 export class Hero {
+  protected readonly faFilePdf = faFilePdf;
   private readonly mouseX = signal(0);
   private readonly mouseY = signal(0);
 
@@ -24,6 +27,8 @@ export class Hero {
       three: { transform: `translate(${x * 100}px, ${-y * 100}px)` },
       four: { transform: `translate(${-x * 110}px, ${y * 110}px)` },
       five: { transform: `translate(${x * 90}px, ${y * 90}px)` },
+      six: { transform: `translate(${-x * 120}px, ${-y * 120}px)` },
+      seven: { transform: `translate(${x * 140}px, ${-y * 140}px)` },
     };
   });
 
