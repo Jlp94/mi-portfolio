@@ -42,3 +42,12 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+## AI Assistants
+.claude/
+.cursorrules
+.copilot-instructions.json
+
+# Local environment secret overrides
+.env.local
+.env.*.local

@@ -1,6 +1,11 @@
 {
   "name": "mi-portfolio",
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "author": {
+    "name": "Jose Luis",
+    "lastname": "Prieto",
+    "email": "jlpcdr94@gmail.com"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
