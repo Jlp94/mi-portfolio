@@ -1,0 +1,36 @@
+.nav-link {
+  display: inline-block;
+  transform-origin: top center;
+  color: color-mix(in srgb, var(--color-sky-800) 60%, transparent);
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  font-weight: 700;
+  color: var(--color-sky-900);
+  animation: swing 0.45s ease;
+}
+
+.mobile-menu-container {
+  background: color-mix(in srgb, var(--color-cyan-50) 95%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--color-sky-700) 10%, transparent);
+}
+
+.mobile-nav-link {
+  color: color-mix(in srgb, var(--color-sky-800) 70%, transparent);
+  font-weight: 500;
+  transition: color 0.3s ease, font-weight 0.2s ease;
+}
+
+.mobile-nav-link:hover {
+  color: var(--color-sky-900);
+  font-weight: 700;
+}
+
+@keyframes swing {
+  0%, 100% { transform: rotate(0deg); }
+  20% { transform: rotate(8deg); }
+  50% { transform: rotate(-5deg); }
+  75% { transform: rotate(3deg); }
+}

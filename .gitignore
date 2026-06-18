@@ -15,6 +15,7 @@ yarn-error.log
 .idea/
 .project
 .classpath
+.vscode/
 .c9/
 *.launch
 .settings/
@@ -44,6 +45,7 @@ __screenshots__/
 Thumbs.db
 
 ## AI Assistants
+.agent-rules/
 .claude/
 .cursorrules
 .copilot-instructions.json

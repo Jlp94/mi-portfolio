@@ -1,1 +1,72 @@
-<p>hero works!</p>
+<div class="hero-section relative w-full min-h-screen flex items-center overflow-hidden px-8 md:px-16">
+
+  <div
+    class="hero-blob hero-blob-one absolute w-[700px] h-[700px] rounded-full pointer-events-none"
+    [style]="blobStyles().one"
+    aria-hidden="true"
+  ></div>
+
+  <div
+    class="hero-blob hero-blob-two absolute w-[550px] h-[550px] rounded-full pointer-events-none"
+    [style]="blobStyles().two"
+    aria-hidden="true"
+  ></div>
+
+  <div
+    class="hero-blob hero-blob-three absolute w-[400px] h-[400px] rounded-full pointer-events-none"
+    [style]="blobStyles().three"
+    aria-hidden="true"
+  ></div>
+
+  <div
+    class="hero-blob hero-blob-four absolute w-[450px] h-[450px] rounded-full pointer-events-none"
+    [style]="blobStyles().four"
+    aria-hidden="true"
+  ></div>
+
+  <div
+    class="hero-blob hero-blob-five absolute w-[350px] h-[350px] rounded-full pointer-events-none"
+    [style]="blobStyles().five"
+    aria-hidden="true"
+  ></div>
+
+  <div class="relative z-10 w-full max-w-6xl mx-auto flex flex-col gap-10">
+    <div class="flex flex-col">
+      <span class="hero-subtitle hero-slide-in hero-slide-in-1 font-display font-medium text-xl md:text-2xl tracking-widest uppercase mb-4 lg:-ml-14">
+        Hola, soy
+      </span>
+      <h1 class="hero-title font-display font-medium tracking-tight uppercase">
+        <span class="hero-slide-in hero-slide-in-2 block text-5xl md:text-7xl lg:text-[8rem] mb-2 lg:-ml-8">Jose</span>
+        <span class="hero-slide-in hero-slide-in-3 block text-5xl md:text-7xl lg:text-[8rem] ml-10 md:ml-20 lg:ml-28 mb-2">Luis</span>
+        <span class="hero-slide-in hero-slide-in-4 block text-5xl md:text-7xl lg:text-[8rem] ml-16 md:ml-28 lg:ml-48">Prieto</span>
+      </h1>
+    </div>
+
+    <div class="flex flex-col items-center w-full">
+      <p class="hero-role hero-slide-in hero-slide-in-5 font-display font-semibold text-lg md:text-xl tracking-widest uppercase mb-8">
+        Desarrollador Full Stack
+      </p>
+      <div class="hero-slide-in hero-slide-in-6 flex flex-wrap gap-4 justify-center w-full">
+        <a
+          href="/CvJoseLuisPrieto2026.pdf"
+          download="CvJoseLuisPrieto2026.pdf"
+          class="hero-btn-primary px-8 py-3 font-display font-bold text-sm tracking-widest uppercase rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 hover:opacity-80 active:scale-[0.98] flex items-center gap-2"
+        >
+          <i class="pi pi-download"></i>
+          CV
+        </a>
+        <a
+          href="#projects"
+          class="hero-btn-secondary px-8 py-3 font-display font-semibold text-sm tracking-widest uppercase rounded-full border transition-all duration-200 focus:outline-none focus-visible:ring-2 hover:opacity-70"
+        >
+          Ver Proyectos
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <app-scroll-badge
+    targetId="#about-me"
+    class="absolute bottom-10 right-10 z-10"
+  />
+</div>

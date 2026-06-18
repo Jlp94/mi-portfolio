@@ -1,0 +1,45 @@
+.scroll-badge-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 9999px;
+  transition: transform 0.3s ease;
+}
+
+.scroll-badge-text {
+  fill: var(--color-sky-700);
+  opacity: 0.4;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.scroll-badge-ring {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--color-sky-700) 10%, transparent);
+  border: 1.5px solid color-mix(in srgb, var(--color-sky-700) 25%, transparent);
+  transition: all 0.3s ease;
+}
+
+.scroll-badge-arrow {
+  color: var(--color-sky-700);
+  transition: transform 0.3s ease;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 18s linear infinite;
+}

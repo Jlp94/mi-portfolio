@@ -1,3 +1,42 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'primeicons/primeicons.css';
 
 @import 'tailwindcss';
+
+@theme {
+  --font-sans: "Poppins", sans-serif;
+  --font-display: "Poppins", sans-serif;
+  --font-mono: "Fira Code", monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-cyan-50);
+  color: var(--color-sky-950);
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-cyan-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-sky-400);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-sky-600);
+}
