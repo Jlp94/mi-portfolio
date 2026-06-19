@@ -15,14 +15,14 @@
   --theme-scrollbar-thumb: var(--color-sky-400);
   --theme-scrollbar-thumb-hover: var(--color-sky-600);
 
-  --theme-panel-bg: color-mix(in srgb, var(--color-teal-200) 75%, transparent);
-  --theme-panel-border: var(--color-sky-100);
-  --theme-panel-link: color-mix(in srgb, var(--color-sky-800) 70%, transparent);
+  --theme-panel-bg: color-mix(in srgb, var(--color-sky-300) 90%, transparent);
+  --theme-panel-border: color-mix(in srgb, var(--color-sky-400) 45%, transparent);
+  --theme-panel-link: color-mix(in srgb, var(--color-sky-800) 80%, transparent);
   --theme-panel-link-hover: var(--color-sky-900);
   --theme-panel-button: var(--color-sky-800);
-  --theme-toggle-hover-bg: color-mix(in srgb, var(--color-sky-700) 10%, transparent);
-  --theme-mobile-menu-bg: color-mix(in srgb, var(--color-teal-200) 95%, transparent);
-  --theme-mobile-menu-border: var(--color-sky-100);
+  --theme-toggle-hover-bg: color-mix(in srgb, var(--color-sky-700) 15%, transparent);
+  --theme-mobile-menu-bg: color-mix(in srgb, var(--color-sky-300) 98%, transparent);
+  --theme-mobile-menu-border: color-mix(in srgb, var(--color-sky-400) 45%, transparent);
   --theme-burger-color: var(--color-sky-950);
 
   --theme-hero-bg: transparent;
@@ -57,6 +57,29 @@
   --theme-badge-ring-hover-border: color-mix(in srgb, var(--color-sky-700) 70%, transparent);
   --theme-badge-ring-glow: 0 4px 12px color-mix(in srgb, var(--color-sky-700) 25%, transparent);
   --theme-badge-arrow: var(--color-sky-700);
+
+  /* About Me Section (Light Mode - Dark Sky Card) */
+  --theme-about-bg: var(--color-sky-900);
+  --theme-about-border: var(--color-sky-800);
+  --theme-about-text: var(--color-sky-100);
+  --theme-about-text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --theme-about-title-1: var(--color-sky-200);
+  --theme-about-title-2: var(--color-cyan-200);
+  --theme-about-highlight-1: var(--color-sky-300);
+  --theme-about-highlight-2: var(--color-cyan-300);
+  --theme-about-highlight-3: var(--color-sky-200);
+  --theme-about-highlight-4: var(--color-cyan-200);
+  --theme-about-glow-1: none;
+  --theme-about-glow-2: none;
+  --theme-about-glow-3: none;
+  --theme-about-glow-4: none;
+  --theme-about-shadow: 0 20px 40px -15px rgba(12, 74, 110, 0.3);
+
+  /* Code Syntax Highlighting Variables */
+  --theme-code-bracket: color-mix(in srgb, var(--color-sky-700) 70%, transparent);
+  --theme-code-tag: var(--color-teal-600);
+  --theme-code-attr: var(--color-cyan-700);
+  --theme-code-val: var(--color-indigo-600);
 }
 
 html.dark {
@@ -106,8 +129,31 @@ html.dark {
   --theme-badge-ring-border: color-mix(in srgb, var(--color-rose-400) 40%, transparent);
   --theme-badge-ring-hover-bg: color-mix(in srgb, var(--color-rose-400) 30%, transparent);
   --theme-badge-ring-hover-border: color-mix(in srgb, var(--color-rose-400) 80%, transparent);
-  --theme-badge-ring-glow: 0 4px 16px color-mix(in srgb, var(--color-rose-400) 40%, transparent);
+  --theme-badge-ring-glow: 0 4px 12px rgba(0, 0, 0, 0.4);
   --theme-badge-arrow: var(--color-rose-400);
+
+  /* About Me Section (Dark Mode - Matte Slate background) */
+  --theme-about-bg: #181922;
+  --theme-about-border: rgba(255, 255, 255, 0.05);
+  --theme-about-text: var(--color-rose-100);
+  --theme-about-text-shadow: none;
+  --theme-about-title-1: var(--color-rose-300);
+  --theme-about-title-2: var(--color-fuchsia-300);
+  --theme-about-highlight-1: var(--color-rose-300);
+  --theme-about-highlight-2: var(--color-fuchsia-300);
+  --theme-about-highlight-3: var(--color-violet-300);
+  --theme-about-highlight-4: var(--color-rose-200);
+  --theme-about-glow-1: none;
+  --theme-about-glow-2: none;
+  --theme-about-glow-3: none;
+  --theme-about-glow-4: none;
+  --theme-about-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+
+  /* Code Syntax Highlighting Variables */
+  --theme-code-bracket: color-mix(in srgb, var(--color-violet-400) 65%, transparent);
+  --theme-code-tag: var(--color-rose-300);
+  --theme-code-attr: var(--color-fuchsia-300);
+  --theme-code-val: var(--color-violet-300);
 }
 
 html {
@@ -127,6 +173,24 @@ body {
   transition: background-color 0.5s ease, color 0.5s ease;
 }
 
+/* Syntax Highlighting for UI Code Tags */
+.code-bracket {
+  color: var(--theme-code-bracket);
+  transition: color 0.5s ease;
+}
+.code-tag {
+  color: var(--theme-code-tag);
+  transition: color 0.5s ease;
+}
+.code-attr {
+  color: var(--theme-code-attr);
+  transition: color 0.5s ease;
+}
+.code-val {
+  color: var(--theme-code-val);
+  transition: color 0.5s ease;
+}
+
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -144,4 +208,43 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--theme-scrollbar-thumb-hover);
+}
+
+/* Reusable Scroll Reveal Styles */
+.reveal-element {
+  opacity: 0;
+  will-change: opacity, transform;
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Vertical Mode States */
+.reveal-element.reveal-exit-bottom {
+  opacity: 0;
+  transform: translateY(50px) scale(0.99);
+}
+.reveal-element.reveal-exit-top {
+  opacity: 0;
+  transform: translateY(-50px) scale(0.99);
+}
+
+/* Horizontal Mode States */
+.reveal-element.reveal-exit-right {
+  opacity: 0;
+  transform: translateX(50px) scale(0.99);
+}
+.reveal-element.reveal-exit-left {
+  opacity: 0;
+  transform: translateX(-50px) scale(0.99);
+}
+
+/* Zoom Mode State */
+.reveal-element.reveal-exit-zoom {
+  opacity: 0;
+  transform: scale(0.93);
+}
+
+/* Visible active state */
+.reveal-element.reveal-visible {
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
 }
