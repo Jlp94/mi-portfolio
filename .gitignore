@@ -32,6 +32,7 @@ yarn-error.log
 
 # Miscellaneous
 /.angular/cache
+.angular/
 .sass-cache/
 /connect.lock
 /coverage
@@ -46,9 +47,11 @@ Thumbs.db
 
 ## AI Assistants
 .agent-rules/
+.agents/
 .claude/
 .cursorrules
 .copilot-instructions.json
+scripts/
 
 # Local environment secret overrides
 .env.local

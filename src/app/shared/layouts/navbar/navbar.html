@@ -1,29 +1,48 @@
 <header
-  class="navbar-header fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out border-b"
-  [class.navbar-scrolled]="isScrolled()"
+  class="navbar-header fixed top-0 left-0 w-full z-50 border-b"
+  [class.navbar-top]="isAtTop()"
+  [class.navbar-hidden]="!isAtTop() && !isPastHero()"
+  [class.navbar-scrolled]="isPastHero()"
 >
   <div class="max-w-6xl mx-auto px-6 h-12 flex items-center justify-between">
-    <div class="w-8 h-8 md:flex-1"></div>
+    <div class="md:flex-1 flex items-center">
+      <a href="#" class="logo-link text-sm md:text-xl tracking-wider focus:outline-none focus-visible:ring-1 rounded">
+        jlp
+        <span class="text-xl font-bold text-white">.</span>
+      </a>
+    </div>
 
     <nav class="hidden md:flex items-center gap-10" aria-label="Navegación de escritorio">
       <a href="#about-me" class="nav-link text-xs tracking-wide focus:outline-none focus-visible:ring-1 rounded px-2 py-1">
-        Sobre Mí
+        {{ languageService.translations().navbar.about }}
       </a>
       <a href="#stacks" class="nav-link text-xs tracking-wide focus:outline-none focus-visible:ring-1 rounded px-2 py-1">
-        Tecnologías
+        {{ languageService.translations().navbar.stack }}
       </a>
       <a href="#experience-education" class="nav-link text-xs tracking-wide focus:outline-none focus-visible:ring-1 rounded px-2 py-1">
-        Experiencia
+        {{ languageService.translations().navbar.experience }}
       </a>
       <a href="#projects" class="nav-link text-xs tracking-wide focus:outline-none focus-visible:ring-1 rounded px-2 py-1">
-        Proyectos
+        {{ languageService.translations().navbar.projects }}
       </a>
       <a href="#contact" class="nav-link text-xs tracking-wide focus:outline-none focus-visible:ring-1 rounded px-2 py-1">
-        Contacto
+        {{ languageService.translations().navbar.contact }}
       </a>
     </nav>
 
     <div class="flex items-center gap-4 md:flex-1 justify-end">
+      <button
+        (click)="toggleLanguage()"
+        class="lang-toggle-btn text-xs font-semibold tracking-wider transition-colors duration-300 focus:outline-none focus-visible:ring-1 rounded px-2 h-8 flex items-center justify-center cursor-pointer"
+        [attr.aria-label]="languageService.currentLang() === 'es' ? 'Cambiar a inglés' : 'Switch to Spanish'"
+      >
+        @if (languageService.currentLang() === 'es') {
+          En
+        } @else {
+          Es
+        }
+      </button>
+
       <button
         (click)="toggleTheme()"
         class="theme-toggle-btn w-8 h-8 flex items-center justify-center rounded-full transition-colors focus:outline-none focus-visible:ring-1 cursor-pointer"
@@ -77,35 +96,35 @@
       href="#about-me"
       class="mobile-nav-link text-lg transition-colors"
     >
-      Sobre Mí
+      {{ languageService.translations().navbar.about }}
     </a>
     <a
       (click)="closeMenu()"
       href="#stacks"
       class="mobile-nav-link text-lg transition-colors"
     >
-      Tecnologías
+      {{ languageService.translations().navbar.stack }}
     </a>
     <a
       (click)="closeMenu()"
       href="#experience-education"
       class="mobile-nav-link text-lg transition-colors"
     >
-      Experiencia
+      {{ languageService.translations().navbar.experience }}
     </a>
     <a
       (click)="closeMenu()"
       href="#projects"
       class="mobile-nav-link text-lg transition-colors"
     >
-      Proyectos
+      {{ languageService.translations().navbar.projects }}
     </a>
     <a
       (click)="closeMenu()"
       href="#contact"
       class="mobile-nav-link text-lg transition-colors"
     >
-      Contacto
+      {{ languageService.translations().navbar.contact }}
     </a>
   </div>
 </header>

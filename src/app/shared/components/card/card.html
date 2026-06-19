@@ -1,0 +1,12 @@
+<div
+  class="shared-card border rounded-xl p-6 transition-all duration-300 relative overflow-hidden h-full"
+  [class.clickable-card]="clickable()"
+  [class.glow-sky]="glowColor() === 'sky'"
+  [class.glow-violet]="glowColor() === 'violet'"
+  [class.glow-emerald]="glowColor() === 'emerald'"
+>
+  <div class="card-glow-effect absolute inset-0 pointer-events-none opacity-0 transition-opacity duration-300"></div>
+  <div class="relative z-10 flex flex-col h-full">
+    <ng-content />
+  </div>
+</div>

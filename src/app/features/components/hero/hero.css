@@ -83,6 +83,10 @@
   transition: color 0.5s ease;
 }
 
+.hero-title .text-accent {
+  color: #ffffff !important;
+}
+
 .hero-title span:nth-child(1) {
   color: var(--theme-name-jose);
   transition: color 0.5s ease;

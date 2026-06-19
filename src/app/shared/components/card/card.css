@@ -1,0 +1,45 @@
+:host {
+  display: block;
+}
+
+.shared-card {
+  background: var(--theme-panel-bg);
+  border-color: var(--theme-panel-border);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.clickable-card {
+  cursor: pointer;
+}
+
+.clickable-card:hover {
+  transform: translateY(-4px);
+}
+
+.card-glow-effect {
+  background: radial-gradient(
+    800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 255, 255, 0.06),
+    transparent 40%
+  );
+}
+
+.shared-card:hover .card-glow-effect {
+  opacity: 1;
+}
+
+.glow-sky:hover {
+  box-shadow: 0 10px 30px -10px rgba(14, 165, 233, 0.15);
+  border-color: var(--color-sky-400);
+}
+
+.glow-violet:hover {
+  box-shadow: 0 10px 30px -10px rgba(139, 92, 246, 0.15);
+  border-color: var(--color-violet-400);
+}
+
+.glow-emerald:hover {
+  box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.15);
+  border-color: var(--color-emerald-400);
+}

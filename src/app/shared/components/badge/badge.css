@@ -1,0 +1,66 @@
+:host {
+  display: inline-block;
+}
+
+.shared-badge {
+  border: 1px solid transparent;
+}
+
+.shared-badge:hover {
+  transform: scale(1.05);
+}
+
+.badge-sky {
+  background: color-mix(in srgb, var(--color-sky-500) 10%, transparent);
+  color: var(--color-sky-400);
+  border-color: color-mix(in srgb, var(--color-sky-500) 20%, transparent);
+}
+.badge-sky:hover {
+  background: color-mix(in srgb, var(--color-sky-500) 15%, transparent);
+  color: var(--color-sky-300);
+  border-color: var(--color-sky-400);
+}
+
+.badge-violet {
+  background: color-mix(in srgb, var(--color-violet-500) 10%, transparent);
+  color: var(--color-violet-400);
+  border-color: color-mix(in srgb, var(--color-violet-500) 20%, transparent);
+}
+.badge-violet:hover {
+  background: color-mix(in srgb, var(--color-violet-500) 15%, transparent);
+  color: var(--color-violet-300);
+  border-color: var(--color-violet-400);
+}
+
+.badge-emerald {
+  background: color-mix(in srgb, var(--color-emerald-500) 10%, transparent);
+  color: var(--color-emerald-400);
+  border-color: color-mix(in srgb, var(--color-emerald-500) 20%, transparent);
+}
+.badge-emerald:hover {
+  background: color-mix(in srgb, var(--color-emerald-500) 15%, transparent);
+  color: var(--color-emerald-300);
+  border-color: var(--color-emerald-400);
+}
+
+.badge-teal {
+  background: color-mix(in srgb, var(--color-teal-500) 10%, transparent);
+  color: var(--color-teal-400);
+  border-color: color-mix(in srgb, var(--color-teal-500) 20%, transparent);
+}
+.badge-teal:hover {
+  background: color-mix(in srgb, var(--color-teal-500) 15%, transparent);
+  color: var(--color-teal-300);
+  border-color: var(--color-teal-400);
+}
+
+.badge-slate {
+  background: color-mix(in srgb, var(--color-slate-500) 10%, transparent);
+  color: var(--color-slate-400);
+  border-color: color-mix(in srgb, var(--color-slate-500) 20%, transparent);
+}
+.badge-slate:hover {
+  background: color-mix(in srgb, var(--color-slate-500) 15%, transparent);
+  color: var(--color-slate-300);
+  border-color: var(--color-slate-400);
+}

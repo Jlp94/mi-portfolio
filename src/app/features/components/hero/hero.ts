@@ -1,6 +1,7 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed, inject } from '@angular/core';
 
 import { ScrollBadge } from '../../../shared/components/scroll-badge/scroll-badge';
+import { LanguageService } from '../../../core/services/language.service';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faFilePdf } from '@fortawesome/free-regular-svg-icons';
 
@@ -14,6 +15,7 @@ import { faFilePdf } from '@fortawesome/free-regular-svg-icons';
   styleUrl: './hero.css',
 })
 export class Hero {
+  protected readonly languageService = inject(LanguageService);
   protected readonly faFilePdf = faFilePdf;
   private readonly mouseX = signal(0);
   private readonly mouseY = signal(0);

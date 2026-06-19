@@ -16,13 +16,13 @@
   --theme-scrollbar-thumb-hover: var(--color-sky-600);
 
   --theme-panel-bg: color-mix(in srgb, var(--color-teal-200) 75%, transparent);
-  --theme-panel-border: color-mix(in srgb, var(--color-teal-300) 60%, transparent);
+  --theme-panel-border: var(--color-sky-100);
   --theme-panel-link: color-mix(in srgb, var(--color-sky-800) 70%, transparent);
   --theme-panel-link-hover: var(--color-sky-900);
   --theme-panel-button: var(--color-sky-800);
   --theme-toggle-hover-bg: color-mix(in srgb, var(--color-sky-700) 10%, transparent);
   --theme-mobile-menu-bg: color-mix(in srgb, var(--color-teal-200) 95%, transparent);
-  --theme-mobile-menu-border: color-mix(in srgb, var(--color-teal-300) 60%, transparent);
+  --theme-mobile-menu-border: var(--color-sky-100);
   --theme-burger-color: var(--color-sky-950);
 
   --theme-hero-bg: transparent;

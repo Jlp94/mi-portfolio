@@ -1,10 +1,32 @@
 .navbar-header {
   background: transparent;
   border-color: transparent;
-  transition: background-color 0.5s ease, border-color 0.5s ease, backdrop-filter 0.5s ease;
+  transform: translateY(0);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.6s ease,
+              border-color 0.6s ease,
+              backdrop-filter 0.6s ease,
+              -webkit-backdrop-filter 0.6s ease;
+}
+
+.navbar-header.navbar-top {
+  transform: translateY(0);
+  background: transparent;
+  border-color: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.navbar-header.navbar-hidden {
+  transform: translateY(-100%);
+  background: transparent;
+  border-color: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .navbar-header.navbar-scrolled {
+  transform: translateY(0);
   background: var(--theme-panel-bg);
   border-color: var(--theme-panel-border);
   backdrop-filter: blur(12px);
@@ -41,6 +63,19 @@
   font-weight: 700;
 }
 
+.logo-link {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--theme-panel-link);
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.logo-link:hover {
+  color: var(--theme-panel-link-hover);
+  transform: scale(1.05);
+}
+
 .burger-btn {
   color: var(--theme-burger-color);
 }
@@ -54,6 +89,14 @@
 .theme-toggle-btn:hover {
   background: var(--theme-toggle-hover-bg);
   transform: scale(1.05);
+}
+
+.lang-toggle-btn {
+  color: var(--theme-panel-link);
+}
+
+.lang-toggle-btn:hover {
+  color: var(--theme-panel-link-hover);
 }
 
 @keyframes swing {
