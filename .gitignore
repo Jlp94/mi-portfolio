@@ -15,6 +15,7 @@ yarn-error.log
 .idea/
 .project
 .classpath
+.vscode/
 .c9/
 *.launch
 .settings/
@@ -31,6 +32,7 @@ yarn-error.log
 
 # Miscellaneous
 /.angular/cache
+.angular/
 .sass-cache/
 /connect.lock
 /coverage
@@ -44,9 +46,12 @@ __screenshots__/
 Thumbs.db
 
 ## AI Assistants
+.agent-rules/
+.agents/
 .claude/
 .cursorrules
 .copilot-instructions.json
+scripts/
 
 # Local environment secret overrides
 .env.local

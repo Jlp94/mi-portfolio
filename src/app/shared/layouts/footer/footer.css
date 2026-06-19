@@ -1,0 +1,36 @@
+.portfolio-footer {
+  width: 100%;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  position: relative;
+  background: var(--theme-panel-bg);
+  border-top: 1px solid var(--theme-panel-border);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background-color 0.5s ease, border-color 0.5s ease, backdrop-filter 0.5s ease;
+}
+
+.footer-text {
+  font-size: 0.75rem;
+  color: var(--theme-panel-link);
+  transition: color 0.5s ease;
+}
+
+.footer-social-link {
+  color: var(--theme-panel-link);
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.footer-social-link:hover {
+  color: var(--theme-panel-link-hover);
+  transform: translateY(-2px);
+}
+
+.footer-divider {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--theme-panel-link);
+  opacity: 0.3;
+  transition: color 0.5s ease;
+}

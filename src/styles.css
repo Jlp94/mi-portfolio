@@ -1,3 +1,147 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'primeicons/primeicons.css';
 
 @import 'tailwindcss';
+
+@theme {
+  --font-sans: "Poppins", sans-serif;
+  --font-display: "Poppins", sans-serif;
+  --font-mono: "Fira Code", monospace;
+}
+
+:root {
+  --theme-body-bg: var(--color-teal-100);
+  --theme-body-color: var(--color-sky-950);
+  --theme-scrollbar-track: var(--color-teal-100);
+  --theme-scrollbar-thumb: var(--color-sky-400);
+  --theme-scrollbar-thumb-hover: var(--color-sky-600);
+
+  --theme-panel-bg: color-mix(in srgb, var(--color-teal-200) 75%, transparent);
+  --theme-panel-border: var(--color-sky-100);
+  --theme-panel-link: color-mix(in srgb, var(--color-sky-800) 70%, transparent);
+  --theme-panel-link-hover: var(--color-sky-900);
+  --theme-panel-button: var(--color-sky-800);
+  --theme-toggle-hover-bg: color-mix(in srgb, var(--color-sky-700) 10%, transparent);
+  --theme-mobile-menu-bg: color-mix(in srgb, var(--color-teal-200) 95%, transparent);
+  --theme-mobile-menu-border: var(--color-sky-100);
+  --theme-burger-color: var(--color-sky-950);
+
+  --theme-hero-bg: transparent;
+  --theme-hero-subtitle: var(--color-sky-600);
+  --theme-name-jose: var(--color-sky-600);
+  --theme-name-luis: var(--color-cyan-600);
+  --theme-name-prieto: var(--color-cyan-800);
+  --theme-hero-role: var(--color-sky-700);
+  --theme-hero-btn-primary-bg: var(--color-sky-700);
+  --theme-hero-btn-secondary-color: var(--theme-name-jose);
+
+  --theme-blob-one-bg: radial-gradient(circle, var(--color-teal-400) 0%, var(--color-teal-300) 60%, transparent 85%);
+  --theme-blob-two-bg: radial-gradient(circle, var(--color-indigo-400) 0%, var(--color-indigo-300) 60%, transparent 85%);
+  --theme-blob-three-bg: radial-gradient(circle, var(--color-violet-400) 0%, transparent 85%);
+  --theme-blob-four-bg: radial-gradient(circle, var(--color-indigo-300) 0%, var(--color-teal-300) 60%, transparent 85%);
+  --theme-blob-five-bg: radial-gradient(circle, var(--color-violet-300) 0%, var(--color-indigo-300) 60%, transparent 85%);
+  --theme-blob-six-bg: radial-gradient(circle, var(--color-teal-300) 0%, var(--color-indigo-300) 60%, transparent 85%);
+  --theme-blob-seven-bg: radial-gradient(circle, var(--color-violet-300) 0%, transparent 85%);
+
+  --theme-blob-one-opacity: 0.95;
+  --theme-blob-two-opacity: 0.9;
+  --theme-blob-three-opacity: 0.85;
+  --theme-blob-four-opacity: 0.8;
+  --theme-blob-five-opacity: 0.75;
+  --theme-blob-six-opacity: 0.75;
+  --theme-blob-seven-opacity: 0.7;
+
+  --theme-badge-text: var(--color-sky-700);
+  --theme-badge-ring-bg: color-mix(in srgb, var(--color-sky-700) 15%, transparent);
+  --theme-badge-ring-border: color-mix(in srgb, var(--color-sky-700) 35%, transparent);
+  --theme-badge-ring-hover-bg: color-mix(in srgb, var(--color-sky-700) 25%, transparent);
+  --theme-badge-ring-hover-border: color-mix(in srgb, var(--color-sky-700) 70%, transparent);
+  --theme-badge-ring-glow: 0 4px 12px color-mix(in srgb, var(--color-sky-700) 25%, transparent);
+  --theme-badge-arrow: var(--color-sky-700);
+}
+
+html.dark {
+  --theme-body-bg: #181922;
+  --theme-body-color: var(--color-rose-100);
+  --theme-scrollbar-track: #1e1f29;
+  --theme-scrollbar-thumb: var(--color-rose-500);
+  --theme-scrollbar-thumb-hover: var(--color-rose-600);
+
+  --theme-panel-bg: color-mix(in srgb, #1e1f29 80%, transparent);
+  --theme-panel-border: color-mix(in srgb, var(--color-violet-500) 15%, transparent);
+  --theme-panel-link: color-mix(in srgb, var(--color-rose-300) 80%, transparent);
+  --theme-panel-link-hover: var(--color-rose-400);
+  --theme-panel-button: var(--color-yellow-400);
+  --theme-toggle-hover-bg: color-mix(in srgb, var(--color-violet-500) 15%, transparent);
+  --theme-mobile-menu-bg: color-mix(in srgb, #1e1f29 98%, transparent);
+  --theme-mobile-menu-border: color-mix(in srgb, var(--color-violet-500) 15%, transparent);
+  --theme-burger-color: var(--color-rose-300);
+
+  --theme-hero-bg: #181922;
+  --theme-hero-subtitle: var(--color-rose-400);
+  --theme-name-jose: var(--color-rose-300);
+  --theme-name-luis: var(--color-fuchsia-300);
+  --theme-name-prieto: var(--color-violet-300);
+  --theme-hero-role: var(--color-violet-400);
+  --theme-hero-btn-primary-bg: var(--color-fuchsia-600);
+  --theme-hero-btn-secondary-color: var(--color-rose-300);
+
+  --theme-blob-one-bg: radial-gradient(circle, var(--color-violet-500) 0%, var(--color-purple-600) 50%, transparent 70%);
+  --theme-blob-two-bg: radial-gradient(circle, var(--color-fuchsia-600) 0%, var(--color-pink-500) 50%, transparent 70%);
+  --theme-blob-three-bg: radial-gradient(circle, var(--color-rose-500) 0%, transparent 70%);
+  --theme-blob-four-bg: radial-gradient(circle, var(--color-red-500) 0%, var(--color-rose-600) 50%, transparent 70%);
+  --theme-blob-five-bg: radial-gradient(circle, var(--color-pink-600) 0%, var(--color-violet-600) 50%, transparent 70%);
+  --theme-blob-six-bg: radial-gradient(circle, var(--color-purple-500) 0%, var(--color-fuchsia-600) 50%, transparent 70%);
+  --theme-blob-seven-bg: radial-gradient(circle, var(--color-rose-600) 0%, transparent 70%);
+
+  --theme-blob-one-opacity: 0.75;
+  --theme-blob-two-opacity: 0.68;
+  --theme-blob-three-opacity: 0.60;
+  --theme-blob-four-opacity: 0.55;
+  --theme-blob-five-opacity: 0.50;
+  --theme-blob-six-opacity: 0.48;
+  --theme-blob-seven-opacity: 0.45;
+
+  --theme-badge-text: var(--color-rose-400);
+  --theme-badge-ring-bg: color-mix(in srgb, var(--color-rose-400) 18%, transparent);
+  --theme-badge-ring-border: color-mix(in srgb, var(--color-rose-400) 40%, transparent);
+  --theme-badge-ring-hover-bg: color-mix(in srgb, var(--color-rose-400) 30%, transparent);
+  --theme-badge-ring-hover-border: color-mix(in srgb, var(--color-rose-400) 80%, transparent);
+  --theme-badge-ring-glow: 0 4px 16px color-mix(in srgb, var(--color-rose-400) 40%, transparent);
+  --theme-badge-arrow: var(--color-rose-400);
+}
+
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--theme-body-bg);
+  color: var(--theme-body-color);
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--theme-scrollbar-track);
+  transition: background-color 0.5s ease;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--theme-scrollbar-thumb);
+  border-radius: 3px;
+  transition: background-color 0.5s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--theme-scrollbar-thumb-hover);
+}
