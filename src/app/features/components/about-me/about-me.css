@@ -14,8 +14,8 @@
   /* Local overrides for high-contrast code highlighting on dark background (Light Mode - Dark Sky bg) */
   --theme-code-bracket: rgba(125, 211, 252, 0.6);
   --theme-code-tag: var(--color-teal-300);
-  --theme-code-attr: var(--color-cyan-300);
-  --theme-code-val: var(--color-sky-200);
+  --theme-code-attr: var(--color-amber-400);
+  --theme-code-val: var(--color-lime-300);
 }
 
 :host-context(.dark) {
@@ -23,11 +23,11 @@
   --theme-code-bracket: rgba(196, 181, 253, 0.6);
   --theme-code-tag: var(--color-rose-300);
   --theme-code-attr: var(--color-fuchsia-300);
-  --theme-code-val: var(--color-violet-300);
+  --theme-code-val: var(--color-lime-300);
 }
 
-:host-context(.dark) .about-me-glow-one,
-:host-context(.dark) .about-me-glow-two {
+.about-me-glow-one,
+.about-me-glow-two {
   display: none;
 }
 
@@ -50,8 +50,18 @@
 }
 
 .highlight {
+  display: inline-block;
   font-weight: 800;
-  transition: color 0.5s ease, text-shadow 0.5s ease;
+  transform-origin: center;
+  transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              text-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              letter-spacing 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.highlight:hover {
+  transform: scale(1.05) translateY(-3px) rotate(-1deg);
+  letter-spacing: 0.02em;
 }
 
 .highlight-1 {

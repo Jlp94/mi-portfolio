@@ -1,5 +1,5 @@
 <header
-  class="navbar-header fixed top-0 left-0 w-full z-50 border-b"
+  class="navbar-header fixed top-0 left-0 w-full z-50 border-b pt-[5px] md:pt-0"
   [class.navbar-top]="isAtTop()"
   [class.navbar-hidden]="!isAtTop() && !isPastHero()"
   [class.navbar-scrolled]="isPastHero()"
@@ -82,7 +82,7 @@
 
   <div
     id="mobile-nav"
-    class="mobile-menu-container md:hidden fixed top-[48px] left-0 w-full h-[calc(100vh-48px)] backdrop-blur-lg transition-all duration-300 ease-in-out transform flex flex-col items-center justify-center gap-8 z-40"
+    class="mobile-menu-container md:hidden fixed top-[53px] left-0 w-full h-[calc(100vh-53px)] backdrop-blur-lg transition-all duration-300 ease-in-out transform flex flex-col items-center justify-center gap-8 z-40"
     [class.translate-x-0]="isMenuOpen()"
     [class.opacity-100]="isMenuOpen()"
     [class.pointer-events-auto]="isMenuOpen()"
