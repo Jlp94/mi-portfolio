@@ -4,16 +4,12 @@
   maxWidth="max-w-7xl"
   heightClass="min-h-[calc(100vh+7.5px)] h-auto flex flex-col justify-start pt-12 md:pt-28 pb-16 overflow-visible"
 >
-  <div 
-    class="about-me-content"
-    appScrollReveal
-  >
-    <!-- Background glows inside the component -->
+  <div class="about-me-content">
+
     <div class="about-me-glow-one"></div>
     <div class="about-me-glow-two"></div>
 
-    <!-- Staircase Title -->
-    <div class="about-me-header mb-6 select-none font-display" appScrollReveal animationMode="zoom">
+    <div class="about-me-header mb-6 select-none font-display">
       <span class="text-xs font-mono opacity-65 mb-2 block">
         <span class="code-bracket">&lt;</span><span class="code-tag">h2</span><span class="code-attr"> class</span>=<span class="code-val">"section-title"</span><span class="code-bracket">&gt;</span>
       </span>
@@ -28,20 +24,19 @@
       </span>
     </div>
 
-    <!-- Biography body text -->
     <div class="about-me-body pl-0">
       <span class="text-xs font-mono opacity-65 mb-2 block">
         <span class="code-bracket">&lt;</span><span class="code-tag">p</span><span class="code-attr"> class</span>=<span class="code-val">"profile"</span><span class="code-bracket">&gt;</span>
       </span>
       
       <div class="about-me-statements pl-4 flex flex-col gap-6 md:gap-8">
-        <p class="about-me-statement text-base md:text-[1.5rem] lg:text-[1.85rem] font-bold tracking-tight leading-relaxed md:leading-normal" appScrollReveal>
+        <p class="about-me-statement text-base md:text-[1.5rem] lg:text-[1.85rem] font-bold tracking-tight leading-relaxed md:leading-normal">
           <span>{{ t().text1 }}</span>
           <span class="highlight highlight-1">{{ t().highlight1 }}</span>
           <span>{{ t().text2 }}</span>
         </p>
 
-        <p class="about-me-statement text-base md:text-[1.5rem] lg:text-[1.85rem] font-bold tracking-tight leading-relaxed md:leading-normal" appScrollReveal>
+        <p class="about-me-statement text-base md:text-[1.5rem] lg:text-[1.85rem] font-bold tracking-tight leading-relaxed md:leading-normal">
           <span>{{ t().text3 }}</span>
           <span class="highlight highlight-2">{{ t().highlight2 }}</span>
           <span>{{ t().text3_2 }}</span>
@@ -49,7 +44,7 @@
           <span>{{ t().text4 }}</span>
         </p>
 
-        <p class="about-me-statement text-base md:text-[1.5rem] lg:text-[1.85rem] font-bold tracking-tight leading-relaxed md:leading-normal" appScrollReveal>
+        <p class="about-me-statement text-base md:text-[1.5rem] lg:text-[1.85rem] font-bold tracking-tight leading-relaxed md:leading-normal">
           <span>{{ t().text5_pre }}</span>
           <span class="highlight highlight-4">{{ t().highlight4 }}</span>
           <span>{{ t().text5 }}</span>

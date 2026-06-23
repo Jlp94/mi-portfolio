@@ -11,7 +11,6 @@
   box-shadow: var(--theme-about-shadow);
   transition: background-color 0.5s ease, border-color 0.5s ease, border-radius 0.5s ease, box-shadow 0.5s ease;
 
-  /* Local overrides for high-contrast code highlighting on dark background (Light Mode - Dark Sky bg) */
   --theme-code-bracket: rgba(125, 211, 252, 0.6);
   --theme-code-tag: var(--color-teal-300);
   --theme-code-attr: var(--color-amber-400);
@@ -19,7 +18,6 @@
 }
 
 :host-context(.dark) {
-  /* Local overrides for high-contrast code highlighting on dark background (Dark Mode - Dark Violet bg) */
   --theme-code-bracket: rgba(196, 181, 253, 0.6);
   --theme-code-tag: var(--color-rose-300);
   --theme-code-attr: var(--color-fuchsia-300);
@@ -84,7 +82,6 @@
   text-shadow: var(--theme-about-glow-4);
 }
 
-/* Background glows floating under text */
 .about-me-glow-one {
   position: absolute;
   top: -10%;
@@ -114,3 +111,4 @@
   background: radial-gradient(circle, var(--theme-about-highlight-2) 0%, transparent 70%);
   z-index: 1;
 }
+

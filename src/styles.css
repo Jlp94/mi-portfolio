@@ -1,6 +1,7 @@
 @import 'primeicons/primeicons.css';
 
 @import 'tailwindcss';
+@import 'tailwind-animations';
 
 @theme {
   --font-sans: "Poppins", sans-serif;

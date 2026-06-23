@@ -27,10 +27,9 @@
 
 .navbar-header.navbar-scrolled {
   transform: translateY(0);
-  background: var(--theme-panel-bg);
+  background: color-mix(in srgb, var(--theme-panel-bg) 50%, transparent);
   border-color: var(--theme-panel-border);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(5px);
 }
 
 .nav-link {
