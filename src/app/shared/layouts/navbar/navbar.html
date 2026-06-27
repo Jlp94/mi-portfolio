@@ -14,26 +14,26 @@
 
     <nav class="hidden md:flex items-center gap-10" aria-label="Navegación de escritorio">
       <a href="#about-me" class="nav-link text-xs tracking-wide focus:outline-none focus-visible:ring-1 rounded px-2 py-1">
-        {{ languageService.translations().navbar.about }}
+        <span class="nav-link-text">{{ languageService.translations().navbar.about }}</span>
       </a>
       <a href="#stacks" class="nav-link text-xs tracking-wide focus:outline-none focus-visible:ring-1 rounded px-2 py-1">
-        {{ languageService.translations().navbar.stack }}
+        <span class="nav-link-text">{{ languageService.translations().navbar.stack }}</span>
       </a>
       <a href="#experience-education" class="nav-link text-xs tracking-wide focus:outline-none focus-visible:ring-1 rounded px-2 py-1">
-        {{ languageService.translations().navbar.experience }}
+        <span class="nav-link-text">{{ languageService.translations().navbar.experience }}</span>
       </a>
       <a href="#projects" class="nav-link text-xs tracking-wide focus:outline-none focus-visible:ring-1 rounded px-2 py-1">
-        {{ languageService.translations().navbar.projects }}
+        <span class="nav-link-text">{{ languageService.translations().navbar.projects }}</span>
       </a>
       <a href="#contact" class="nav-link text-xs tracking-wide focus:outline-none focus-visible:ring-1 rounded px-2 py-1">
-        {{ languageService.translations().navbar.contact }}
+        <span class="nav-link-text">{{ languageService.translations().navbar.contact }}</span>
       </a>
     </nav>
 
     <div class="flex items-center gap-4 md:flex-1 justify-end">
       <button
         (click)="toggleLanguage()"
-        class="lang-toggle-btn text-xs font-semibold tracking-wider transition-colors duration-300 focus:outline-none focus-visible:ring-1 rounded px-2 h-8 flex items-center justify-center cursor-pointer"
+        class="lang-toggle-btn w-8 h-8 flex items-center justify-center rounded-full text-xs font-semibold tracking-wider focus:outline-none focus-visible:ring-1 cursor-pointer"
         [attr.aria-label]="languageService.currentLang() === 'es' ? 'Cambiar a inglés' : 'Switch to Spanish'"
       >
         @if (languageService.currentLang() === 'es') {

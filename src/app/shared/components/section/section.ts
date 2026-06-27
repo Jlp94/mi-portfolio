@@ -1,8 +1,9 @@
 import { Component, input } from '@angular/core';
+import { CodeTag } from '../code-tag/code-tag';
 
 @Component({
   selector: 'app-shared-section',
-  imports: [],
+  imports: [CodeTag],
   templateUrl: './section.html',
   styleUrl: './section.css',
 })
