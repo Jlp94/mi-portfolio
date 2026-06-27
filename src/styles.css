@@ -3,10 +3,14 @@
 @import 'tailwindcss';
 @import 'tailwind-animations';
 
+* {
+  box-sizing: border-box;
+}
+
 @theme {
-  --font-sans: "Poppins", sans-serif;
-  --font-display: "Poppins", sans-serif;
-  --font-mono: "Fira Code", monospace;
+  --font-sans: 'Poppins', sans-serif;
+  --font-display: 'Poppins', sans-serif;
+  --font-mono: 'Fira Code', monospace;
 }
 
 :root {
@@ -35,12 +39,37 @@
   --theme-hero-btn-primary-bg: var(--color-sky-700);
   --theme-hero-btn-secondary-color: var(--theme-name-jose);
 
-  --theme-blob-one-bg: radial-gradient(circle, var(--color-teal-400) 0%, var(--color-teal-300) 60%, transparent 85%);
-  --theme-blob-two-bg: radial-gradient(circle, var(--color-indigo-400) 0%, var(--color-indigo-300) 60%, transparent 85%);
+  --theme-blob-one-bg: radial-gradient(
+    circle,
+    var(--color-teal-400) 0%,
+    var(--color-teal-300) 60%,
+    transparent 85%
+  );
+  --theme-blob-two-bg: radial-gradient(
+    circle,
+    var(--color-indigo-400) 0%,
+    var(--color-indigo-300) 60%,
+    transparent 85%
+  );
   --theme-blob-three-bg: radial-gradient(circle, var(--color-violet-400) 0%, transparent 85%);
-  --theme-blob-four-bg: radial-gradient(circle, var(--color-indigo-300) 0%, var(--color-teal-300) 60%, transparent 85%);
-  --theme-blob-five-bg: radial-gradient(circle, var(--color-violet-300) 0%, var(--color-indigo-300) 60%, transparent 85%);
-  --theme-blob-six-bg: radial-gradient(circle, var(--color-teal-300) 0%, var(--color-indigo-300) 60%, transparent 85%);
+  --theme-blob-four-bg: radial-gradient(
+    circle,
+    var(--color-indigo-300) 0%,
+    var(--color-teal-300) 60%,
+    transparent 85%
+  );
+  --theme-blob-five-bg: radial-gradient(
+    circle,
+    var(--color-violet-300) 0%,
+    var(--color-indigo-300) 60%,
+    transparent 85%
+  );
+  --theme-blob-six-bg: radial-gradient(
+    circle,
+    var(--color-teal-300) 0%,
+    var(--color-indigo-300) 60%,
+    transparent 85%
+  );
   --theme-blob-seven-bg: radial-gradient(circle, var(--color-violet-300) 0%, transparent 85%);
 
   --theme-blob-one-opacity: 0.95;
@@ -59,7 +88,6 @@
   --theme-badge-ring-glow: 0 4px 12px color-mix(in srgb, var(--color-sky-700) 25%, transparent);
   --theme-badge-arrow: var(--color-sky-700);
 
-  /* About Me Section (Light Mode - Dark Sky Card) */
   --theme-about-bg: var(--color-sky-900);
   --theme-about-border: var(--color-sky-800);
   --theme-about-text: var(--color-sky-100);
@@ -76,7 +104,6 @@
   --theme-about-glow-4: none;
   --theme-about-shadow: 0 20px 40px -15px rgba(12, 74, 110, 0.3);
 
-  /* Code Syntax Highlighting Variables */
   --theme-code-bracket: color-mix(in srgb, var(--color-sky-700) 70%, transparent);
   --theme-code-tag: var(--color-teal-600);
   --theme-code-attr: var(--color-amber-300);
@@ -109,31 +136,55 @@ html.dark {
   --theme-hero-btn-primary-bg: var(--color-fuchsia-600);
   --theme-hero-btn-secondary-color: var(--color-rose-300);
 
-  --theme-blob-one-bg: radial-gradient(circle, var(--color-violet-500) 0%, var(--color-purple-600) 50%, transparent 70%);
-  --theme-blob-two-bg: radial-gradient(circle, var(--color-fuchsia-600) 0%, var(--color-pink-500) 50%, transparent 70%);
+  --theme-blob-one-bg: radial-gradient(
+    circle,
+    var(--color-violet-500) 0%,
+    var(--color-purple-600) 50%,
+    transparent 70%
+  );
+  --theme-blob-two-bg: radial-gradient(
+    circle,
+    var(--color-fuchsia-600) 0%,
+    var(--color-pink-500) 50%,
+    transparent 70%
+  );
   --theme-blob-three-bg: radial-gradient(circle, var(--color-rose-500) 0%, transparent 70%);
-  --theme-blob-four-bg: radial-gradient(circle, var(--color-red-500) 0%, var(--color-rose-600) 50%, transparent 70%);
-  --theme-blob-five-bg: radial-gradient(circle, var(--color-pink-600) 0%, var(--color-violet-600) 50%, transparent 70%);
-  --theme-blob-six-bg: radial-gradient(circle, var(--color-purple-500) 0%, var(--color-fuchsia-600) 50%, transparent 70%);
+  --theme-blob-four-bg: radial-gradient(
+    circle,
+    var(--color-red-500) 0%,
+    var(--color-rose-600) 50%,
+    transparent 70%
+  );
+  --theme-blob-five-bg: radial-gradient(
+    circle,
+    var(--color-pink-600) 0%,
+    var(--color-violet-600) 50%,
+    transparent 70%
+  );
+  --theme-blob-six-bg: radial-gradient(
+    circle,
+    var(--color-purple-500) 0%,
+    var(--color-fuchsia-600) 50%,
+    transparent 70%
+  );
   --theme-blob-seven-bg: radial-gradient(circle, var(--color-rose-600) 0%, transparent 70%);
 
   --theme-blob-one-opacity: 0.75;
   --theme-blob-two-opacity: 0.68;
-  --theme-blob-three-opacity: 0.60;
+  --theme-blob-three-opacity: 0.6;
   --theme-blob-four-opacity: 0.55;
-  --theme-blob-five-opacity: 0.50;
+  --theme-blob-five-opacity: 0.5;
   --theme-blob-six-opacity: 0.48;
   --theme-blob-seven-opacity: 0.45;
 
-  --theme-badge-text: var(--color-rose-400);
-  --theme-badge-ring-bg: color-mix(in srgb, var(--color-rose-400) 18%, transparent);
-  --theme-badge-ring-border: color-mix(in srgb, var(--color-rose-400) 40%, transparent);
-  --theme-badge-ring-hover-bg: color-mix(in srgb, var(--color-rose-400) 30%, transparent);
-  --theme-badge-ring-hover-border: color-mix(in srgb, var(--color-rose-400) 80%, transparent);
-  --theme-badge-ring-glow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --theme-badge-arrow: var(--color-rose-400);
+  --theme-badge-text: var(--color-yellow-100);
+  --theme-badge-ring-bg: color-mix(in srgb, var(--color-yellow-100) 18%, transparent);
+  --theme-badge-ring-border: color-mix(in srgb, var(--color-yellow-100) 40%, transparent);
+  --theme-badge-ring-hover-bg: color-mix(in srgb, var(--color-yellow-100) 30%, transparent);
+  --theme-badge-ring-hover-border: color-mix(in srgb, var(--color-yellow-100) 80%, transparent);
+  --theme-badge-ring-glow: 0 4px 12px color-mix(in srgb, var(--color-yellow-100) 25%, transparent);
+  --theme-badge-arrow: var(--color-yellow-100);
 
-  /* About Me Section (Dark Mode - Matte Slate background) */
   --theme-about-bg: #181922;
   --theme-about-border: rgba(255, 255, 255, 0.05);
   --theme-about-text: var(--color-rose-100);
@@ -150,7 +201,6 @@ html.dark {
   --theme-about-glow-4: none;
   --theme-about-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
 
-  /* Code Syntax Highlighting Variables */
   --theme-code-bracket: color-mix(in srgb, var(--color-violet-400) 65%, transparent);
   --theme-code-tag: var(--color-rose-300);
   --theme-code-attr: var(--color-fuchsia-300);
@@ -160,6 +210,8 @@ html.dark {
 html {
   scroll-behavior: smooth;
   height: 100%;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -171,10 +223,11 @@ body {
   min-height: 100%;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-  transition: background-color 0.5s ease, color 0.5s ease;
+  transition:
+    background-color 0.5s ease,
+    color 0.5s ease;
 }
 
-/* Syntax Highlighting for UI Code Tags */
 .code-bracket {
   color: var(--theme-code-bracket);
   transition: color 0.5s ease;
@@ -211,14 +264,14 @@ body {
   background: var(--theme-scrollbar-thumb-hover);
 }
 
-/* Reusable Scroll Reveal Styles */
 .reveal-element {
   opacity: 0;
   will-change: opacity, transform;
-  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Vertical Mode States */
 .reveal-element.reveal-exit-bottom {
   opacity: 0;
   transform: translateY(50px) scale(0.99);
@@ -228,7 +281,6 @@ body {
   transform: translateY(-50px) scale(0.99);
 }
 
-/* Horizontal Mode States */
 .reveal-element.reveal-exit-right {
   opacity: 0;
   transform: translateX(50px) scale(0.99);
@@ -238,13 +290,11 @@ body {
   transform: translateX(-50px) scale(0.99);
 }
 
-/* Zoom Mode State */
 .reveal-element.reveal-exit-zoom {
   opacity: 0;
   transform: scale(0.93);
 }
 
-/* Visible active state */
 .reveal-element.reveal-visible {
   opacity: 1;
   transform: translate(0, 0) scale(1);
@@ -252,4 +302,12 @@ body {
 
 .text-accent {
   color: #ffffff !important;
+}
+
+#about-me,
+#stacks,
+#experience-education,
+#projects,
+#contact {
+  scroll-margin-top: 5px;
 }

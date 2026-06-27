@@ -5,5 +5,6 @@ export default defineConfig({
     pool: 'threads',
     maxWorkers: 2,
     minWorkers: 1,
+    setupFiles: ['./src/test-setup.ts'],
   },
 });

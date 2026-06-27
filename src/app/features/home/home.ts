@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { Navbar } from '../../shared/layouts/navbar/navbar';
 import { Footer } from '../../shared/layouts/footer/footer';
 import { Hero } from '../components/hero/hero';
-import { AboutMe } from '../components/about-me/about-me';
-import { Stack } from '../components/stack/stack';
+import { AboutStack } from '../components/about-stack/about-stack';
 import { Experience } from '../components/experience/experience';
 import { Education } from '../components/education/education';
 import { Projects } from '../components/projects/projects';
@@ -14,8 +13,7 @@ import { Contact } from '../components/contact/contact';
   imports: [
     Navbar,
     Hero,
-    AboutMe,
-    Stack,
+    AboutStack,
     Experience,
     Education,
     Projects,

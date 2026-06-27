@@ -1,6 +1,10 @@
+# CRITICAL RULE: LOCAL DATE AND TIME REPORTING
+- BEFORE starting any response or interacting with the user, you MUST explicitly declare the current local date and time in `LocalDateTime` format (for example: `Fecha de hoy: YYYY-MM-DDTHH:MM:SS+TZ`). This is a mandatory alignment verification check.
+
+# CRITICAL RULE: NO COMMENTS IN CODE
+- Do NOT write or leave any comments in the code under any circumstances (this includes single-line comments like //, block comments like /* */, JSDoc, CSS/HTML comments, and commented-out code). Keep all implementations clean and self-documenting.
 
 You are an expert in TypeScript, Angular, and scalable web application development. You write functional, maintainable, performant, and accessible code following Angular and TypeScript best practices.
-
 ## TypeScript Best Practices
 
 - Use strict type checking
@@ -52,3 +56,17 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - Design services around a single responsibility
 - Use the `providedIn: 'root'` option for singleton services
 - Use the `inject()` function instead of constructor injection
+
+## Browser Testing / Validation Rules
+
+- Do NOT verify DOM or animations using the browser subagent, as visual issues (like animation stutter, layout shifts, fluidity) are not reliably detectable by DOM checks.
+
+## Project Context: Completed HU-STACK
+
+- **ScrollBadge**: Positioned at `bottom-10 right-10 z-10`. Moved from `Footer` to `Contact` component.
+- **ScrollBadge Dark Color**: In dark mode, uses `var(--color-yellow-100)` to match the Stack grid headers.
+- **GSAP Flip & Timeline**: Coordinated under a unified `gsap.timeline()`. Included `.stack-layout-cols` (the grid) in the Flip scope. Removed `.stack-closing-tag` and `.section-closing-tags` from Flip's absolute settings, letting the browser's document flow animate their positions naturally as the grid height transitions, preventing scroll-desync jumps.
+- **Responsive Layout**: Prevented horizontal scrollbars on mobile/tablet by adding `overflow-hidden` to `hero-section` and `overflow-x: hidden; width: 100%;` to `html`.
+- **CSS Code Cleanliness**: Cleaned up all comments in CSS/SCSS files to prevent code smells.
+
+

@@ -1,3 +1,35 @@
+const TECHNOLOGIES = {
+  html: 'HTML5',
+  css: 'CSS3',
+  scss: 'Sass/Scss',
+  bootstrap: 'Bootstrap',
+  swiper: 'Swiper',
+  typescript: 'TypeScript',
+  rxjs: 'RxJS',
+  javascript: 'JavaScript',
+  angular: 'Angular',
+  tailwind: 'Tailwind CSS',
+  primeng: 'PrimeNG',
+  mongodb: 'MongoDB',
+  postgres: 'PostgreSQL',
+  mysql: 'MySQL',
+  spring: 'Spring Framework',
+  springboot: 'Spring Boot',
+  java: 'Java',
+  jwt: 'JWT',
+  git: 'Git',
+  github: 'GitHub',
+  docker: 'Docker',
+  vercel: 'Vercel',
+  render: 'Render',
+  php: 'PHP',
+  nodejs: 'Node.js',
+  azure: 'Microsoft Azure',
+  kafka: 'Apache Kafka',
+  rabbitmq: 'RabbitMQ',
+  gsap: 'GSAP',
+} as const;
+
 export const TRANSLATIONS = {
   es: {
     navbar: {
@@ -5,64 +37,172 @@ export const TRANSLATIONS = {
       stack: 'Tecnologías',
       experience: 'Experiencia',
       projects: 'Proyectos',
-      contact: 'Contacto'
+      contact: 'Contacto',
     },
     hero: {
       greeting: 'Hola, soy',
       role: 'Desarrollador Full Stack',
       cv: 'Descargar CV',
-      cvAriaLabel: 'Descargar Currículum Vitae de Jose Luis Prieto en PDF'
+      cvAriaLabel: 'Descargar Currículum Vitae de Jose Luis Prieto en PDF',
     },
     aboutMe: {
       titleLine1: 'Sobre',
       titleLine2: 'mí',
-      text1: 'Me considero una persona meticulosa y perfeccionista. Mis estudios me iniciaron en el ',
+      text1:
+        'Me considero una persona meticulosa y perfeccionista. Mis estudios me iniciaron en el ',
       highlight1: 'frontend',
       text2: ', donde descubrí mi pasión por el diseño web.',
-      text3: 'Sin embargo, la lógica y la arquitectura del ', 
+      text3: 'Sin embargo, la lógica y la arquitectura del ',
       highlight2: 'backend',
-      text3_2: ' me cautivaron desde el principio, llevándome a entender cómo construir soluciones robustas y bien estructuradas. Por ello, decidí especializarme en ',
+      text3_2:
+        ' me cautivaron desde el principio, llevándome a entender cómo construir soluciones robustas y bien estructuradas. Por ello, decidí especializarme en ',
       highlight3: 'ambos mundos',
       text4: ', sintiéndome cómodo creando proyectos completos.',
       text5_pre: 'Me motivan los retos: creo firmemente que son la mejor vía para crecer y ',
       highlight4: 'nunca dejar de aprender',
-      text5: '.'
+      text5: '.',
+    },
+    stacks: {
+      titleLine1: 'Tecnologías',
+      frontend: 'Frontend',
+      backend: 'Backend',
+      tools: 'Infraestructura',
+      frontendDesc:
+        'Especializado en el ecosistema Angular, construyendo interfaces modernas con arquitectura basada en componentes standalone, gestión de estado reactivo con RxJS y una capa de estilos mantenible con SCSS.',
+      ecosystemTitle: 'Ecosistema:',
+      librariesTitle: 'Librerías:',
+      frontendEcosystem: [
+        'Angular (v19+) — Componentes standalone, signal inputs, inject() para DI, arquitectura escalable.',
+        'RxJS — Programación reactiva: operadores, streams asíncronos y gestión de eventos sin acoplar lógica a la plantilla. Combinado con Signals para estado reactivo, actualmente profundizando en Signal Forms.',
+        'SCSS — Estilos modulares y mantenibles, variables y mixins para una arquitectura visual escalable.',
+        'TypeScript — Tipado estricto en todo el proyecto para un código robusto y autodocumentado, uso de clases genéricas y Utility Types.',
+        'HTML / CSS — Maquetado semántico y accesible (WCAG AA).',
+      ],
+      frontendLibraries: [
+        'Tailwind CSS — Utility-first para prototipado rápido y consistencia visual.',
+        'Bootstrap — Grid y componentes base en proyectos que lo requieren.',
+        'PrimeNG — Componentes UI complejos (tablas, formularios, overlays) integrados con Angular.',
+        'Swiper — Carruseles e interacciones táctiles para secciones dinámicas.',
+        'GSAP — Animaciones y transiciones avanzadas para dar vida a la interfaz.',
+      ],
+      backendDesc:
+        'Especializado en el ecosistema Spring, construyendo APIs robustas con Spring Boot, arquitectura por capas y un diseño orientado a dominio (DDD) que mantiene la lógica de negocio desacoplada de la infraestructura.',
+      backendEcosystem: [
+        'Spring Boot (3.5+) — Desarrollo de APIs REST, configuración de seguridad con JWT y Spring Security, arquitectura en capas con alta cohesión y bajo acoplamiento.',
+        'Spring Framework — Inyección de dependencias, gestión del contexto y manejo transaccional.',
+        'Spring Data JPA — Consultas type-safe con QueryDSL, Specifications para filtros dinámicos y composables, optimización de fetch con EntityGraph para evitar el problema N+1, y JPQL para consultas más específicas cuando el repositorio no es suficiente.',
+        'Spring Modulith — Diseño de monolitos modulares con validación de dependencias internas, eventos de aplicación desacoplados y generación automática de diagramas de arquitectura.',
+        'ArchUnit — Pruebas unitarias de arquitectura para verificar reglas de diseño, dependencias entre paquetes y la estructura del monolito modular.',
+        'Java — Uso de Streams API, programación funcional y genéricos para reducir duplicación y mejorar la reutilización del código.',
+        'DDD (Domain-Driven Design) — Separación clara entre entidad, dominio y DTO; modelado del negocio centrado en el dominio antes que en la infraestructura.',
+        'Bases de datos — PostgreSQL, MySQL y MongoDB según las necesidades de cada proyecto: relacional con integridad fuerte, simplicidad o flexibilidad documental.',
+      ],
+      backendLearning: ['RabbitMQ', 'Kafka'],
+      toolsDesc:
+        'Manejo de control de versiones, contenerización y despliegue en distintos entornos.',
+      toolsEcosystem: [
+        'Git / GitHub — Control de versiones con flujo GitFlow/GitHubFlow, gestión de ramas, pull requests y resolución de conflictos en proyectos.',
+        'Docker — Contenerización de aplicaciones y servicios, gestión de imágenes y docker-compose para entornos multi-contenedor.',
+        'Microsoft Azure — Experiencia trabajando con infraestructura cloud durante mi periodo en Nunsys.',
+        'Vercel — Despliegue continuo de proyectos personales frontend, integración directa con repositorios de GitHub.',
+        'Render — Despliegue de backends y servicios personales con builds automáticos desde Git.',
+      ],
+      toolsLearning: ['Kubernetes', 'AWS'],
+      others: 'Otros',
+      closeBtn: 'Cerrar detalles',
+      learningTitle: 'Aprendiendo',
+      selectPrompt: 'Haz clic en una tecnología para ver los detalles de mi dominio',
+      technologies: TECHNOLOGIES,
     },
     footer: {
-      copyright: '© 2026 Jose Luis Prieto. Hecho con Angular y Tailwind.'
-    }
+      copyright: '© 2026 Jose Luis Prieto.',
+    },
   },
   en: {
     navbar: {
       about: 'About me',
-      stack: 'Tech Stack',
+      stack: 'Stack',
       experience: 'Experience',
       projects: 'Projects',
-      contact: 'Contact'
+      contact: 'Contact',
     },
     hero: {
       greeting: "Hi, I'm",
       role: 'Full Stack Developer',
       cv: 'Download CV',
-      cvAriaLabel: "Download Jose Luis Prieto's Curriculum Vitae in PDF format"
+      cvAriaLabel: "Download Jose Luis Prieto's Curriculum Vitae in PDF format",
     },
     aboutMe: {
       titleLine1: 'About',
       titleLine2: 'me',
-      text1: 'I consider myself a meticulous and perfectionist person. My studies introduced me to the ',
+      text1:
+        'I consider myself a meticulous and perfectionist person. My studies introduced me to the ',
       highlight1: 'frontend',
       text2: ', where I discovered my passion for web design.',
       text3: 'However, the logic and architecture of the ',
       highlight2: 'backend',
-      text3_2: ' captivated me from the beginning, leading me to understand how to build robust and well-structured solutions. Therefore, I decided to specialize in ',
+      text3_2:
+        ' captivated me from the beginning, leading me to understand how to build robust and well-structured solutions. Therefore, I decided to specialize in ',
       highlight3: 'both worlds',
       text4: ', feeling comfortable creating complete projects.',
       text5_pre: 'I am driven by challenges: I firmly believe they are the best way to grow and ',
       highlight4: 'never stop learning',
-      text5: '.'
+      text5: '.',
+    },
+    stacks: {
+      titleLine1: 'Stack',
+      frontend: 'Frontend',
+      backend: 'Backend',
+      tools: 'Infrastructure',
+      frontendDesc:
+        'Specialized in the Angular ecosystem, building modern interfaces with standalone component-based architecture, reactive state management with RxJS, and a maintainable style layer with SCSS.',
+      ecosystemTitle: 'Ecosystem:',
+      librariesTitle: 'Libraries:',
+      frontendEcosystem: [
+        'Angular (v19+) — Standalone components, signal inputs, inject() for DI, scalable architecture.',
+        'RxJS — Reactive programming: operators, asynchronous streams, and event management without decoupling logic to the template. Combined with Signals for reactive state, currently deepening into Signal Forms.',
+        'SCSS — Modular and maintainable styles, variables, and mixins for a visual scalable architecture.',
+        'TypeScript — Strict typing throughout the project for a robust and self-documented code, use of generic classes and Utility Types.',
+        'HTML / CSS — Semantic and accessible layout (WCAG AA).',
+      ],
+      frontendLibraries: [
+        'Tailwind CSS — Utility-first for rapid prototyping and visual consistency.',
+        'Bootstrap — Grid and base components in projects that require it.',
+        'PrimeNG — Complex UI components (tables, forms, overlays) integrated with Angular.',
+        'Swiper — Carousels and touch interactions for dynamic sections.',
+        'GSAP — Advanced animations and transitions to bring the interface to life.',
+      ],
+      backendDesc:
+        'Specialized in the Spring ecosystem, building robust APIs with Spring Boot, layered architecture, and a domain-driven design (DDD) that keeps business logic decoupled from infrastructure.',
+      backendEcosystem: [
+        'Spring Boot (3.5+) — REST API development, security configuration with JWT and Spring Security, layered architecture with high cohesion and low coupling.',
+        'Spring Framework — Dependency injection, context management, and transactional management.',
+        'Spring Data JPA — Type-safe queries with QueryDSL, Specifications for dynamic and composable filters, fetch optimization with EntityGraph to avoid the N+1 problem, and JPQL for more specific queries when the repository is not enough.',
+        'Spring Modulith — Design of modular monoliths with validation of internal dependencies, decoupled application events, and automatic generation of architectural diagrams.',
+        'ArchUnit — Unit architecture tests to verify design rules, dependencies between packages, and the modular monolith structure.',
+        'Java — Streams API usage, functional programming, and generics to reduce duplication and improve code reusability.',
+        'DDD (Domain-Driven Design) — Clear separation between entity, domain, and DTO; business modeling centered on domain rather than infrastructure.',
+        'Databases — PostgreSQL, MySQL, and MongoDB depending on project requirements: relational with strong integrity, simplicity, or document flexibility.',
+      ],
+      backendLearning: ['RabbitMQ', 'Kafka'],
+      toolsDesc:
+        'Version control management, containerization, and deployment across different environments.',
+      toolsEcosystem: [
+        'Git / GitHub — Version control with GitFlow/GitHubFlow workflow, branch management, pull requests, and conflict resolution in projects.',
+        'Docker — Containerization of applications and services, image management, and docker-compose for multi-container environments.',
+        'Microsoft Azure — Experience working with cloud infrastructure during my time at Nunsys.',
+        'Vercel — Continuous deployment of personal frontend projects, direct integration with GitHub repositories.',
+        'Render — Deployment of backends and personal services with automatic builds from Git.',
+      ],
+      toolsLearning: ['Kubernetes', 'AWS'],
+      others: 'Others',
+      closeBtn: 'Close details',
+      learningTitle: 'Learning',
+      selectPrompt: 'Click on any technology to view my proficiency details',
+      technologies: TECHNOLOGIES,
     },
     footer: {
-      copyright: '© 2026 Jose Luis Prieto. Made with Angular & Tailwind.'
-    }
-  }
+      copyright: '© 2026 Jose Luis Prieto.',
+    },
+  },
 } as const;

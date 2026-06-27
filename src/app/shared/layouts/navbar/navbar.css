@@ -2,11 +2,12 @@
   background: transparent;
   border-color: transparent;
   transform: translateY(0);
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-              background-color 0.6s ease,
-              border-color 0.6s ease,
-              backdrop-filter 0.6s ease,
-              -webkit-backdrop-filter 0.6s ease;
+  transition:
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.6s ease,
+    border-color 0.6s ease,
+    backdrop-filter 0.6s ease,
+    -webkit-backdrop-filter 0.6s ease;
 }
 
 .navbar-header.navbar-top {
@@ -27,22 +28,31 @@
 
 .navbar-header.navbar-scrolled {
   transform: translateY(0);
-  background: color-mix(in srgb, var(--theme-panel-bg) 50%, transparent);
+  background: color-mix(in srgb, var(--theme-panel-bg) 70%, transparent);
   border-color: var(--theme-panel-border);
   backdrop-filter: blur(5px);
 }
 
 .nav-link {
   display: inline-block;
-  transform-origin: top center;
   color: var(--theme-panel-link);
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
+.nav-link-text {
+  display: inline-block;
+  transform-origin: top center;
+}
+
 .nav-link:hover {
   color: var(--theme-panel-link-hover);
-  text-shadow: 0.5px 0 var(--theme-panel-link-hover), -0.5px 0 var(--theme-panel-link-hover);
+  text-shadow:
+    0.5px 0 var(--theme-panel-link-hover),
+    -0.5px 0 var(--theme-panel-link-hover);
+}
+
+.nav-link:hover .nav-link-text {
   animation: swing 0.45s ease;
 }
 
@@ -54,7 +64,9 @@
 .mobile-nav-link {
   color: var(--theme-panel-link);
   font-weight: 500;
-  transition: color 0.3s ease, font-weight 0.2s ease;
+  transition:
+    color 0.3s ease,
+    font-weight 0.2s ease;
 }
 
 .mobile-nav-link:hover {
@@ -67,7 +79,9 @@
   font-weight: 700;
   color: var(--theme-panel-link);
   text-decoration: none;
-  transition: color 0.3s ease, transform 0.2s ease;
+  transition:
+    color 0.3s ease,
+    transform 0.2s ease;
 }
 
 .logo-link:hover {
@@ -82,7 +96,9 @@
 .theme-toggle-btn {
   background: transparent;
   color: var(--theme-panel-button);
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
 }
 
 .theme-toggle-btn:hover {
@@ -91,16 +107,32 @@
 }
 
 .lang-toggle-btn {
+  background: transparent;
   color: var(--theme-panel-link);
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease,
+    color 0.3s ease;
 }
 
 .lang-toggle-btn:hover {
+  background: var(--theme-toggle-hover-bg);
+  transform: scale(1.05);
   color: var(--theme-panel-link-hover);
 }
 
 @keyframes swing {
-  0%, 100% { transform: rotate(0deg); }
-  20% { transform: rotate(8deg); }
-  50% { transform: rotate(-5deg); }
-  75% { transform: rotate(3deg); }
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(8deg);
+  }
+  50% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(3deg);
+  }
 }
