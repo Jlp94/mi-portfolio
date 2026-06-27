@@ -30,14 +30,13 @@
   --theme-mobile-menu-border: color-mix(in srgb, var(--color-sky-400) 45%, transparent);
   --theme-burger-color: var(--color-sky-950);
 
-  --theme-hero-bg: transparent;
-  --theme-hero-subtitle: var(--color-sky-600);
-  --theme-name-jose: var(--color-sky-600);
-  --theme-name-luis: var(--color-cyan-600);
-  --theme-name-prieto: var(--color-cyan-800);
-  --theme-hero-role: var(--color-sky-700);
-  --theme-hero-btn-primary-bg: var(--color-sky-700);
-  --theme-hero-btn-secondary-color: var(--theme-name-jose);
+  --theme-accent-primary: var(--color-sky-600);
+  --theme-accent-primary-soft: var(--color-sky-600);
+  --theme-accent-secondary: var(--color-cyan-600);
+  --theme-accent-tertiary: var(--color-cyan-800);
+  --theme-accent-deep: var(--color-sky-700);
+  --theme-accent-solid: var(--color-sky-700);
+  --theme-surface-hero-bg: transparent;
 
   --theme-blob-one-bg: radial-gradient(
     circle,
@@ -88,26 +87,30 @@
   --theme-badge-ring-glow: 0 4px 12px color-mix(in srgb, var(--color-sky-700) 25%, transparent);
   --theme-badge-arrow: var(--color-sky-700);
 
-  --theme-about-bg: var(--color-sky-900);
-  --theme-about-border: var(--color-sky-800);
-  --theme-about-text: var(--color-sky-100);
-  --theme-about-text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  --theme-about-title-1: var(--color-teal-300);
-  --theme-about-title-2: var(--color-indigo-200);
-  --theme-about-highlight-1: var(--color-sky-300);
-  --theme-about-highlight-2: var(--color-cyan-300);
-  --theme-about-highlight-3: var(--color-emerald-400);
-  --theme-about-highlight-4: var(--color-blue-500);
-  --theme-about-glow-1: none;
-  --theme-about-glow-2: none;
-  --theme-about-glow-3: none;
-  --theme-about-glow-4: none;
-  --theme-about-shadow: 0 20px 40px -15px rgba(12, 74, 110, 0.3);
+  --theme-title-accent-1: var(--color-teal-300);
+  --theme-title-accent-2: var(--color-indigo-200);
+  --theme-highlight-1: var(--color-sky-300);
+  --theme-highlight-2: var(--color-cyan-300);
+  --theme-highlight-3: var(--color-emerald-400);
+  --theme-highlight-4: var(--color-blue-500);
+  --theme-surface-special-bg: var(--color-sky-900);
+  --theme-surface-special-border: var(--color-sky-800);
+  --theme-surface-special-text: var(--color-sky-100);
+  --theme-surface-special-text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --theme-surface-special-shadow: 0 20px 40px -15px rgba(12, 74, 110, 0.3);
 
   --theme-code-bracket: color-mix(in srgb, var(--color-sky-700) 70%, transparent);
-  --theme-code-tag: var(--color-teal-600);
-  --theme-code-attr: var(--color-amber-300);
+  --theme-code-tag: var(--color-rose-600);
+  --theme-code-attr: var(--color-orange-600);
   --theme-code-val: var(--color-lime-800);
+
+  --theme-accent-soft: var(--color-sky-300);
+  --theme-accent-soft-hover: var(--color-sky-200);
+  --theme-surface-card-bg: var(--color-sky-900);
+  --theme-text-accent-subtitle: var(--color-sky-300);
+  --theme-timeline-header: var(--color-sky-600);
+  --theme-timeline-dot-experience: var(--color-sky-900);
+  --theme-timeline-dot-education: var(--color-sky-800);
 }
 
 html.dark {
@@ -127,14 +130,13 @@ html.dark {
   --theme-mobile-menu-border: color-mix(in srgb, var(--color-violet-500) 15%, transparent);
   --theme-burger-color: var(--color-rose-300);
 
-  --theme-hero-bg: #181922;
-  --theme-hero-subtitle: var(--color-rose-400);
-  --theme-name-jose: var(--color-rose-300);
-  --theme-name-luis: var(--color-fuchsia-300);
-  --theme-name-prieto: var(--color-violet-300);
-  --theme-hero-role: var(--color-violet-400);
-  --theme-hero-btn-primary-bg: var(--color-fuchsia-600);
-  --theme-hero-btn-secondary-color: var(--color-rose-300);
+  --theme-accent-primary: var(--color-rose-300);
+  --theme-accent-primary-soft: var(--color-rose-400);
+  --theme-accent-secondary: var(--color-fuchsia-300);
+  --theme-accent-tertiary: var(--color-violet-300);
+  --theme-accent-deep: var(--color-violet-400);
+  --theme-accent-solid: var(--color-fuchsia-600);
+  --theme-surface-hero-bg: #181922;
 
   --theme-blob-one-bg: radial-gradient(
     circle,
@@ -185,27 +187,32 @@ html.dark {
   --theme-badge-ring-glow: 0 4px 12px color-mix(in srgb, var(--color-yellow-100) 25%, transparent);
   --theme-badge-arrow: var(--color-yellow-100);
 
-  --theme-about-bg: #181922;
-  --theme-about-border: rgba(255, 255, 255, 0.05);
-  --theme-about-text: var(--color-rose-100);
-  --theme-about-text-shadow: none;
-  --theme-about-title-1: var(--color-rose-300);
-  --theme-about-title-2: var(--color-fuchsia-300);
-  --theme-about-highlight-1: var(--color-rose-300);
-  --theme-about-highlight-2: var(--color-fuchsia-300);
-  --theme-about-highlight-3: var(--color-violet-300);
-  --theme-about-highlight-4: var(--color-fuchsia-400);
-  --theme-about-glow-1: none;
-  --theme-about-glow-2: none;
-  --theme-about-glow-3: none;
-  --theme-about-glow-4: none;
-  --theme-about-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+  --theme-title-accent-1: var(--color-rose-300);
+  --theme-title-accent-2: var(--color-fuchsia-300);
+  --theme-highlight-1: var(--color-rose-300);
+  --theme-highlight-2: var(--color-fuchsia-300);
+  --theme-highlight-3: var(--color-violet-300);
+  --theme-highlight-4: var(--color-fuchsia-400);
+  --theme-surface-special-bg: #181922;
+  --theme-surface-special-border: rgba(255, 255, 255, 0.05);
+  --theme-surface-special-text: var(--color-rose-100);
+  --theme-surface-special-text-shadow: none;
+  --theme-surface-special-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
 
-  --theme-code-bracket: color-mix(in srgb, var(--color-violet-400) 65%, transparent);
-  --theme-code-tag: var(--color-rose-300);
-  --theme-code-attr: var(--color-fuchsia-300);
-  --theme-code-val: var(--color-violet-300);
+  --theme-code-bracket: var(--color-neutral-200);
+  --theme-code-tag: var(--color-red-400);
+  --theme-code-attr: var(--color-amber-300);
+  --theme-code-val: var(--color-lime-300);
+
+  --theme-accent-soft: var(--color-rose-400);
+  --theme-accent-soft-hover: var(--color-rose-500);
+  --theme-surface-card-bg: rgba(30, 31, 41, 0.45);
+  --theme-text-accent-subtitle: var(--color-rose-300);
+  --theme-timeline-header: var(--color-rose-300);
+  --theme-timeline-dot-experience: var(--color-violet-300);
+  --theme-timeline-dot-education: var(--color-violet-300);
 }
+
 
 html {
   scroll-behavior: smooth;

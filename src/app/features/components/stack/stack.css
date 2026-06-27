@@ -9,6 +9,8 @@
   --theme-code-val: var(--color-lime-300);
   --chip-active-border: var(--color-sky-500);
   --theme-grid-title: var(--color-yellow-300);
+  --title-accent-1: var(--theme-title-accent-1);
+  --title-accent-2: var(--theme-title-accent-2);
 
   &:host-context(.dark) {
     --theme-code-bracket: var(--color-neutral-200);
@@ -25,10 +27,10 @@
   z-index: 10;
 
   .text-stack-title-1 {
-    color: var(--theme-about-title-1);
+    color: var(--title-accent-1);
   }
   .text-stack-title-2 {
-    color: var(--theme-about-title-2);
+    color: var(--title-accent-2);
   }
 }
 
@@ -70,7 +72,7 @@
   font-size: 0.8rem;
   opacity: 0.8;
   margin-bottom: 1.5rem;
-  color: var(--theme-about-title-1);
+  color: var(--title-accent-1);
   cursor: pointer;
   outline: none;
 

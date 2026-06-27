@@ -7,6 +7,15 @@
   --theme-code-tag: var(--color-rose-300);
   --theme-code-attr: var(--color-amber-400);
   --theme-code-val: var(--color-lime-300);
+
+  --title-1-color: var(--theme-title-accent-1);
+  --title-2-color: var(--theme-title-accent-2);
+  --statement-color: var(--theme-surface-special-text);
+  --statement-shadow: var(--theme-surface-special-text-shadow);
+  --highlight-1: var(--theme-highlight-1);
+  --highlight-2: var(--theme-highlight-2);
+  --highlight-3: var(--theme-highlight-3);
+  --highlight-4: var(--theme-highlight-4);
 }
 
 :host-context(.dark) {
@@ -22,16 +31,16 @@
 }
 
 .text-about-title-1 {
-  color: var(--theme-about-title-1);
+  color: var(--title-1-color);
 }
 
 .text-about-title-2 {
-  color: var(--theme-about-title-2);
+  color: var(--title-2-color);
 }
 
 .about-me-statement {
-  color: var(--theme-about-text);
-  text-shadow: var(--theme-about-text-shadow);
+  color: var(--statement-color);
+  text-shadow: var(--statement-shadow);
 }
 
 .highlight {
@@ -50,23 +59,19 @@
 }
 
 .highlight-1 {
-  color: var(--theme-about-highlight-1);
-  text-shadow: var(--theme-about-glow-1);
+  color: var(--highlight-1);
 }
 
 .highlight-2 {
-  color: var(--theme-about-highlight-2);
-  text-shadow: var(--theme-about-glow-2);
+  color: var(--highlight-2);
 }
 
 .highlight-3 {
-  color: var(--theme-about-highlight-3);
-  text-shadow: var(--theme-about-glow-3);
+  color: var(--highlight-3);
 }
 
 .highlight-4 {
-  color: var(--theme-about-highlight-4);
-  text-shadow: var(--theme-about-glow-4);
+  color: var(--highlight-4);
 }
 
 
