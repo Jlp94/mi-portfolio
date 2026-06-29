@@ -17,38 +17,65 @@
     </div>
 
     <div class="about-me-body pl-0">
-      <span class="text-xs font-mono opacity-65 mb-1 block">
-        <app-code-tag tag="p" attrName="class" attrVal="profile"></app-code-tag>
-      </span>
+      <div class="about-me-statements flex flex-col gap-8">
+        
+        <div class="flex flex-col">
+          <span class="text-xs font-mono opacity-65 mb-1 block">
+            <app-code-tag tag="p" attrName="class" attrVal="profile"></app-code-tag>
+          </span>
+          <p class="about-me-statement pl-4 text-base md:text-lg lg:text-xl font-bold tracking-tight leading-relaxed md:leading-normal">
+            <span>{{ t().text1 }}</span>
+            <span class="highlight highlight-1">{{ t().highlight1 }}</span>
+            <span>{{ t().text2 }}</span>
+          </p>
+          <span class="text-xs font-mono opacity-65 mt-1 block">
+            <app-code-tag tag="p" [isClose]="true"></app-code-tag>
+          </span>
+        </div>
 
-      <div class="about-me-statements pl-4 flex flex-col gap-6 md:gap-8">
-        <p
-          class="about-me-statement text-base md:text-[1.5rem] lg:text-[1.85rem] font-bold tracking-tight leading-relaxed md:leading-normal">
-          <span>{{ t().text1 }}</span>
-          <span class="highlight highlight-1">{{ t().highlight1 }}</span>
-          <span>{{ t().text2 }}</span>
-        </p>
+        <div class="flex flex-col">
+          <span class="text-xs font-mono opacity-65 mb-1 block">
+            <app-code-tag tag="p" attrName="class" attrVal="profile"></app-code-tag>
+          </span>
+          <p class="about-me-statement pl-4 text-base md:text-lg lg:text-xl font-bold tracking-tight leading-relaxed md:leading-normal">
+            <span>{{ t().text3 }}</span>
+            <span class="highlight highlight-2">{{ t().highlight2 }}</span>
+            <span>{{ t().text3_2 }}</span>
+          </p>
+          <span class="text-xs font-mono opacity-65 mt-1 block">
+            <app-code-tag tag="p" [isClose]="true"></app-code-tag>
+          </span>
+        </div>
 
-        <p
-          class="about-me-statement text-base md:text-[1.5rem] lg:text-[1.85rem] font-bold tracking-tight leading-relaxed md:leading-normal">
-          <span>{{ t().text3 }}</span>
-          <span class="highlight highlight-2">{{ t().highlight2 }}</span>
-          <span>{{ t().text3_2 }}</span>
-          <span class="highlight highlight-3">{{ t().highlight3 }}</span>
-          <span>{{ t().text4 }}</span>
-        </p>
+        <div class="flex flex-col">
+          <span class="text-xs font-mono opacity-65 mb-1 block">
+            <app-code-tag tag="p" attrName="class" attrVal="profile"></app-code-tag>
+          </span>
+          <p class="about-me-statement pl-4 text-base md:text-lg lg:text-xl font-bold tracking-tight leading-relaxed md:leading-normal">
+            <span>{{ t().text4 }}</span>
+            <span class="highlight highlight-3">{{ t().highlight3 }}</span>
+            <span>{{ t().text4_2 }}</span>
+          </p>
+          <span class="text-xs font-mono opacity-65 mt-1 block">
+            <app-code-tag tag="p" [isClose]="true"></app-code-tag>
+          </span>
+        </div>
 
-        <p
-          class="about-me-statement text-base md:text-[1.5rem] lg:text-[1.85rem] font-bold tracking-tight leading-relaxed md:leading-normal">
-          <span>{{ t().text5_pre }}</span>
-          <span class="highlight highlight-4">{{ t().highlight4 }}</span>
-          <span>{{ t().text5 }}</span>
-        </p>
+        <div class="flex flex-col">
+          <span class="text-xs font-mono opacity-65 mb-1 block">
+            <app-code-tag tag="p" attrName="class" attrVal="profile"></app-code-tag>
+          </span>
+          <p class="about-me-statement pl-4 text-base md:text-lg lg:text-xl font-bold tracking-tight leading-relaxed md:leading-normal">
+            <span>{{ t().text5_pre }}</span>
+            <span class="highlight highlight-4">{{ t().highlight4 }}</span>
+            <span>{{ t().text5 }}</span>
+          </p>
+          <span class="text-xs font-mono opacity-65 mt-1 block">
+            <app-code-tag tag="p" [isClose]="true"></app-code-tag>
+          </span>
+        </div>
+
       </div>
-
-      <span class="text-xs font-mono opacity-65 mt-2 block">
-        <app-code-tag tag="p" [isClose]="true"></app-code-tag>
-      </span>
     </div>
   </div>
 </app-shared-section>

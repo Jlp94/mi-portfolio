@@ -18,27 +18,36 @@ export class AboutStack {
 
     afterNextRender(() => {
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (prefersReducedMotion) {
-        return;
+      if (prefersReducedMotion) return;
+
+      const host = this.elementRef.nativeElement;
+      const panels = host.querySelector('.about-stack-panels');
+
+      if (panels) {
+        const mm = gsap.matchMedia();
+
+        mm.add('(min-width: 1024px)', () => {
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: host,
+              pin: true,
+              scrub: 1,
+              start: 'center center',
+              end: () => `+=${host.offsetWidth * 0.95}`,
+              invalidateOnRefresh: true,
+            }
+          });
+
+          tl.to(panels, {
+            xPercent: -50,
+            ease: 'sine.inOut',
+          });
+
+          return () => {
+            tl.kill();
+          };
+        });
       }
-
-      const hostElement = this.elementRef.nativeElement;
-
-      gsap.set(hostElement, {
-        opacity: 0,
-        filter: 'blur(8px)',
-      });
-
-      gsap.to(hostElement, {
-        opacity: 1,
-        filter: 'blur(0px)',
-        duration: 0.8,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: hostElement,
-          start: 'top 95%',
-        },
-      });
     });
   }
 }
