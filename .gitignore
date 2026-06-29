@@ -52,6 +52,7 @@ Thumbs.db
 .cursorrules
 .copilot-instructions.json
 scripts/
+AGENTS.md
 
 # Local environment secret overrides
 .env.local

@@ -1,1 +1,71 @@
-<p>education works!</p>
+<div class="section-header mb-8 select-none font-display">
+  <span class="text-xs font-mono opacity-65 mb-1 block">
+    <app-code-tag tag="h2" attrName="class" attrVal="section-title"></app-code-tag>
+  </span>
+  <h2 class="text-3xl md:text-4xl font-bold tracking-tight leading-none">
+    <span class="block text-[var(--title-1-color)] pl-4">{{ t().titleLine1 }}</span>
+    <span class="block text-[var(--theme-name-prieto)] ml-20 md:ml-[7.5rem] lg:ml-[9rem] -mt-1 md:-mt-2">
+      {{ t().titleLine2 }}<span class="text-accent">.</span>
+    </span>
+  </h2>
+  <span class="text-xs font-mono opacity-65 mt-1 block">
+    <app-code-tag tag="h2" [isClose]="true"></app-code-tag>
+  </span>
+</div>
+
+<span class="text-xs font-mono opacity-65 mb-2 block select-none">
+  <app-code-tag tag="article" attrName="class" attrVal="education"></app-code-tag>
+</span>
+
+<div class="timeline-container relative">
+  <div class="flex flex-col gap-12">
+    <div class="timeline-item">
+      <div class="timeline-card cursor-pointer select-none" [class.is-expanded]="expandedCard() === 'daw'" (click)="toggleCard('daw')" role="button" tabindex="0"
+        (keydown.enter)="toggleCard('daw')">
+        <div class="flex items-start justify-between gap-4">
+          <div class="flex items-start gap-4">
+            <div class="card-icon-wrapper">
+              <svg class="w-6 h-6 text-[var(--accent-color)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="card-title">{{ t().dawTitle }}</h3>
+              <h4 class="card-subtitle">{{ t().dawSchool }}</h4>
+              <span class="timeline-date">{{ t().dawPeriod }}</span>
+            </div>
+          </div>
+          <button class="expand-chevron-btn" aria-label="Desplegar detalles de educación en DAW">
+            <fa-icon [icon]="expandedCard() === 'daw' ? faAngleUp : faAngleDown" class="category-chevron"></fa-icon>
+          </button>
+        </div>
+
+        <div class="card-details-wrapper" [class.expanded]="expandedCard() === 'daw'">
+          <div class="card-details-content">
+            <div class="tech-icons-grid pt-4">
+              <app-tech-icon key="html" class="w-6 h-6 animate-pulse-slow" />
+              <app-tech-icon key="css" class="w-6 h-6 animate-pulse-slow" />
+              <app-tech-icon key="python" class="w-6 h-6 animate-pulse-slow" />
+              <app-tech-icon key="java" class="w-6 h-6 animate-pulse-slow" />
+              <app-tech-icon key="php" class="w-6 h-6 animate-pulse-slow" />
+              <app-tech-icon key="codeigniter" class="w-6 h-6 animate-pulse-slow" />
+              <app-tech-icon key="angular" class="w-6 h-6 animate-pulse-slow" />
+              <app-tech-icon key="rxjs" class="w-6 h-6 animate-pulse-slow" />
+              <app-tech-icon key="typescript" class="w-6 h-6 animate-pulse-slow" />
+              <app-tech-icon key="ionic" class="w-6 h-6 animate-pulse-slow" />
+              <app-tech-icon key="scss" class="w-6 h-6 animate-pulse-slow" />
+              <app-tech-icon key="bootstrap" class="w-6 h-6 animate-pulse-slow" />
+              <app-tech-icon key="git" class="w-6 h-6 animate-pulse-slow" />
+              <app-tech-icon key="docker" class="w-6 h-6 animate-pulse-slow" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<span class="text-xs font-mono opacity-65 mt-4 block select-none">
+  <app-code-tag tag="article" [isClose]="true"></app-code-tag>
+</span>

@@ -1,1 +1,112 @@
-<p>experience works!</p>
+<div class="section-header mb-8 select-none font-display">
+  <span class="text-xs font-mono opacity-65 mb-1 block">
+    <app-code-tag tag="h2" attrName="class" attrVal="section-title"></app-code-tag>
+  </span>
+  <h2 class="text-3xl md:text-4xl font-bold tracking-tight leading-none">
+    <span class="block text-[var(--title-1-color)] pl-4">{{ t().titleLine1 }}</span>
+    <span class="block text-[var(--theme-name-prieto)] ml-28 md:ml-[9.5rem] lg:ml-[11rem] -mt-1 md:-mt-2">
+      {{ t().titleLine2 }}<span class="text-accent">.</span>
+    </span>
+  </h2>
+  <span class="text-xs font-mono opacity-65 mt-1 block">
+    <app-code-tag tag="h2" [isClose]="true"></app-code-tag>
+  </span>
+</div>
+
+<span class="text-xs font-mono opacity-65 mb-2 block select-none">
+  <app-code-tag tag="article" attrName="class" attrVal="experience"></app-code-tag>
+</span>
+
+<div class="timeline-container relative">
+  <div class="flex flex-col gap-12">
+    <div class="timeline-item">
+      <div class="timeline-card cursor-pointer select-none" [class.is-expanded]="expandedCard() === 'nunsys'" (click)="toggleCard('nunsys')" role="button" tabindex="0" (keydown.enter)="toggleCard('nunsys')">
+        <div class="flex items-start justify-between gap-4">
+          <div class="flex items-start gap-4">
+            <div class="card-icon-wrapper">
+              <svg class="w-6 h-6 text-[var(--accent-color)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                <line x1="8" y1="21" x2="16" y2="21" />
+                <line x1="12" y1="17" x2="12" y2="21" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="card-title">{{ t().nunsysTitle }}</h3>
+              <h4 class="card-subtitle">{{ t().nunsysCompany }}</h4>
+              <span class="timeline-date">{{ t().nunsysPeriod }}</span>
+            </div>
+          </div>
+          <button class="expand-chevron-btn" aria-label="Desplegar detalles de experiencia">
+            <fa-icon [icon]="expandedCard() === 'nunsys' ? faAngleUp : faAngleDown" class="category-chevron"></fa-icon>
+          </button>
+        </div>
+
+        <div class="card-details-wrapper" [class.expanded]="expandedCard() === 'nunsys'">
+          <div class="card-details-content">
+            <ul class="card-bullets pt-4">
+              @for (bullet of t().nunsysBullets; track bullet) {
+              <li>{{ bullet }}</li>
+              }
+            </ul>
+
+            <div class="card-techs-row mt-4">
+              <app-tech-icon key="java" class="w-6 h-6" />
+              <app-tech-icon key="spring" class="w-6 h-6" />
+              <app-tech-icon key="springboot" class="w-6 h-6" />
+              <app-tech-icon key="postgres" class="w-6 h-6" />
+              <app-tech-icon key="angular" class="w-6 h-6" />
+              <app-tech-icon key="rxjs" class="w-6 h-6" />
+              <app-tech-icon key="html" class="w-6 h-6 animate-pulse-slow" />
+              <app-tech-icon key="css" class="w-6 h-6 animate-pulse-slow" />
+              <app-tech-icon key="scss" class="w-6 h-6 animate-pulse-slow" />
+              <app-tech-icon key="docker" class="w-6 h-6" />
+              <app-tech-icon key="azure" class="w-6 h-6" />
+              <app-tech-icon key="git" class="w-6 h-6" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-card cursor-pointer select-none" [class.is-expanded]="expandedCard() === 'hospitality'" (click)="toggleCard('hospitality')" role="button" tabindex="0" (keydown.enter)="toggleCard('hospitality')">
+        <div class="flex items-start justify-between gap-4">
+          <div class="flex items-start gap-4">
+            <div class="card-icon-wrapper">
+              <svg class="w-6 h-6 text-[var(--accent-color)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
+                <path d="M7 2v20" />
+                <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3" />
+                <path d="M21 15v7" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="card-title">{{ t().hospitalityTitle }}</h3>
+              <h4 class="card-subtitle">{{ t().hospitalityCompany }}</h4>
+              <span class="timeline-date">{{ t().hospitalityPeriod }}</span>
+            </div>
+          </div>
+          <button class="expand-chevron-btn" aria-label="Desplegar detalles de experiencia en hostelería">
+            <fa-icon [icon]="expandedCard() === 'hospitality' ? faAngleUp : faAngleDown" class="category-chevron"></fa-icon>
+          </button>
+        </div>
+
+        <div class="card-details-wrapper" [class.expanded]="expandedCard() === 'hospitality'">
+          <div class="card-details-content">
+            <ul class="card-bullets pt-4">
+              @for (bullet of t().hospitalityBullets; track bullet) {
+              <li>{{ bullet }}</li>
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<span class="text-xs font-mono opacity-65 mt-4 block select-none">
+  <app-code-tag tag="article" [isClose]="true"></app-code-tag>
+</span>

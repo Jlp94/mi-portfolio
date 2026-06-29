@@ -10,6 +10,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build-gh-pages": "ng build --base-href /mi-portfolio/",
+    "deploy": "pnpm build-gh-pages && npx -y angular-cli-ghpages --dir=dist/mi-portfolio/browser",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint"

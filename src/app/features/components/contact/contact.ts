@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { ScrollBadge } from '../../../shared/components/scroll-badge/scroll-badge';
 
 @Component({
   selector: 'app-contact',
-  imports: [ScrollBadge],
+  imports: [],
   templateUrl: './contact.html',
   styleUrl: './contact.css',
 })

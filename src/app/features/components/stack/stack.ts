@@ -34,7 +34,8 @@ export class Stack {
   protected readonly faAngleDown = faAngleDown;
   protected readonly faAngleUp = faAngleUp;
 
-  protected readonly expandedCategory = signal<string | null>(null);
+  protected readonly activeCategory = signal<string | null>(null);
+  private activeTl: gsap.core.Timeline | null = null;
 
   protected readonly categories = [
     {
@@ -64,7 +65,6 @@ export class Stack {
         'mongodb',
         'postgres',
         'mysql',
-        'php',
         'rabbitmq',
         'kafka',
       ],
@@ -189,215 +189,165 @@ export class Stack {
     return [];
   }
 
-  protected toggleCategory(categoryKey: string): void {
-    const current = this.expandedCategory();
-    if (current === categoryKey) {
+  protected getCategoryTechs(key: string): string[] {
+    const cat = this.categories.find(c => c.key === key);
+    return cat ? cat.techs : [];
+  }
+
+  protected toggleCategory(catKey: string): void {
+    const current = this.activeCategory();
+    
+    if (current === catKey) {
       this.closeCategory();
-    } else if (current !== null) {
-      this.closeCategory(() => {
-        this.openCategory(categoryKey);
-      });
-    } else {
-      this.openCategory(categoryKey);
+      return;
+    }
+    
+    if (current !== null) {
+      this.closeCategory(() => this.openCategory(catKey));
+      return;
+    }
+    
+    this.openCategory(catKey);
+  }
+
+  protected openCategory(catKey: string): void {
+    this.activeTl?.kill();
+
+    const state = Flip.getState(`[data-flip-id="${catKey}"]`);
+
+    this.activeCategory.set(catKey);
+    this.cdr.detectChanges();
+
+    this.activeTl = gsap.timeline();
+
+    const host = this.elementRef.nativeElement as HTMLElement;
+    const cols = host.querySelectorAll('.stack-category-col');
+    
+    cols.forEach((c: Element) => {
+      if (!c.querySelector(`[data-flip-id="${catKey}"]`)) {
+        this.activeTl!.to(c, { opacity: 0.3, duration: 0.4, ease: 'power2.inOut' }, 0);
+      }
+    });
+
+    const detailPanel = host.querySelector('.detail-panel');
+    const originCard = host.querySelector(`.stack-category-col [data-flip-id="${catKey}"]`);
+
+    if (originCard && detailPanel) {
+      this.activeTl.to(originCard, { opacity: 0, duration: 0.3, ease: 'power2.out' }, 0);
+
+      this.activeTl.add(
+        Flip.from(state, {
+          targets: detailPanel,
+          duration: 0.8,
+          ease: 'power3.inOut',
+        }),
+        0
+      );
+
+      const wrapper = host.querySelector('.detail-content-wrapper');
+      if (wrapper) {
+        this.activeTl.fromTo(
+          wrapper,
+          { yPercent: 15, opacity: 0 },
+          { yPercent: 0, opacity: 1, duration: 0.4, ease: 'power2.out' },
+          0.4
+        );
+
+        const lines = wrapper.querySelectorAll(
+          '.main-desc, .details-subtitle, .details-list li, .details-inline-text'
+        );
+        lines.forEach((line: Element, index: number) => {
+          const chars = line.querySelectorAll('.split-char');
+          if (chars.length > 0) {
+            this.activeTl!.fromTo(
+              chars,
+              { opacity: 0, filter: 'blur(3px)' },
+              {
+                opacity: 1,
+                filter: 'blur(0px)',
+                duration: 0.3,
+                delay: index * 0.04,
+                stagger: 0.005,
+                ease: 'none',
+                clearProps: 'opacity,filter',
+              },
+              0.5
+            );
+          }
+        });
+      }
     }
   }
 
-  protected openCategory(categoryKey: string): void {
-    const host = this.elementRef.nativeElement;
-    const colIndex = this.categories.findIndex((c) => c.key === categoryKey);
-    const col = host.querySelector(`.stack-category-col:nth-child(${colIndex + 1})`);
-    if (!col) return;
-
-    const labels = col.querySelectorAll('.tech-name-label');
-
-    gsap.to(labels, {
-      opacity: 0,
-      scale: 0.8,
-      y: -5,
-      duration: 0.3,
-      stagger: 0.015,
-      ease: 'power2.in',
-      onComplete: () => {
-        const selector = [
-          '.stack-layout-cols',
-          '.stack-category-col',
-          `.stack-category-col:nth-child(${colIndex + 1}) .category-card`,
-          `.stack-category-col:nth-child(${colIndex + 1}) .icons-area`,
-          `.stack-category-col:nth-child(${colIndex + 1}) .tech-wrapper`,
-          `.stack-category-col:nth-child(${colIndex + 1}) .tech-symbol-btn`,
-        ].join(', ');
-        const state = Flip.getState(selector);
-
-        this.expandedCategory.set(categoryKey);
-        this.cdr.detectChanges();
-
-        const header = host.querySelector('.stack-header');
-        if (header) {
-          const headerRect = header.getBoundingClientRect();
-          const absoluteHeaderTop = headerRect.top + window.scrollY;
-          const offset = window.innerWidth <= 1024 ? 58 : 53;
-          window.scrollTo({
-            top: absoluteHeaderTop - offset,
-          });
-        }
-
-        const rightPanel = host.querySelector(`.stack-category-col.expanded .right-details-panel`);
-        if (rightPanel) {
-          gsap.set(rightPanel, { opacity: 0 });
-          const allChars = rightPanel.querySelectorAll('.split-char');
-          gsap.set(allChars, { opacity: 0, filter: 'blur(3px)' });
-        }
-
-        const tl = gsap.timeline();
-
-        tl.add(
-          Flip.from(state, {
-            duration: 1.4,
-            ease: 'power3.inOut',
-            nested: true,
-            absolute: '.tech-wrapper',
-          })
-        );
-
-        if (rightPanel) {
-          tl.fromTo(
-            rightPanel,
-            { opacity: 0 },
-            {
-              opacity: 1,
-              duration: 0.25,
-              clearProps: 'opacity,transform,filter',
-            },
-            '-=0.3'
-          );
-
-          tl.add(() => {
-            const lines = rightPanel.querySelectorAll(
-              '.main-desc, .details-subtitle, .details-list li',
-            );
-            lines.forEach((line: Element, index: number) => {
-              const chars = line.querySelectorAll('.split-char');
-              if (chars.length > 0) {
-                gsap.fromTo(
-                  chars,
-                  { opacity: 0, filter: 'blur(3px)' },
-                  {
-                    opacity: 1,
-                    filter: 'blur(0px)',
-                    duration: 0.3,
-                    delay: index * 0.05,
-                    stagger: 0.006,
-                    ease: 'none',
-                    clearProps: 'opacity,filter',
-                  },
-                );
-              }
-            });
-          }, '-=0.15');
-        }
-      },
-    });
-  }
-
   protected closeCategory(onCompleteCallback?: () => void): void {
-    const categoryKey = this.expandedCategory();
+    const categoryKey = this.activeCategory();
     if (!categoryKey) {
       if (onCompleteCallback) onCompleteCallback();
       return;
     }
 
+    this.activeTl?.kill();
+
     const host = this.elementRef.nativeElement;
-    const rightPanel = host.querySelector(`.stack-category-col.expanded .right-details-panel`);
-    const colIndex = this.categories.findIndex((c) => c.key === categoryKey);
-    const col = host.querySelector(`.stack-category-col:nth-child(${colIndex + 1})`);
+    const detailPanel = host.querySelector('.detail-panel');
+    const originCard = host.querySelector(`.stack-category-col [data-flip-id="${categoryKey}"]`);
 
-    const executeClose = () => {
-      const selector = [
-        '.stack-layout-cols',
-        '.stack-category-col',
-        `.stack-category-col:nth-child(${colIndex + 1}) .category-card`,
-        `.stack-category-col:nth-child(${colIndex + 1}) .icons-area`,
-        `.stack-category-col:nth-child(${colIndex + 1}) .tech-wrapper`,
-        `.stack-category-col:nth-child(${colIndex + 1}) .tech-symbol-btn`,
-      ].join(', ');
-      const state = Flip.getState(selector);
+    this.activeTl = gsap.timeline({
+      onComplete: () => {
+        this.activeCategory.set(null);
+        this.cdr.detectChanges();
+        if (originCard) gsap.set(originCard, { clearProps: 'opacity' });
+        if (onCompleteCallback) onCompleteCallback();
+      }
+    });
 
-      this.expandedCategory.set(null);
-      this.cdr.detectChanges();
-
-      const header = host.querySelector('.stack-header');
-      if (header) {
-        const headerRect = header.getBoundingClientRect();
-        const absoluteHeaderTop = headerRect.top + window.scrollY;
-        const offset = window.innerWidth <= 1024 ? 58 : 53;
-        window.scrollTo({
-          top: absoluteHeaderTop - offset,
-        });
+    if (detailPanel && originCard) {
+      const backdrop = host.querySelector('.global-backdrop');
+      if (backdrop) {
+        this.activeTl.to(backdrop, { opacity: 0, duration: 0.6, ease: 'power2.out' }, 0);
       }
 
-      const labels = col ? col.querySelectorAll('.tech-name-label') : null;
-      if (labels) {
-        gsap.set(labels, { opacity: 0, scale: 0.8, y: -5 });
-      }
-
-      const tl = gsap.timeline({
-        onComplete: () => {
-          if (col) {
-            const chars = col.querySelectorAll('.split-char');
-            gsap.set(chars, { clearProps: 'all' });
-          }
-          if (onCompleteCallback) onCompleteCallback();
-        },
-      });
-
-      tl.add(
-        Flip.from(state, {
-          duration: 1.2,
-          ease: 'power3.inOut',
-          nested: true,
-          absolute: '.tech-wrapper',
-        })
-      );
-
-      if (labels) {
-        tl.to(
-          labels,
-          {
-            opacity: 0.95,
-            scale: 1,
-            y: 0,
-            duration: 0.7,
-            stagger: 0.01,
-            ease: 'power2.out',
-            clearProps: 'all',
-          },
-          '-=0.5'
+      const wrapper = detailPanel.querySelector('.detail-content-wrapper');
+      if (wrapper) {
+        this.activeTl.to(
+          wrapper,
+          { opacity: 0, scale: 0.95, duration: 0.3, ease: 'power2.out' },
+          0
         );
       }
-    };
 
-    if (rightPanel) {
-      gsap.to(rightPanel, {
-        opacity: 0,
-        duration: 0.2,
-        ease: 'power2.in',
-        onComplete: () => {
-          gsap.set(rightPanel, { clearProps: 'all' });
-          executeClose();
-        },
-      });
+      const state = Flip.getState(detailPanel);
+
+      Flip.fit(detailPanel, originCard, { absolute: true });
+
+      this.activeTl.add(
+        Flip.from(state, {
+          targets: detailPanel,
+          duration: 0.8,
+          ease: 'power3.inOut',
+          absolute: true
+        }),
+        0
+      );
+
+      this.activeTl.to(originCard, { opacity: 1, duration: 0.4, ease: 'power2.inOut', clearProps: 'opacity' }, 0.4);
+      this.activeTl.to(detailPanel, { opacity: 0, duration: 0.4, ease: 'power2.inOut' }, 0.4);
+
+      const cols = host.querySelectorAll('.stack-category-col');
+      this.activeTl.to(cols, { opacity: 1, duration: 0.4, ease: 'power2.inOut', clearProps: 'opacity' }, 0.2);
     } else {
-      executeClose();
+      this.activeCategory.set(null);
+      this.cdr.detectChanges();
+      if (onCompleteCallback) onCompleteCallback();
     }
   }
 
-  protected onHoverIcon(event: MouseEvent, isEven: boolean, categoryKey: string): void {
+  protected onHoverIcon(event: MouseEvent, isEven: boolean): void {
     const wrapper = event.currentTarget as HTMLElement;
     const btn = wrapper.querySelector('.tech-symbol-btn') as HTMLElement;
     if (!btn) return;
     gsap.killTweensOf(btn);
-    const isExpanded = this.expandedCategory() === categoryKey;
-    const naturalTilt = isExpanded ? 0 : isEven ? -5 : 5;
+    const naturalTilt = isEven ? -5 : 5;
     gsap
       .timeline()
       .to(btn, { rotate: naturalTilt + 12, duration: 0.15, ease: 'power1.out' })
@@ -406,13 +356,12 @@ export class Stack {
       .to(btn, { rotate: naturalTilt, duration: 0.2, ease: 'power1.out' });
   }
 
-  protected onLeaveIcon(event: MouseEvent, isEven: boolean, categoryKey: string): void {
+  protected onLeaveIcon(event: MouseEvent, isEven: boolean): void {
     const wrapper = event.currentTarget as HTMLElement;
     const btn = wrapper.querySelector('.tech-symbol-btn') as HTMLElement;
     if (!btn) return;
     gsap.killTweensOf(btn);
-    const isExpanded = this.expandedCategory() === categoryKey;
-    const naturalTilt = isExpanded ? 0 : isEven ? -5 : 5;
+    const naturalTilt = isEven ? -5 : 5;
     gsap.to(btn, {
       rotate: naturalTilt,
       duration: 0.3,

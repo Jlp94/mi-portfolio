@@ -1,23 +1,35 @@
 <footer class="portfolio-footer">
-  <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-    <div class="flex flex-col items-center md:items-start gap-1">
-      <p class="footer-text">
-        {{ languageService.translations().footer.copyright }}
-      </p>
+  <button class="scroll-top-btn focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+          (click)="scrollToTop()"
+          aria-label="Volver arriba">
+    <svg class="scroll-arrow-up-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path class="arrow-line-1" d="M7 15l5-5 5 5" />
+      <path class="arrow-line-2" d="M7 20l5-5 5 5" />
+    </svg>
+  </button>
+
+  <div class="max-w-7xl mx-auto px-6 flex flex-col items-center justify-center gap-6">
+    <div class="flex items-center justify-center gap-4">
+      <a href="https://github.com/Jlp94" target="_blank" rel="noopener noreferrer" class="footer-social-box focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400" aria-label="GitHub de Jose Luis">
+        <fa-icon [icon]="faGithub" class="text-lg"></fa-icon>
+      </a>
+      <a href="https://linkedin.com/in/jose-luis-prieto" target="_blank" rel="noopener noreferrer" class="footer-social-box focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400" aria-label="LinkedIn de Jose Luis">
+        <fa-icon [icon]="faLinkedin" class="text-lg"></fa-icon>
+      </a>
+      <div class="relative flex items-center justify-center">
+        <button (click)="copyEmail()" class="footer-social-box focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400" aria-label="Copiar correo de Jose Luis">
+          <fa-icon [icon]="faEnvelope" class="text-lg"></fa-icon>
+        </button>
+        @if (showTooltip()) {
+          <div class="copied-tooltip">
+            {{ languageService.translations().footer.copied }}
+          </div>
+        }
+      </div>
     </div>
 
-    <div class="flex items-center gap-6">
-      <a href="https://github.com/Jlp94" target="_blank" rel="noopener noreferrer" class="footer-social-link focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded p-1" aria-label="GitHub de Jose Luis">
-        <fa-icon [icon]="faGithub" class="text-xl"></fa-icon>
-      </a>
-      <a href="https://linkedin.com/in/jose-luis-prieto" target="_blank" rel="noopener noreferrer" class="footer-social-link focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded p-1" aria-label="LinkedIn de Jose Luis">
-        <fa-icon [icon]="faLinkedin" class="text-xl"></fa-icon>
-      </a>
-      <a href="mailto:jlpcdr94@gmail.com" class="footer-social-link focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded p-1" aria-label="Enviar correo a Jose Luis">
-        <fa-icon [icon]="faEnvelope" class="text-xl"></fa-icon>
-      </a>
-      <span class="footer-divider hidden sm:inline" aria-hidden="true">&lt; /&gt;</span>
-    </div>
+    <p class="footer-copyright-text">
+      Jose Luis Prieto <span class="copyright-year">© 2026</span>
+    </p>
   </div>
-
 </footer>
