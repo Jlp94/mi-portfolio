@@ -1,4 +1,4 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed, afterNextRender } from '@angular/core';
 import { Navbar } from '../../shared/layouts/navbar/navbar';
 import { Footer } from '../../shared/layouts/footer/footer';
 import { Hero } from '../components/hero/hero';
@@ -20,6 +20,24 @@ import { Contact } from '../components/contact/contact';
 export class Home {
   private readonly mouseX = signal(0);
   private readonly mouseY = signal(0);
+
+  constructor() {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', () => {
+        sessionStorage.setItem('scrollPosition', window.scrollY.toString());
+      });
+
+      afterNextRender(() => {
+        const savedScroll = sessionStorage.getItem('scrollPosition');
+        if (savedScroll) {
+          const scrollY = parseInt(savedScroll, 10);
+          setTimeout(() => {
+            window.scrollTo(0, scrollY);
+          }, 80);
+        }
+      });
+    }
+  }
 
   protected readonly blobStyles = computed(() => {
     const x = this.mouseX();

@@ -56,7 +56,7 @@
   z-index: 1;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-radius: 1.25rem;
+  border-radius: 0.2rem;
   padding: 1.5rem;
   box-shadow: var(--card-shadow);
   backdrop-filter: blur(10px);

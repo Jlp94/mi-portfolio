@@ -35,6 +35,18 @@ const TECHNOLOGIES = {
 
 export const TRANSLATIONS = {
   es: {
+    contact: {
+      title: 'CONTACTO',
+      subtitle: '¿Tienes alguna pregunta o quieres que trabajemos juntos?',
+      placeholderName: 'Nombre',
+      placeholderEmail: 'Introduce tu email',
+      placeholderMessage: 'Tu mensaje',
+      submit: 'ENVIAR',
+      sending: 'ENVIANDO...',
+      successMessage: '¡Mensaje enviado con éxito!',
+      errorMessage: 'Hubo un error al enviar el mensaje.',
+      validationError: 'Por favor, rellena todos los campos.',
+    },
     navbar: {
       about: 'Sobre mí',
       stack: 'Tecnologías',
@@ -117,7 +129,7 @@ export const TRANSLATIONS = {
       nunsysCompany: 'Nunsys Group',
       nunsysPeriod: 'Marzo 2026 – Junio 2026',
       nunsysBullets: [
-        'Desarrollo de monolitos modulares con Java 17 y Spring Boot 3.5 (Spring Data JPA, Hibernate, PostgreSQL).',
+        'Desarrollo de monolitos de forma modular para facilitar una futura migración a microservicios con Java 17 y Spring Boot 3.5 (Spring Data JPA, Hibernate, PostgreSQL).',
         'Creación de Single Page Applications (SPAs) reactivas con Angular v19 utilizando Signals, RxJS e integración de servicios REST.',
         'Implementación de Arquitectura Hexagonal, principios SOLID, DDD (Domain-Driven Design) y Clean Code.',
         'Uso de metodologías ágiles (Scrum) para la gestión del ciclo de vida del software y contenedores Docker para despliegue.',
@@ -246,6 +258,18 @@ export const TRANSLATIONS = {
       dawSchool: 'Solvam (Quart de Poblet, Valencia)',
       dawPeriod: 'September 2023 - June 2026',
       dawBullets: [],
+    },
+    contact: {
+      title: 'CONTACT',
+      subtitle: 'Have a question or want to work together?',
+      placeholderName: 'Name',
+      placeholderEmail: 'Enter email',
+      placeholderMessage: 'Your Message',
+      submit: 'SUBMIT',
+      sending: 'SENDING...',
+      successMessage: 'Message sent successfully!',
+      errorMessage: 'There was an error sending the message.',
+      validationError: 'Please fill in all fields.',
     },
     footer: {
       copyright: 'Jose Luis Prieto © 2026',

@@ -1,3 +1,4 @@
 export const environment = {
-  apiUrl: 'https://api.tu-dominio.com/api/v1'
+  apiUrl: 'https://api.tu-dominio.com/api/v1',
+  formspreeId: 'mjgqeoba',
 };
