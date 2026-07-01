@@ -22,6 +22,8 @@ export class AboutStack {
 
       const host = this.elementRef.nativeElement;
       const panels = host.querySelector('.about-stack-panels');
+      const header = host.querySelector('.stack-header');
+      const wrappers = host.querySelectorAll('.tech-wrapper');
 
       if (panels) {
         const mm = gsap.matchMedia();
@@ -35,7 +37,7 @@ export class AboutStack {
               start: 'center center',
               end: () => `+=${host.offsetWidth * 0.95}`,
               invalidateOnRefresh: true,
-            }
+            },
           });
 
           tl.to(panels, {
@@ -43,9 +45,81 @@ export class AboutStack {
             ease: 'sine.inOut',
           });
 
+          if (header) {
+            gsap.set(header, { opacity: 0, y: 30, filter: 'blur(8px)' });
+            gsap.to(header, {
+              opacity: 1,
+              y: 0,
+              filter: 'blur(0px)',
+              clearProps: 'filter',
+              duration: 0.8,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: header,
+                containerAnimation: tl,
+                start: 'left 70%',
+              },
+            });
+          }
+
+          if (wrappers.length > 0) {
+            const cols = host.querySelector('.stack-layout-cols');
+            gsap.set(wrappers, { opacity: 0, y: 20, filter: 'blur(6px)' });
+            gsap.to(wrappers, {
+              opacity: 1,
+              y: 0,
+              filter: 'blur(0px)',
+              clearProps: 'filter',
+              duration: 0.5,
+              ease: 'power2.out',
+              stagger: 0.03,
+              scrollTrigger: {
+                trigger: cols,
+                containerAnimation: tl,
+                start: 'left 55%',
+              },
+            });
+          }
+
           return () => {
             tl.kill();
           };
+        });
+
+        mm.add('(max-width: 1023px)', () => {
+          if (header) {
+            gsap.set(header, { opacity: 0, y: 30, filter: 'blur(8px)' });
+            gsap.to(header, {
+              opacity: 1,
+              y: 0,
+              filter: 'blur(0px)',
+              clearProps: 'filter',
+              duration: 0.9,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: header,
+                start: 'top 85%',
+              },
+            });
+          }
+
+          if (wrappers.length > 0) {
+            const cols = host.querySelector('.stack-layout-cols');
+            gsap.set(wrappers, { opacity: 0, y: 20, filter: 'blur(6px)' });
+            gsap.to(wrappers, {
+              opacity: 1,
+              y: 0,
+              filter: 'blur(0px)',
+              clearProps: 'filter',
+              duration: 0.5,
+              ease: 'power2.out',
+              stagger: 0.03,
+              scrollTrigger: {
+                trigger: cols,
+                start: 'top 80%',
+              },
+            });
+          }
         });
       }
     });

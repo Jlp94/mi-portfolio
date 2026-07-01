@@ -5,7 +5,7 @@
   --accent-color-hover: var(--theme-accent-soft-hover);
   --accent-color-muted: color-mix(in srgb, var(--theme-accent-soft) 10%, transparent);
   --accent-color-border: color-mix(in srgb, var(--theme-accent-soft) 15%, transparent);
-  --card-bg: rgba(229, 231, 235, 0.45);
+  --card-bg: rgba(193, 207, 237, 0.45);
   --card-border: rgba(209, 213, 219, 0.7);
   --text-title: var(--theme-surface-special-text);
   --text-subtitle: var(--theme-title-accent-2);
@@ -25,20 +25,19 @@
 }
 
 :host-context(.dark) {
-  --accent-color: var(--color-yellow-100);
+  --accent-color: var(--color-violet-300);
   --accent-color-hover: var(--theme-accent-soft-hover);
   --accent-color-muted: color-mix(in srgb, var(--theme-accent-soft) 10%, transparent);
   --accent-color-border: color-mix(in srgb, var(--theme-accent-soft) 15%, transparent);
   --card-bg: var(--theme-surface-card-bg);
   --card-border: rgba(255, 255, 255, 0.05);
-  --text-title: var(--color-rose-100);
-  --text-subtitle: var(--theme-text-accent-subtitle);
+  --text-title: var(--color-violet-300);
   --text-body: #cbd5e1;
   --dot-bg: var(--theme-timeline-dot-experience);
   --body-bg-solid: #181922;
   --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
   --card-shadow-hover: 0 12px 40px 0 rgba(0, 0, 0, 0.35);
-  --date-color: var(--color-yellow-100);
+  --date-color: var(--color-violet-300);
   --title-1-color: var(--theme-timeline-header);
   --theme-code-bracket: var(--color-red-400);
   --theme-code-tag: var(--color-red-400);
@@ -55,9 +54,12 @@
   overflow: hidden;
   z-index: 1;
   background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 1.25rem;
-  padding: 1.5rem;
+  border-top: 2px solid var(--color-cyan-500);
+  border-left: none;
+  border-bottom: none;
+  border-right: none;
+  border-radius: 0.2rem;
+  padding: 0;
   box-shadow: var(--card-shadow);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -76,16 +78,7 @@
 }
 
 .timeline-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  z-index: 0;
-  opacity: var(--noise-opacity);
-  background-image: var(--noise-bg);
+  display: none;
 }
 
 .timeline-card > * {
@@ -136,12 +129,28 @@
   color: var(--text-subtitle);
 }
 
+.card-header {
+  padding: 1.5rem;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+  border-left: 2px solid var(--color-cyan-500);
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.timeline-card.is-expanded .card-header {
+  border-bottom-color: var(--color-cyan-500);
+}
+
 .card-bullets {
-  margin: 1rem 0 0;
-  padding-left: 1.2rem;
+  margin: 0;
+  padding: 1rem 1.5rem 1.5rem 2.7rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  border-right: 2px solid var(--color-cyan-500);
 }
 
 .card-bullets li {
@@ -155,8 +164,9 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  border-top: 1px solid var(--card-border);
-  padding-top: 0.75rem;
+  border-top: 2px solid var(--color-cyan-500);
+  border-left: 2px solid var(--color-cyan-500);
+  padding: 1rem 1.5rem;
 }
 
 .card-techs-row app-tech-icon {
@@ -252,5 +262,42 @@
 }
 
 .card-details-content {
+  position: relative;
   min-height: 0;
+  z-index: 2;
+}
+
+.card-details-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: var(--noise-opacity);
+  background-image: var(--noise-bg);
+  background-size: 800px 800px;
+}
+
+:host-context(.dark) .timeline-card {
+  border-top-color: var(--color-violet-900);
+}
+
+:host-context(.dark) .card-header {
+  border-left-color: var(--color-violet-900);
+}
+
+:host-context(.dark) .timeline-card.is-expanded .card-header {
+  border-bottom-color: var(--color-violet-900);
+}
+
+:host-context(.dark) .card-bullets {
+  border-right-color: var(--color-violet-900);
+}
+
+:host-context(.dark) .card-techs-row {
+  border-top-color: var(--color-violet-900);
+  border-left-color: var(--color-violet-900);
 }

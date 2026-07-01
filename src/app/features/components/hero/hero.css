@@ -160,6 +160,10 @@
   transform: translateX(-50%) translateY(4px) scale(1.1);
 }
 
+.scroll-indicator-container:hover .scroll-arrow path {
+  animation-play-state: paused;
+}
+
 .scroll-arrow {
   width: 2.5rem;
   height: 2.5rem;

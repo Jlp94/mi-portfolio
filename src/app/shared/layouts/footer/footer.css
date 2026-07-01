@@ -3,10 +3,11 @@
   padding-top: 3.5rem;
   padding-bottom: 2.5rem;
   position: relative;
-  background: linear-gradient(rgba(211, 213, 217, 0.55), rgba(151, 154, 160, 0.45));
+  background: linear-gradient(rgba(164, 172, 185, 0.7), rgba(100, 110, 125, 0.6));
   border-top: 1px solid rgba(209, 213, 219, 0.7);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  z-index: 30;
   transition:
     background-color 0.5s ease,
     border-color 0.5s ease,
@@ -103,7 +104,7 @@
   width: 40px;
   height: 40px;
   border-radius: 2px;
-  background: rgba(16, 20, 30, 0.05);
+  background: rgba(255, 255, 255, 0.35);
   color: #334155;
   overflow: hidden;
   border: none;

@@ -2,20 +2,13 @@
 
 <main class="relative w-full overflow-hidden">
   <div class="background-blobs-container absolute inset-0 pointer-events-none overflow-hidden z-0">
-    <div class="global-blob global-blob-one absolute" [style]="blobStyles().one" aria-hidden="true"></div>
-    <div class="global-blob global-blob-two absolute" [style]="blobStyles().two" aria-hidden="true"></div>
-    <div class="global-blob global-blob-three absolute" [style]="blobStyles().three" aria-hidden="true"></div>
-    <div class="global-blob global-blob-four absolute" [style]="blobStyles().four" aria-hidden="true"></div>
-    <div class="global-blob global-blob-five absolute" [style]="blobStyles().five" aria-hidden="true"></div>
-    <div class="global-blob global-blob-six absolute" [style]="blobStyles().six" aria-hidden="true"></div>
-    <div class="global-blob global-blob-seven absolute" [style]="blobStyles().seven" aria-hidden="true"></div>
-    <div class="global-blob global-blob-eight absolute" [style]="blobStyles().eight" aria-hidden="true"></div>
-    <div class="global-blob global-blob-nine absolute" [style]="blobStyles().nine" aria-hidden="true"></div>
-    <div class="global-blob global-blob-ten absolute" [style]="blobStyles().ten" aria-hidden="true"></div>
-    <div class="global-blob global-blob-eleven absolute" [style]="blobStyles().eleven" aria-hidden="true"></div>
-    <div class="global-blob global-blob-twelve absolute" [style]="blobStyles().twelve" aria-hidden="true"></div>
-    <div class="global-blob global-blob-thirteen absolute" [style]="blobStyles().thirteen" aria-hidden="true"></div>
-    <div class="global-blob global-blob-fourteen absolute" [style]="blobStyles().fourteen" aria-hidden="true"></div>
+    @for (blob of blobs(); track $index) {
+      <div 
+        class="global-blob absolute" 
+        [style]="'top: ' + blob.top + '; left: ' + blob.left + '; background: ' + blob.bg + '; opacity: ' + blob.opacity + '; animation: ' + blob.animation + '; transform: ' + blob.transform + '; --blob-size-mobile: ' + blob.sizeMobile + 'vw; --blob-size-desktop: ' + blob.sizeDesktop + 'vw; --blob-blur-mobile: ' + blob.blurMobile + 'px; --blob-blur-desktop: ' + blob.blurDesktop + 'px;'"
+        aria-hidden="true"
+      ></div>
+    }
   </div>
 
   <section id="hero" class="w-full min-h-screen flex items-center justify-center relative">
@@ -35,8 +28,8 @@
     <app-projects class="w-full" />
   </section>
 
-  <section id="contact" class="w-full min-h-screen flex items-center justify-center relative py-20">
-    <app-contact class="w-full" />
+  <section id="contact" class="w-full flex relative mt-20">
+    <app-contact class="w-full flex flex-col flex-grow" />
   </section>
 </main>
 
