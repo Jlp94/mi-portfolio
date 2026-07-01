@@ -1,13 +1,56 @@
 import { Component, inject, computed, ElementRef, afterNextRender, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl } from '@angular/forms';
+import {
+  form,
+  schema,
+  required,
+  validate,
+  FormRoot,
+  FormField,
+  submit,
+} from '@angular/forms/signals';
 import { LanguageService } from '../../../core/services/language.service';
 import { EmailService } from '../../../core/services/email-service';
+import { FormValidators } from '../../../validators/FormValidators';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+interface CardLayout {
+  gridColumn: string;
+  gridRow: string;
+}
+
+const LAYOUTS: CardLayout[][] = [
+  [
+    { gridColumn: 'span 2 / span 2', gridRow: 'span 1 / span 1' },
+    { gridColumn: 'span 1 / span 1', gridRow: 'span 2 / span 2' },
+    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
+    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
+  ],
+  [
+    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
+    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
+    { gridColumn: 'span 2 / span 2', gridRow: 'span 1 / span 1' },
+    { gridColumn: 'span 1 / span 1', gridRow: 'span 2 / span 2' },
+  ],
+  [
+    { gridColumn: 'span 1 / span 1', gridRow: 'span 2 / span 2' },
+    { gridColumn: 'span 2 / span 2', gridRow: 'span 1 / span 1' },
+    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
+    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
+  ],
+  [
+    { gridColumn: 'span 1 / span 1', gridRow: 'span 2 / span 2' },
+    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
+    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
+    { gridColumn: 'span 2 / span 2', gridRow: 'span 1 / span 1' },
+  ],
+];
+
 @Component({
   selector: 'app-contact',
-  imports: [FormsModule],
+  imports: [FormRoot, FormField],
+  providers: [EmailService],
   templateUrl: './contact.html',
   styleUrl: './contact.css',
 })
@@ -17,18 +60,47 @@ export class Contact {
   private readonly elementRef = inject(ElementRef);
   private readonly emailService = inject(EmailService);
 
-  // Form signals
-  protected readonly name = signal('');
-  protected readonly email = signal('');
-  protected readonly message = signal('');
+  protected readonly formModel = signal({ name: '', email: '', message: '' });
 
-  protected readonly submissionStatus = signal<'idle' | 'loading' | 'success' | 'error'>('idle');
-  protected readonly showValidationError = signal<boolean>(false);
+  protected readonly contactForm = form(
+    this.formModel,
+    schema((p) => {
+      required(p.name, { error: { kind: 'validationError' } });
+      validate(p.name, (ctx) => {
+        const control = new FormControl(ctx.value());
+        return FormValidators.notOnlyWhiteSpace(control) ? { kind: 'validationError' } : null;
+      });
+
+      required(p.email, { error: { kind: 'validationError' } });
+      validate(p.email, (ctx) => {
+        const control = new FormControl(ctx.value());
+        return FormValidators.strictEmail(control) ? { kind: 'emailInvalid' } : null;
+      });
+
+      required(p.message, { error: { kind: 'validationError' } });
+      validate(p.message, (ctx) => {
+        const control = new FormControl(ctx.value());
+        return FormValidators.notOnlyWhiteSpace(control) ? { kind: 'validationError' } : null;
+      });
+    }),
+  );
+
+  protected readonly submissionStatus = signal<'idle' | 'success' | 'error'>('idle');
+
+  protected readonly activeLayout = signal<CardLayout[]>([
+    { gridColumn: 'span 2 / span 2', gridRow: 'span 1 / span 1' },
+    { gridColumn: 'span 1 / span 1', gridRow: 'span 2 / span 2' },
+    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
+    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
+  ]);
 
   constructor() {
     gsap.registerPlugin(ScrollTrigger);
 
     afterNextRender(() => {
+      const randomIndex = Math.floor(Math.random() * LAYOUTS.length);
+      this.activeLayout.set(LAYOUTS[randomIndex]);
+
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReducedMotion) {
         return;
@@ -39,13 +111,12 @@ export class Contact {
       const title = hostElement.querySelector('.contact-title');
       const line = hostElement.querySelector('.contact-line');
       const subtitle = hostElement.querySelector('.contact-subtitle');
-      const form = hostElement.querySelector('.contact-form');
+      const formEl = hostElement.querySelector('.contact-form');
 
-      // Pre-set initial states for GSAP
       gsap.set(title, { opacity: 0, x: 200 });
       gsap.set(line, { scaleX: 0, transformOrigin: 'right center' });
       gsap.set(subtitle, { opacity: 0, x: 200 });
-      gsap.set(form, { opacity: 0, y: 50 });
+      gsap.set(formEl, { opacity: 0, y: 50 });
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -62,51 +133,63 @@ export class Contact {
         duration: 1.2,
         ease: 'power2.out',
       })
-      .to(line, {
-        scaleX: 1,
-        duration: 0.8,
-        ease: 'power2.out',
-      }, '-=0.8')
-      .to(subtitle, {
-        opacity: 1,
-        x: 0,
-        duration: 1.0,
-        ease: 'power2.out',
-      }, '-=0.6')
-      .to(form, {
-        opacity: 1,
-        y: 0,
-        duration: 1.2,
-        ease: 'power2.out',
-      }, '-=0.8');
+        .to(
+          line,
+          {
+            scaleX: 1,
+            duration: 0.8,
+            ease: 'power2.out',
+          },
+          '-=0.8',
+        )
+        .to(
+          subtitle,
+          {
+            opacity: 1,
+            x: 0,
+            duration: 1.0,
+            ease: 'power2.out',
+          },
+          '-=0.6',
+        )
+        .to(
+          formEl,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: 'power2.out',
+          },
+          '-=0.8',
+        );
     });
   }
 
   protected async onSubmit(event: Event): Promise<void> {
     event.preventDefault();
-    const nameVal = this.name().trim();
-    const emailVal = this.email().trim();
-    const messageVal = this.message().trim();
 
-    if (!nameVal || !emailVal || !messageVal) {
-      this.showValidationError.set(true);
-      setTimeout(() => {
-        if (this.showValidationError()) {
-          this.showValidationError.set(false);
-        }
-      }, 5000);
+    if (this.contactForm().invalid()) {
+      this.contactForm().markAsTouched();
       return;
     }
 
-    this.showValidationError.set(false);
-    this.submissionStatus.set('loading');
+    this.submissionStatus.set('idle');
 
-    const success = await this.emailService.sendEmail(nameVal, emailVal, messageVal);
+    const { name, email, message } = this.formModel();
+    const success = await submit(this.contactForm, {
+      action: async () => {
+        const emailSent = await this.emailService.sendEmail(name, email, message);
+        if (!emailSent) {
+          return { kind: 'submitError' };
+        }
+        return null;
+      },
+    });
+
     if (success) {
       this.submissionStatus.set('success');
-      this.name.set('');
-      this.email.set('');
-      this.message.set('');
+      this.formModel.set({ name: '', email: '', message: '' });
+      this.contactForm().reset();
       setTimeout(() => {
         if (this.submissionStatus() === 'success') {
           this.submissionStatus.set('idle');
@@ -120,5 +203,49 @@ export class Contact {
         }
       }, 5000);
     }
+  }
+
+  protected onBtnMouseEnter(event: MouseEvent): void {
+    const button = event.currentTarget as HTMLElement;
+    const bg = button.querySelector('.btn-hover-bg') as HTMLElement;
+    if (!bg) return;
+
+    const rect = button.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    gsap.killTweensOf(bg);
+    gsap.fromTo(
+      bg,
+      {
+        left: `${x}px`,
+        top: `${y}px`,
+        scale: 0,
+      },
+      {
+        scale: 1,
+        duration: 1,
+        ease: 'power2.out',
+      },
+    );
+  }
+
+  protected onBtnMouseLeave(event: MouseEvent): void {
+    const button = event.currentTarget as HTMLElement;
+    const bg = button.querySelector('.btn-hover-bg') as HTMLElement;
+    if (!bg) return;
+
+    const rect = button.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    gsap.killTweensOf(bg);
+    gsap.to(bg, {
+      left: `${x}px`,
+      top: `${y}px`,
+      scale: 0,
+      duration: 0.8,
+      ease: 'power2.inOut',
+    });
   }
 }

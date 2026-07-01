@@ -46,6 +46,25 @@ export const TRANSLATIONS = {
       successMessage: '¡Mensaje enviado con éxito!',
       errorMessage: 'Hubo un error al enviar el mensaje.',
       validationError: 'Por favor, rellena todos los campos.',
+      emailInvalid: 'Introduce un email válido.',
+      cards: [
+        {
+          title: 'Diseño UX/UI',
+          text: 'Me apasiona el diseño de interfaces web: ver diseños, apuntármelos y aprender nuevas cosas. Me encantan las cosas simples con detalles únicos, las animaciones y efectos sutiles que impresionan.',
+        },
+        {
+          title: 'Naturaleza y Deporte',
+          text: 'Me apasiona salir a la montaña, hacer senderismo y practicar deporte al aire libre; estar en contacto con la naturaleza es mi forma de recargar energía.',
+        },
+        {
+          title: 'Pasión Gastronómica',
+          text: 'Como amante de la gastronomía, me encanta cocinar y probar lugares nuevos, sobre todo descubriendo platos de otros países.',
+        },
+        {
+          title: 'Curiosidad Continua',
+          text: 'Siempre explorando nuevos paradigmas, lenguajes y frameworks. En la tecnología, la curiosidad constante es un estilo de vida.',
+        },
+      ],
     },
     navbar: {
       about: 'Sobre mí',
@@ -270,6 +289,25 @@ export const TRANSLATIONS = {
       successMessage: 'Message sent successfully!',
       errorMessage: 'There was an error sending the message.',
       validationError: 'Please fill in all fields.',
+      emailInvalid: 'Please enter a valid email.',
+      cards: [
+        {
+          title: 'UX/UI Design',
+          text: 'I am passionate about web interface design: exploring designs, noting ideas, and learning new things. I love simple things with unique details, animations and subtle effects that impress.',
+        },
+        {
+          title: 'Nature & Sports',
+          text: 'I love going out to the mountains, hiking, and practicing outdoor sports; being in touch with nature is my favorite way to recharge.',
+        },
+        {
+          title: 'Gastronomy Enthusiast',
+          text: 'As a gastronomy lover, I enjoy cooking and trying out new spots, especially exploring dishes from different countries.',
+        },
+        {
+          title: 'Continuous Curiosity',
+          text: 'Always exploring new paradigms, languages, and frameworks. In technology, constant curiosity is a lifestyle.',
+        },
+      ],
     },
     footer: {
       copyright: 'Jose Luis Prieto © 2026',

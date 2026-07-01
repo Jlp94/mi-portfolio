@@ -1,15 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Service } from '@angular/core';
 import { environment } from '../../../environments/environment';
 
-@Injectable({
-  providedIn: 'root',
+@Service({
+  autoProvided: false,
 })
 export class EmailService {
   private readonly formspreeId: string = environment.formspreeId;
 
   async sendEmail(name: string, email: string, message: string): Promise<boolean> {
     if (!this.formspreeId || this.formspreeId === 'YOUR_FORMSPREE_ID') {
-      console.warn('Formspree ID no configurado. Simulando envío de red de 1.2 segundos...');
       await new Promise(resolve => setTimeout(resolve, 1200));
       return true;
     }
@@ -24,8 +23,7 @@ export class EmailService {
         body: JSON.stringify({ name, email, message }),
       });
       return response.ok;
-    } catch (error) {
-      console.error('Error al enviar el email:', error);
+    } catch {
       return false;
     }
   }

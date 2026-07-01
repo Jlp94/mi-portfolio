@@ -1,12 +1,4 @@
-import {
-  Component,
-  inject,
-  computed,
-  ElementRef,
-  afterNextRender,
-  signal,
-  ChangeDetectorRef,
-} from '@angular/core';
+import { Component, inject, computed, ElementRef, signal, ChangeDetectorRef } from '@angular/core';
 import { LanguageService } from '../../../core/services/language.service';
 import { SharedSection } from '../../../shared/components/section/section';
 import { TechIcon } from './tech-icon';
@@ -74,42 +66,6 @@ export class Stack {
       techs: ['git', 'github', 'docker', 'azure', 'vercel', 'render', 'aws', 'kubernetes'],
     },
   ];
-
-  constructor() {
-    afterNextRender(() => {
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (prefersReducedMotion) return;
-
-      const host = this.elementRef.nativeElement;
-
-      const header = host.querySelector('.stack-header');
-      if (header) {
-        gsap.set(header, { opacity: 0, y: 30, filter: 'blur(8px)' });
-        gsap.to(header, {
-          opacity: 1,
-          y: 0,
-          filter: 'blur(0px)',
-          clearProps: 'filter',
-          duration: 0.9,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: header, start: 'top 90%' },
-        });
-      }
-
-      const wrappers = host.querySelectorAll('.tech-wrapper');
-      gsap.set(wrappers, { opacity: 0, y: 20, filter: 'blur(6px)' });
-      gsap.to(wrappers, {
-        opacity: 1,
-        y: 0,
-        filter: 'blur(0px)',
-        clearProps: 'filter',
-        duration: 0.5,
-        ease: 'power2.out',
-        stagger: 0.03,
-        scrollTrigger: { trigger: host.querySelector('.stack-layout-cols'), start: 'top 85%' },
-      });
-    });
-  }
 
   protected getCategoryTitle(key: string): string {
     const translations = this.t();
@@ -190,23 +146,23 @@ export class Stack {
   }
 
   protected getCategoryTechs(key: string): string[] {
-    const cat = this.categories.find(c => c.key === key);
+    const cat = this.categories.find((c) => c.key === key);
     return cat ? cat.techs : [];
   }
 
   protected toggleCategory(catKey: string): void {
     const current = this.activeCategory();
-    
+
     if (current === catKey) {
       this.closeCategory();
       return;
     }
-    
+
     if (current !== null) {
       this.closeCategory(() => this.openCategory(catKey));
       return;
     }
-    
+
     this.openCategory(catKey);
   }
 
@@ -222,7 +178,7 @@ export class Stack {
 
     const host = this.elementRef.nativeElement as HTMLElement;
     const cols = host.querySelectorAll('.stack-category-col');
-    
+
     cols.forEach((c: Element) => {
       if (!c.querySelector(`[data-flip-id="${catKey}"]`)) {
         this.activeTl!.to(c, { opacity: 0.3, duration: 0.4, ease: 'power2.inOut' }, 0);
@@ -241,7 +197,7 @@ export class Stack {
           duration: 0.8,
           ease: 'power3.inOut',
         }),
-        0
+        0,
       );
 
       const wrapper = host.querySelector('.detail-content-wrapper');
@@ -250,11 +206,11 @@ export class Stack {
           wrapper,
           { yPercent: 15, opacity: 0 },
           { yPercent: 0, opacity: 1, duration: 0.4, ease: 'power2.out' },
-          0.4
+          0.4,
         );
 
         const lines = wrapper.querySelectorAll(
-          '.main-desc, .details-subtitle, .details-list li, .details-inline-text'
+          '.main-desc, .details-subtitle, .details-list li, .details-inline-text',
         );
         lines.forEach((line: Element, index: number) => {
           const chars = line.querySelectorAll('.split-char');
@@ -271,7 +227,7 @@ export class Stack {
                 ease: 'none',
                 clearProps: 'opacity,filter',
               },
-              0.5
+              0.5,
             );
           }
         });
@@ -298,7 +254,7 @@ export class Stack {
         this.cdr.detectChanges();
         if (originCard) gsap.set(originCard, { clearProps: 'opacity' });
         if (onCompleteCallback) onCompleteCallback();
-      }
+      },
     });
 
     if (detailPanel && originCard) {
@@ -312,7 +268,7 @@ export class Stack {
         this.activeTl.to(
           wrapper,
           { opacity: 0, scale: 0.95, duration: 0.3, ease: 'power2.out' },
-          0
+          0,
         );
       }
 
@@ -325,16 +281,24 @@ export class Stack {
           targets: detailPanel,
           duration: 0.8,
           ease: 'power3.inOut',
-          absolute: true
+          absolute: true,
         }),
-        0
+        0,
       );
 
-      this.activeTl.to(originCard, { opacity: 1, duration: 0.4, ease: 'power2.inOut', clearProps: 'opacity' }, 0.4);
+      this.activeTl.to(
+        originCard,
+        { opacity: 1, duration: 0.4, ease: 'power2.inOut', clearProps: 'opacity' },
+        0.4,
+      );
       this.activeTl.to(detailPanel, { opacity: 0, duration: 0.4, ease: 'power2.inOut' }, 0.4);
 
       const cols = host.querySelectorAll('.stack-category-col');
-      this.activeTl.to(cols, { opacity: 1, duration: 0.4, ease: 'power2.inOut', clearProps: 'opacity' }, 0.2);
+      this.activeTl.to(
+        cols,
+        { opacity: 1, duration: 0.4, ease: 'power2.inOut', clearProps: 'opacity' },
+        0.2,
+      );
     } else {
       this.activeCategory.set(null);
       this.cdr.detectChanges();

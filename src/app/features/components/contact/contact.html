@@ -1,12 +1,10 @@
-<div class="contact-container w-full flex flex-col-reverse lg:grid lg:grid-cols-2 relative overflow-hidden">
-  <!-- Left Column: Contact Form Area -->
+<div class="contact-container relative overflow-hidden">
   <div class="contact-left-panel flex flex-col justify-center items-center px-6 py-8 md:p-10 lg:p-12 text-center relative z-10">
     <div class="contact-header-wrap flex flex-col gap-7 items-center w-full max-w-lg">
       <h2 class="contact-title text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
         {{ t().title }}
       </h2>
 
-      <!-- Horizontal line -->
       <div class="contact-line"></div>
 
       <p class="contact-subtitle text-base md:text-lg font-medium">
@@ -14,26 +12,23 @@
       </p>
     </div>
 
-    <!-- Contact Form -->
-    <form class="contact-form mt-10 flex flex-col gap-5 w-full max-w-lg" (submit)="onSubmit($event)">
+    <form class="contact-form mt-10 flex flex-col gap-5 w-full max-w-lg" [formRoot]="contactForm" (submit)="onSubmit($event)">
       <div class="form-group flex flex-col w-full text-left">
         <label for="name" class="sr-only">{{ t().placeholderName }}</label>
-        <input type="text" id="name" name="name" required [placeholder]="t().placeholderName" class="form-input" [disabled]="submissionStatus() === 'loading'" [(ngModel)]="name" />
+        <input type="text" id="name" [placeholder]="t().placeholderName" class="form-input" [formField]="contactForm.name" [class.input-error]="contactForm.name().invalid() && contactForm.name().touched()" />
       </div>
 
       <div class="form-group flex flex-col w-full text-left">
         <label for="email" class="sr-only">{{ t().placeholderEmail }}</label>
-        <input type="email" id="email" name="email" required [placeholder]="t().placeholderEmail" class="form-input" [disabled]="submissionStatus() === 'loading'" [(ngModel)]="email" />
+        <input type="email" id="email" [placeholder]="t().placeholderEmail" class="form-input" [formField]="contactForm.email" [class.input-error]="contactForm.email().invalid() && contactForm.email().touched()" />
       </div>
 
       <div class="form-group flex flex-col w-full text-left">
         <label for="message" class="sr-only">{{ t().placeholderMessage }}</label>
-        <textarea id="message" name="message" rows="4" required [placeholder]="t().placeholderMessage"
-          class="form-textarea" [disabled]="submissionStatus() === 'loading'" [(ngModel)]="message"></textarea>
+        <textarea id="message" rows="4" [placeholder]="t().placeholderMessage" class="form-textarea" [formField]="contactForm.message" [class.input-error]="contactForm.message().invalid() && contactForm.message().touched()"></textarea>
       </div>
 
       <div class="flex justify-between items-center mt-3 w-full">
-        <!-- Message area to the left of the submit button -->
         <div class="text-left flex-grow mr-4">
           @if (submissionStatus() === 'success') {
             <span class="text-xs font-semibold text-emerald-600 dark:text-emerald-400">
@@ -43,22 +38,37 @@
             <span class="text-xs font-semibold text-rose-600 dark:text-rose-400">
               {{ t().errorMessage }}
             </span>
-          } @else if (showValidationError()) {
+          } @else if (contactForm().invalid() && contactForm().touched()) {
             <span class="text-xs font-semibold text-rose-600 dark:text-rose-400">
-              {{ t().validationError }}
+              {{ (contactForm.email().errors().length > 0 && contactForm.email().errors()[0].kind === 'emailInvalid') ? t().emailInvalid : t().validationError }}
             </span>
           }
         </div>
 
-        <button type="submit" class="contact-submit-btn" [disabled]="submissionStatus() === 'loading'">
-          {{ submissionStatus() === 'loading' ? t().sending : t().submit }}
+        <button type="submit" class="contact-submit-btn" [disabled]="contactForm().submitting()"
+          (mouseenter)="onBtnMouseEnter($event)" (mouseleave)="onBtnMouseLeave($event)">
+          <span class="btn-hover-bg"></span>
+          <span class="btn-text">{{ contactForm().submitting() ? t().sending : t().submit }}</span>
         </button>
       </div>
     </form>
   </div>
 
-  <!-- Right Column: Placeholder Area -->
   <div class="contact-right-panel flex items-center justify-center relative z-10">
-    <!-- This panel is intentionally left blank for future content and will sit on top on mobile -->
+    <div class="contact-card-grid">
+      @for (card of t().cards; track $index) {
+        <div 
+          class="contact-card" 
+          [style.grid-column]="activeLayout()[$index]?.gridColumn"
+          [style.grid-row]="activeLayout()[$index]?.gridRow"
+        >
+          <svg viewBox="0 0 24 24" class="contact-card-quote" fill="currentColor" aria-hidden="true">
+            <path d="M10,7L8,11H11V17H5V11L7,7H10M18,7L16,11H19V17H13V11L15,7H18Z" />
+          </svg>
+          <h3 class="contact-card-title">{{ card.title }}</h3>
+          <p class="contact-card-text">{{ card.text }}</p>
+        </div>
+      }
+    </div>
   </div>
 </div>

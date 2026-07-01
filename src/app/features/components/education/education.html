@@ -1,28 +1,20 @@
 <div class="section-header mb-8 select-none font-display">
-  <span class="text-xs font-mono opacity-65 mb-1 block">
-    <app-code-tag tag="h2" attrName="class" attrVal="section-title"></app-code-tag>
-  </span>
   <h2 class="text-3xl md:text-4xl font-bold tracking-tight leading-none">
-    <span class="block text-[var(--title-1-color)] pl-4">{{ t().titleLine1 }}</span>
+    <span class="block text-[var(--title-1-color)] pl-4">
+      <span class="highlight-title-word">{{ t().titleLine1 }}</span>
+    </span>
     <span class="block text-[var(--theme-name-prieto)] ml-20 md:ml-[7.5rem] lg:ml-[9rem] -mt-1 md:-mt-2">
-      {{ t().titleLine2 }}<span class="text-accent">.</span>
+      <span class="highlight-title-word">{{ t().titleLine2 }}</span><span class="text-accent">.</span>
     </span>
   </h2>
-  <span class="text-xs font-mono opacity-65 mt-1 block">
-    <app-code-tag tag="h2" [isClose]="true"></app-code-tag>
-  </span>
 </div>
 
-<span class="text-xs font-mono opacity-65 mb-2 block select-none">
-  <app-code-tag tag="article" attrName="class" attrVal="education"></app-code-tag>
-</span>
-
 <div class="timeline-container relative">
-  <div class="flex flex-col gap-12">
+  <div class="flex flex-col gap-6">
     <div class="timeline-item">
       <div class="timeline-card cursor-pointer select-none" [class.is-expanded]="expandedCard() === 'daw'" (click)="toggleCard('daw')" role="button" tabindex="0"
         (keydown.enter)="toggleCard('daw')">
-        <div class="flex items-start justify-between gap-4">
+        <div class="card-header">
           <div class="flex items-start gap-4">
             <div class="card-icon-wrapper">
               <svg class="w-6 h-6 text-[var(--accent-color)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -32,8 +24,11 @@
             </div>
             <div>
               <h3 class="card-title">{{ t().dawTitle }}</h3>
-              <h4 class="card-subtitle">{{ t().dawSchool }}</h4>
-              <span class="timeline-date">{{ t().dawPeriod }}</span>
+              <h4 class="card-subtitle">
+                {{ t().dawSchool }}
+                <span class="card-date-separator"> • </span>
+                <span class="card-date-text">{{ t().dawPeriod }}</span>
+              </h4>
             </div>
           </div>
           <button class="expand-chevron-btn" aria-label="Desplegar detalles de educación en DAW">
@@ -65,7 +60,3 @@
     </div>
   </div>
 </div>
-
-<span class="text-xs font-mono opacity-65 mt-4 block select-none">
-  <app-code-tag tag="article" [isClose]="true"></app-code-tag>
-</span>
