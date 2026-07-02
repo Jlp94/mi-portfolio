@@ -12,14 +12,8 @@
   --text-body: var(--theme-surface-special-text);
   --dot-bg: var(--theme-timeline-dot-experience);
   --body-bg-solid: #f8fafc;
-  --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
-  --card-shadow-hover: 0 20px 40px -15px rgba(0, 0, 0, 0.12);
   --date-color: var(--theme-surface-special-text);
   --title-1-color: var(--theme-timeline-header);
-  --theme-code-bracket: var(--color-violet-900);
-  --theme-code-tag: var(--color-violet-900);
-  --theme-code-attr: var(--color-sky-900);
-  --theme-code-val: #15803d;
   --noise-opacity: var(--theme-noise-opacity);
   --noise-bg: var(--theme-noise-bg);
 }
@@ -35,14 +29,8 @@
   --text-body: #cbd5e1;
   --dot-bg: var(--theme-timeline-dot-experience);
   --body-bg-solid: #181922;
-  --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
-  --card-shadow-hover: 0 12px 40px 0 rgba(0, 0, 0, 0.35);
   --date-color: var(--color-violet-300);
   --title-1-color: var(--theme-timeline-header);
-  --theme-code-bracket: var(--color-red-400);
-  --theme-code-tag: var(--color-red-400);
-  --theme-code-attr: var(--color-amber-300);
-  --theme-code-val: var(--color-lime-300);
 }
 
 .timeline-container {
@@ -98,7 +86,7 @@
 }
 
 .timeline-card:hover .card-icon-wrapper {
-  transform: scale(1.1) rotate(5deg);
+  transform: scale(1.2) rotate(5deg);
 }
 
 .timeline-date {

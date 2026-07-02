@@ -104,7 +104,7 @@
   --theme-code-attr: var(--color-orange-600);
   --theme-code-val: #16a34a;
 
-  --theme-accent-soft: var(--color-sky-300);
+  --theme-accent-soft: var(--color-sky-500);
   --theme-accent-soft-hover: var(--color-sky-200);
   --theme-surface-card-bg: var(--color-sky-900);
   --theme-text-accent-subtitle: var(--color-sky-300);
@@ -220,7 +220,6 @@ html.dark {
   --theme-noise-bg: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-
 html {
   scroll-behavior: smooth;
   height: 100%;
@@ -335,28 +334,63 @@ html.dark .text-accent {
 }
 
 @keyframes float-one {
-  0%, 100% { margin-top: 0; margin-left: 0; }
-  50% { margin-top: 5%; margin-left: 10vw; }
+  0%,
+  100% {
+    margin-top: 0;
+    margin-left: 0;
+  }
+  50% {
+    margin-top: 5%;
+    margin-left: 10vw;
+  }
 }
 
 @keyframes float-two {
-  0%, 100% { margin-top: 0; margin-left: 0; }
-  50% { margin-top: -6%; margin-left: -12vw; }
+  0%,
+  100% {
+    margin-top: 0;
+    margin-left: 0;
+  }
+  50% {
+    margin-top: -6%;
+    margin-left: -12vw;
+  }
 }
 
 @keyframes float-three {
-  0%, 100% { margin-top: 0; margin-left: 0; }
-  50% { margin-top: -4%; margin-left: -8vw; }
+  0%,
+  100% {
+    margin-top: 0;
+    margin-left: 0;
+  }
+  50% {
+    margin-top: -4%;
+    margin-left: -8vw;
+  }
 }
 
 @keyframes float-four {
-  0%, 100% { margin-top: 0; margin-left: 0; }
-  50% { margin-top: 6%; margin-left: -10vw; }
+  0%,
+  100% {
+    margin-top: 0;
+    margin-left: 0;
+  }
+  50% {
+    margin-top: 6%;
+    margin-left: -10vw;
+  }
 }
 
 @keyframes float-five {
-  0%, 100% { margin-top: 0; margin-left: 0; }
-  50% { margin-top: -5%; margin-left: 8vw; }
+  0%,
+  100% {
+    margin-top: 0;
+    margin-left: 0;
+  }
+  50% {
+    margin-top: -5%;
+    margin-left: 8vw;
+  }
 }
 
 .highlight-title-word {

@@ -23,6 +23,7 @@
                tabindex="0"
                (click)="toggleCategory(cat.key)"
                (keydown.enter)="toggleCategory(cat.key)"
+               (keydown.space)="toggleCategory(cat.key)"
                [attr.aria-expanded]="activeCategory() === cat.key"
                [attr.aria-controls]="cat.key + '-card'">
             <app-code-tag tag="h3"></app-code-tag>
@@ -36,7 +37,9 @@
               @for (tech of cat.techs; track tech; let isEven = $even) {
                 <div class="tech-wrapper"
                      (mouseenter)="onHoverIcon($event, isEven)"
-                     (mouseleave)="onLeaveIcon($event, isEven)">
+                     (mouseleave)="onLeaveIcon($event, isEven)"
+                     (focus)="onHoverIcon($event, isEven)"
+                     (blur)="onLeaveIcon($event, isEven)">
                   <div class="tech-content">
                     <div class="tech-symbol-btn" [class]="'tech-symbol-btn tech-' + tech" [style.--tech-rotation]="isEven ? '-5deg' : '5deg'">
                       <app-tech-icon [key]="tech" customClass="w-8 h-8 md:w-10 md:h-10" />
@@ -52,11 +55,11 @@
     </div>
 
     @if (activeCategory(); as activeCat) {
-      <div class="global-backdrop" (click)="closeCategory()"></div>
-      <div class="details-overlay-container" (click)="closeCategory()">
-        <div class="detail-panel" 
+      <div class="global-backdrop" (click)="onBackdropClick($event)" (keydown.escape)="closeCategory()" role="presentation"></div>
+      <div class="details-overlay-container" (click)="onBackdropClick($event)" (keydown.escape)="closeCategory()" role="presentation">
+        <div class="detail-panel"
              [attr.data-flip-id]="activeCat"
-             (click)="$event.stopPropagation()">
+             role="document">
           <div class="detail-content-wrapper">
              <div class="detail-icons-side">
                 <div class="icons-area icons-compact select-none">

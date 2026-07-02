@@ -1,1 +1,117 @@
-<p>projects works!</p>
+<div class="max-w-7xl mx-auto px-6">
+
+  <div class="section-header mb-6 select-none font-display">
+    <h2 class="flex flex-col">
+      <span class="text-[clamp(1.5rem,4vw,2.8rem)] font-black text-[var(--title-1-color)] leading-[1.05] pl-4">
+        <span class="highlight-title-word">{{ t().titleLine1 }}</span>
+      </span>
+      <span
+        class="text-[clamp(1.5rem,4vw,2.8rem)] font-black text-[var(--theme-name-prieto)] leading-[1.05] ml-16 md:ml-20 -mt-[0.05em]">
+        <span class="highlight-title-word">{{ t().titleLine2 }}</span><span class="text-accent">.</span>
+      </span>
+    </h2>
+  </div>
+
+  <nav class="projects-breadcrumb flex flex-wrap items-center mb-8" aria-label="Filtro de proyectos">
+    @for (key of filterKeys; track key; let last = $last) {
+    <button
+      class="breadcrumb-item px-2 py-1 bg-transparent border-none font-sans text-sm font-semibold cursor-pointer leading-none transition-all duration-200"
+      [class.breadcrumb-item--active]="activeFilter() === key" (click)="setFilter(key)"
+      [attr.aria-pressed]="activeFilter() === key">
+      {{ getFilterLabel(key) }}<sup class="text-[0.5rem] font-bold ml-[0.1rem] opacity-80">{{ projectCount()[key]
+        }}</sup>
+    </button>
+    @if (!last) {
+    <span class="text-sm font-light opacity-30 px-[0.1rem] select-none" aria-hidden="true">/</span>
+    }
+    }
+  </nav>
+
+  <div class="projects-grid">
+    @for (project of filteredProjects(); track trackById($index, project); let i = $index) {
+    <app-project-card [project]="project" [layout]="activeLayout()[i % activeLayout().length]"
+      [viewLabel]="t().viewProject" (cardOpen)="openModal($event)" />
+    }
+  </div>
+
+  @if (activeModal(); as project) {
+  <div class="modal-overlay fixed inset-0 z-[1000] flex items-center justify-center p-4"
+    animate.enter="modal-overlay-enter" animate.leave="modal-overlay-leave" (click)="onOverlayClick($event)"
+    (keydown.escape)="closeModal()" role="dialog" aria-modal="true" tabindex="-1"
+    [attr.aria-labelledby]="'modal-title-' + project.id">
+    <div class="modal-inner relative w-full max-w-[44rem] max-h-[90vh] overflow-y-auto"
+      animate.enter="modal-inner-enter" animate.leave="modal-inner-leave" role="document">
+
+      <div class="modal-carousel relative w-full aspect-video overflow-hidden bg-slate-900">
+        <img [src]="project.images[activeSlide()]" [alt]="project.title" class="w-full h-full object-cover block" />
+
+        @if (project.images.length > 1) {
+        <button class="carousel-btn absolute top-1/2 left-3 -translate-y-1/2" (click)="prevSlide()"
+          aria-label="Imagen anterior">
+          <svg class="w-[1.1rem] h-[1.1rem]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+        <button class="carousel-btn absolute top-1/2 right-3 -translate-y-1/2" (click)="nextSlide()"
+          aria-label="Imagen siguiente">
+          <svg class="w-[1.1rem] h-[1.1rem]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </button>
+        <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+          @for (img of project.images; track $index) {
+          <button
+            class="carousel-dot w-[0.45rem] h-[0.45rem] rounded-full border-none p-0 cursor-pointer transition-all duration-200"
+            [class.carousel-dot--active]="activeSlide() === $index" (click)="activeSlide.set($index)"
+            [attr.aria-label]="'Imagen ' + ($index + 1)"></button>
+          }
+        </div>
+        }
+      </div>
+
+      <div class="px-7 pt-6 pb-20 flex flex-col gap-4">
+        <h2 [id]="'modal-title-' + project.id"
+          class="font-sans text-[1.35rem] font-extrabold m-0 leading-tight modal-title">{{ project.title }}</h2>
+
+        <div class="flex flex-wrap gap-1.5">
+          @for (tech of project.techs; track tech) {
+          <span
+            class="tech-pill tech-pill--modal inline-flex items-center justify-center h-7 px-2.5 rounded-sm border font-mono text-[0.7rem] font-semibold whitespace-nowrap">
+            {{ tech }}
+          </span>
+          }
+        </div>
+
+        <p class="font-sans text-[0.9rem] leading-relaxed m-0 opacity-85 modal-description">{{ project.description }}
+        </p>
+
+        <div class="flex gap-3 flex-wrap mt-1">
+          @if (project.repoUrl) {
+          <a [href]="project.repoUrl" target="_blank" rel="noopener noreferrer"
+            class="modal-link modal-link--github inline-flex items-center gap-2 px-5 py-2.5 rounded-sm font-sans text-[0.8rem] font-bold tracking-widest uppercase no-underline transition-all duration-200">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 shrink-0" aria-hidden="true">
+              <path
+                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z" />
+            </svg>
+            {{ t().sourceCode }}
+          </a>
+          }
+        </div>
+      </div>
+
+      <button
+        class="modal-close-btn absolute top-4 right-5 w-11 h-11 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200"
+        (click)="closeModal()" [attr.aria-label]="t().closeModal">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+    </div>
+  </div>
+  }
+
+</div>

@@ -3,7 +3,7 @@
     <span class="block text-[var(--title-1-color)] pl-4">
       <span class="highlight-title-word">{{ t().titleLine1 }}</span>
     </span>
-    <span class="block text-[var(--theme-name-prieto)] ml-20 md:ml-[7.5rem] lg:ml-[9rem] -mt-1 md:-mt-2">
+    <span class="block text-[var(--theme-name-prieto)] ml-26 md:ml-[10rem] lg:ml-[7.5rem] -mt-1 md:-mt-2">
       <span class="highlight-title-word">{{ t().titleLine2 }}</span><span class="text-accent">.</span>
     </span>
   </h2>
@@ -12,8 +12,8 @@
 <div class="timeline-container relative">
   <div class="flex flex-col gap-6">
     <div class="timeline-item">
-      <div class="timeline-card cursor-pointer select-none" [class.is-expanded]="expandedCard() === 'daw'" (click)="toggleCard('daw')" role="button" tabindex="0"
-        (keydown.enter)="toggleCard('daw')">
+      <div class="timeline-card cursor-pointer select-none" [class.is-expanded]="expandedCard() === 'daw'"
+        (click)="toggleCard('daw')" role="button" tabindex="0" (keydown.enter)="toggleCard('daw')">
         <div class="card-header">
           <div class="flex items-start gap-4">
             <div class="card-icon-wrapper">

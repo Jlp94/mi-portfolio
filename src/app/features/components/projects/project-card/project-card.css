@@ -1,0 +1,131 @@
+:host {
+  /* display: contents para que <article> sea el hijo directo del grid del padre,
+     no <app-project-card>. Sin esto, grid-column/grid-row no colocan la card. */
+  display: contents;
+}
+
+.project-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--card-bg);
+  border-top: 2px solid var(--card-border);
+  border-right: 2px solid var(--card-border);
+  border-radius: 0 2rem;
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--card-shadow-hover);
+}
+
+.card-image-wrap {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: #0f172a;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+}
+
+.project-card:hover .card-image {
+  transform: scale(1.1);
+}
+
+.card-footer {
+  position: relative;
+}
+
+.card-footer-inner {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--modal-text);
+}
+
+:host-context(.dark) .card-title {
+  color: var(--color-slate-100);
+}
+
+.card-title-line {
+  flex-shrink: 0;
+  width: 3rem;
+  height: 2px;
+  background: var(--accent-color);
+}
+
+.card-footer-slide {
+  position: relative;
+  height: 1.75rem;
+}
+
+.card-techs,
+.card-view-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  transition:
+    transform 0.6s cubic-bezier(0.65, 0, 0.35, 1),
+    opacity 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.card-techs {
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.project-card--hovered .card-techs {
+  transform: translateY(-130%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.card-view-label {
+  transform: translateY(130%);
+  opacity: 0;
+  color: var(--accent-color);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.project-card--hovered .card-view-label {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.tech-pill {
+  border-color: transparent;
+  background: transparent;
+  color: var(--pill-color);
+  border-radius: 2px;
+  gap: 0.25rem;
+}

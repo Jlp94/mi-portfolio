@@ -1,0 +1,36 @@
+<article class="project-card" [style.grid-column]="layout()?.gridColumn" [style.grid-row]="layout()?.gridRow"
+  [class.project-card--hovered]="isHovered()" (mouseenter)="isHovered.set(true)" (mouseleave)="isHovered.set(false)"
+  (focus)="isHovered.set(true)" (blur)="isHovered.set(false)" (click)="onOpen()" role="button" tabindex="0"
+  (keydown.enter)="onOpen()" (keydown.space)="onOpen()" [attr.aria-label]="ariaLabel()">
+
+  <div class="card-image-wrap">
+    <img [src]="project().images[0]" [alt]="project().title" class="card-image" loading="lazy" />
+  </div>
+
+  <div class="card-footer px-4 py-3">
+    <div class="card-footer-inner">
+      <h3 class="card-title font-sans text-[0.9rem] font-bold m-0 leading-snug">
+        <span class="card-title-text">{{ project().title }}</span>
+      </h3>
+
+      <div class="card-footer-slide">
+        <div class="card-techs flex flex-wrap gap-1">
+          @for (tech of project().techs; track tech) {
+          <span
+            class="tech-pill inline-flex items-center justify-center h-6 px-2 rounded-sm border font-mono text-[0.65rem] font-semibold whitespace-nowrap">
+            @if (getTechIcon(tech); as iconKey) {
+            <app-tech-icon [key]="iconKey" class="inline-block w-4 h-4" />
+            } @else {
+            {{ tech }}
+            }
+          </span>
+          }
+        </div>
+        <span class="card-view-label font-sans text-[0.8rem] font-bold tracking-[0.12em] uppercase" aria-hidden="true">
+          {{ viewLabel() }} <span class="card-title-line ms-2" aria-hidden="true"></span>
+
+        </span>
+      </div>
+    </div>
+  </div>
+</article>

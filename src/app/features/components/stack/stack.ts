@@ -306,7 +306,13 @@ export class Stack {
     }
   }
 
-  protected onHoverIcon(event: MouseEvent, isEven: boolean): void {
+  protected onBackdropClick(event: MouseEvent): void {
+    if (event.target === event.currentTarget) {
+      this.closeCategory();
+    }
+  }
+
+  protected onHoverIcon(event: MouseEvent | FocusEvent, isEven: boolean): void {
     const wrapper = event.currentTarget as HTMLElement;
     const btn = wrapper.querySelector('.tech-symbol-btn') as HTMLElement;
     if (!btn) return;
@@ -320,7 +326,7 @@ export class Stack {
       .to(btn, { rotate: naturalTilt, duration: 0.2, ease: 'power1.out' });
   }
 
-  protected onLeaveIcon(event: MouseEvent, isEven: boolean): void {
+  protected onLeaveIcon(event: MouseEvent | FocusEvent, isEven: boolean): void {
     const wrapper = event.currentTarget as HTMLElement;
     const btn = wrapper.querySelector('.tech-symbol-btn') as HTMLElement;
     if (!btn) return;

@@ -6,7 +6,9 @@ on:
       - main
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build-and-deploy:
@@ -29,8 +31,10 @@ jobs:
       - name: Build
         run: pnpm run build-gh-pages
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          folder: dist/mi-portfolio/browser
-          branch: gh-pages
+          path: dist/mi-portfolio/browser
+
+      - name: Deploy
+        uses: actions/deploy-pages@v4
