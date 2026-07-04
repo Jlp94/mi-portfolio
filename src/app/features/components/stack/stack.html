@@ -1,109 +1,93 @@
-<app-shared-section id="stacks" title="" maxWidth="max-w-7xl"
-  heightClass="h-auto flex flex-col justify-start pt-8 md:pt-12 pb-16 overflow-visible">
-  <div class="stack-content">
-    <div class="stack-header mb-8 select-none font-display">
-      <span class="text-xs font-mono opacity-65 mb-1 block">
-        <app-code-tag tag="h2" attrName="class" attrVal="section-title"></app-code-tag>
-      </span>
-      <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-none">
-        <span class="block text-stack-title-1 pl-4">{{ t().titleLine1 }} <span class="text-accent">.</span></span>
-      </h2>
-      <span class="text-xs font-mono opacity-65 mt-1 block">
-        <app-code-tag tag="h2" [isClose]="true"></app-code-tag>
-      </span>
-    </div>
-    <span class="text-xs font-mono opacity-65 mt-1 block">
-      <app-code-tag tag="article" attrName="class" attrVal="grid-stack"></app-code-tag>
-    </span>
-    <div class="stack-layout-cols">
-      @for (cat of categories; track cat.key) {
-        <div class="stack-category-col">
-          <div class="category-header-title"
-               role="button"
-               tabindex="0"
-               (click)="toggleCategory(cat.key)"
-               (keydown.enter)="toggleCategory(cat.key)"
-               (keydown.space)="toggleCategory(cat.key)"
-               [attr.aria-expanded]="activeCategory() === cat.key"
-               [attr.aria-controls]="cat.key + '-card'">
-            <app-code-tag tag="h3"></app-code-tag>
-            <h3 class="cat-title-text">{{ getCategoryTitle(cat.key) }}</h3>
-            <fa-icon [icon]="activeCategory() === cat.key ? faAngleUp : faAngleDown" class="category-chevron"></fa-icon>
-            <app-code-tag tag="h3" [isClose]="true"></app-code-tag>
-          </div>
+<div class="stack-content w-full">
 
-          <div class="category-card" [attr.data-flip-id]="cat.key">
-            <div class="icons-area select-none" [attr.data-category]="cat.key">
-              @for (tech of cat.techs; track tech; let isEven = $even) {
-                <div class="tech-wrapper"
-                     (mouseenter)="onHoverIcon($event, isEven)"
-                     (mouseleave)="onLeaveIcon($event, isEven)"
-                     (focus)="onHoverIcon($event, isEven)"
-                     (blur)="onLeaveIcon($event, isEven)">
-                  <div class="tech-content">
-                    <div class="tech-symbol-btn" [class]="'tech-symbol-btn tech-' + tech" [style.--tech-rotation]="isEven ? '-5deg' : '5deg'">
-                      <app-tech-icon [key]="tech" customClass="w-8 h-8 md:w-10 md:h-10" />
-                    </div>
-                    <span class="tech-name-label">{{ getTechName(tech) }}</span>
-                  </div>
-                </div>
-              }
+  <div class="stack-layout-cols">
+    @for (cat of categories; track cat.key) {
+    <div class="stack-category-col" [class]="'stack-category-col cat-' + cat.key">
+      <div class="category-header-title select-none flex items-center mb-4 cursor-pointer"
+        (click)="toggleCategory(cat.key)" (keydown.enter)="toggleCategory(cat.key)"
+        (keydown.space)="toggleCategory(cat.key)" tabindex="0" role="button"
+        [attr.aria-expanded]="activeCategory() === cat.key">
+        <h3
+          class="category-subtitle text-lg md:text-xl font-bold uppercase tracking-wider text-[var(--theme-title-accent-1)] mb-0">
+          {{ getCategoryTitle(cat.key) }}
+        </h3>
+        <fa-icon [icon]="activeCategory() === cat.key ? faAngleUp : faAngleDown"
+          class="category-chevron ml-2"></fa-icon>
+      </div>
+      <div class="category-card" [attr.data-flip-id]="cat.key">
+        <div class="icons-area select-none" [attr.data-category]="cat.key">
+          @for (tech of cat.techs; track tech; let isEven = $even) {
+          <div class="tech-wrapper" (mouseenter)="onHoverIcon($event, isEven)"
+            (mouseleave)="onLeaveIcon($event, isEven)" (focus)="onHoverIcon($event, isEven)"
+            (blur)="onLeaveIcon($event, isEven)">
+            <div class="tech-content">
+              <div class="tech-symbol-btn" [class]="'tech-symbol-btn tech-' + tech"
+                [style.--tech-rotation]="isEven ? '-5deg' : '5deg'">
+                <app-tech-icon [key]="tech" customClass="w-8 h-8 md:w-10 md:h-10" />
+              </div>
+              <span class="tech-name-label">{{ getTechName(tech) }}</span>
             </div>
           </div>
+          }
         </div>
-      }
+      </div>
     </div>
+    }
+  </div>
+</div>
 
-    @if (activeCategory(); as activeCat) {
-      <div class="global-backdrop" (click)="onBackdropClick($event)" (keydown.escape)="closeCategory()" role="presentation"></div>
-      <div class="details-overlay-container" (click)="onBackdropClick($event)" (keydown.escape)="closeCategory()" role="presentation">
-        <div class="detail-panel"
-             [attr.data-flip-id]="activeCat"
-             role="document">
-          <div class="detail-content-wrapper">
-             <div class="detail-icons-side">
-                <div class="icons-area icons-compact select-none">
-                   @for (tech of getCategoryTechs(activeCat); track tech) {
-                      <div class="tech-wrapper">
-                         <div class="tech-content">
-                            <div class="tech-symbol-btn tech-{{tech}}">
-                               <app-tech-icon [key]="tech" customClass="w-5 h-5 md:w-6 md:h-6" />
-                            </div>
-                         </div>
-                      </div>
-                   }
-                </div>
-             </div>
-             <div class="detail-content-side">
-                <div class="text-drawer">
-                  <div class="tech-details-card">
-                    <p class="details-tech-desc main-desc" [innerHTML]="getSplitTechDesc(activeCat)"></p>
-                    @if (hasExtraDetails(activeCat)) {
-                      <div class="details-block">
-                        <h4 class="details-subtitle" [innerHTML]="getSplitText(getFirstBlockTitle())"></h4>
-                        <ul class="details-list">
-                          @for (item of getEcosystem(activeCat); track item) {
-                            <li [innerHTML]="getSplitText('• ' + item)"></li>
-                          }
-                        </ul>
-                      </div>
-                      @if (getSecondBlockItems(activeCat).length > 0) {
-                        <div class="details-block">
-                          <h4 class="details-subtitle" [innerHTML]="getSplitText(getSecondBlockTitle(activeCat))"></h4>
-                          <p class="details-inline-text" [innerHTML]="getSplitText(getSecondBlockItems(activeCat).join(' • '))">
-                          </p>
-                        </div>
-                      }
-                    }
-                  </div>
-                </div>
-             </div>
+@if (activeCategory(); as activeCat) {
+<div class="global-backdrop" (click)="onBackdropClick($event)" (keydown.escape)="closeCategory()" role="presentation">
+</div>
+<div class="details-overlay-container" (click)="onBackdropClick($event)" (keydown.escape)="closeCategory()"
+  role="presentation">
+  <div class="detail-panel" [attr.data-flip-id]="activeCat" role="document">
+    <div class="detail-content-wrapper">
+      <div class="detail-icons-side">
+        <div class="icons-area icons-compact select-none">
+          @for (tech of getCategoryTechs(activeCat); track tech) {
+          <div class="tech-wrapper">
+            <div class="tech-content">
+              <div class="tech-symbol-btn tech-{{tech}}">
+                <app-tech-icon [key]="tech" customClass="w-8 h-8 md:w-9 md:h-9" />
+              </div>
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+      <div class="detail-content-side">
+        <div class="text-drawer">
+          <div class="tech-details-card">
+            <p class="details-tech-desc main-desc" [innerHTML]="getSplitTechDesc(activeCat)"></p>
+            @if (hasExtraDetails(activeCat)) {
+            <div class="details-block">
+              <h4 class="details-subtitle" [innerHTML]="getSplitText(getFirstBlockTitle())"></h4>
+              <ul class="details-list">
+                @for (item of getEcosystem(activeCat); track item) {
+                <li [innerHTML]="getSplitText('• ' + item)"></li>
+                }
+              </ul>
+            </div>
+            @if (getSecondBlockItems(activeCat).length > 0) {
+            <div class="details-block">
+              <h4 class="details-subtitle" [innerHTML]="getSplitText(getSecondBlockTitle(activeCat))"></h4>
+              <p class="details-inline-text" [innerHTML]="getSplitText(getSecondBlockItems(activeCat).join(' • '))">
+              </p>
+            </div>
+            }
+            @if (getThirdBlockItems(activeCat).length > 0) {
+            <div class="details-block">
+              <h4 class="details-subtitle" [innerHTML]="getSplitText(getThirdBlockTitle(activeCat))"></h4>
+              <p class="details-inline-text" [innerHTML]="getSplitText(getThirdBlockItems(activeCat).join(' • '))">
+              </p>
+            </div>
+            }
+            }
           </div>
         </div>
       </div>
-    }
+    </div>
   </div>
-  <span class="stack-closing-tag text-xs font-mono opacity-65 mt-1 block">
-    <app-code-tag tag="article" [isClose]="true"></app-code-tag>
-  </span>
-</app-shared-section>
+</div>
+}

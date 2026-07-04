@@ -5,10 +5,10 @@ import {
   signal,
   ElementRef,
   afterNextRender,
-  HostListener,
 } from '@angular/core';
 import { LanguageService } from '../../../core/services/language.service';
 import { ProjectCard } from './project-card/project-card';
+import { ProjectModal } from './project-modal/project-modal';
 import { ProjectItem, CardLayout, FilterKey } from './model/project.model';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -48,7 +48,7 @@ const LAYOUTS: CardLayout[][] = [
 
 @Component({
   selector: 'app-projects',
-  imports: [ProjectCard],
+  imports: [ProjectCard, ProjectModal],
   templateUrl: './projects.html',
   styleUrl: './projects.css',
 })
@@ -59,7 +59,6 @@ export class Projects {
 
   protected readonly activeFilter = signal<FilterKey>('all');
   protected readonly activeModal = signal<ProjectItem | null>(null);
-  protected readonly activeSlide = signal(0);
   protected readonly activeLayout = signal<CardLayout[]>(LAYOUTS[0]);
 
   protected readonly filterKeys: FilterKey[] = ['all', 'angular', 'spring', 'nest', 'php'];
@@ -90,21 +89,35 @@ export class Projects {
 
       const host = this.elementRef.nativeElement as HTMLElement;
 
-      const header = host.querySelector('.section-header');
+      const headerTitle = host.querySelector('.section-header-centered h2');
+      const headerLine = host.querySelector('.section-header-centered .section-line');
       const breadcrumb = host.querySelector('.projects-breadcrumb');
       const cards = host.querySelectorAll('.project-card');
 
-      if (header) {
-        gsap.set(header, { opacity: 0, y: 30, filter: 'blur(8px)' });
-        gsap.to(header, {
-          opacity: 1,
-          y: 0,
-          filter: 'blur(0px)',
-          clearProps: 'filter',
-          duration: 0.9,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: header, start: 'top 85%' },
+      if (headerTitle && headerLine) {
+        gsap.set(headerTitle, { opacity: 0, x: -200 });
+        gsap.set(headerLine, { scaleX: 0, transformOrigin: 'left center' });
+        
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: host.querySelector('.section-header-centered'),
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          },
+          delay: 0.2,
         });
+
+        tl.to(headerTitle, {
+          opacity: 1,
+          x: 0,
+          duration: 1.2,
+          ease: 'power2.out',
+        })
+        .to(headerLine, {
+          scaleX: 1,
+          duration: 0.8,
+          ease: 'power2.out',
+        }, '-=0.8');
       }
 
       if (breadcrumb) {
@@ -120,7 +133,7 @@ export class Projects {
       }
 
       if (cards.length > 0) {
-        gsap.set(cards, { opacity: 0, y: 50, filter: 'blur(6px)' });
+        gsap.set(cards, { opacity: 0, y: 100, filter: 'blur(6px)' });
         ScrollTrigger.create({
           trigger: host.querySelector('.projects-grid'),
           start: 'top 82%',
@@ -129,10 +142,10 @@ export class Projects {
               opacity: 1,
               y: 0,
               filter: 'blur(0px)',
-              clearProps: 'filter',
-              duration: 0.65,
-              ease: 'power2.out',
-              stagger: 0.1,
+              clearProps: 'filter,transform',
+              duration: 1.2,
+              ease: 'power3.out',
+              stagger: 0.25,
             });
           },
         });
@@ -149,22 +162,21 @@ export class Projects {
       const cards = host.querySelectorAll('.project-card');
       gsap.fromTo(
         cards,
-        { opacity: 0, y: 20, filter: 'blur(4px)' },
+        { opacity: 0, y: 100, filter: 'blur(6px)' },
         {
           opacity: 1,
           y: 0,
           filter: 'blur(0px)',
-          clearProps: 'filter',
-          duration: 0.4,
-          ease: 'power2.out',
-          stagger: 0.06,
+          clearProps: 'filter,transform',
+          duration: 1.2,
+          ease: 'power3.out',
+          stagger: 0.25,
         },
       );
     }, 0);
   }
 
   protected openModal(project: ProjectItem): void {
-    this.activeSlide.set(0);
     this.activeModal.set(project);
     document.body.style.overflow = 'hidden';
   }
@@ -172,29 +184,6 @@ export class Projects {
   protected closeModal(): void {
     this.activeModal.set(null);
     document.body.style.overflow = '';
-  }
-
-  protected onOverlayClick(event: MouseEvent): void {
-    if (event.target === event.currentTarget) {
-      this.closeModal();
-    }
-  }
-
-  protected nextSlide(): void {
-    const project = this.activeModal();
-    if (!project) return;
-    this.activeSlide.update((s) => (s + 1) % project.images.length);
-  }
-
-  protected prevSlide(): void {
-    const project = this.activeModal();
-    if (!project) return;
-    this.activeSlide.update((s) => (s - 1 + project.images.length) % project.images.length);
-  }
-
-  @HostListener('document:keydown.escape')
-  protected onEscapeKey(): void {
-    if (this.activeModal()) this.closeModal();
   }
 
   protected getFilterLabel(key: FilterKey): string {

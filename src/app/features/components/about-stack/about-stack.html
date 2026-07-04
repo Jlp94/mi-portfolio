@@ -1,10 +1,62 @@
-<div class="about-stack-viewport w-full overflow-hidden">
-  <div class="about-stack-panels flex flex-row flex-nowrap w-[200%] relative z-10">
-    <div class="panel-section w-1/2 flex items-center justify-center">
+<div class="about-stack-container max-w-7xl mx-auto px-6 py-20 md:py-32 relative z-10">
+
+  <div class="section-header-centered select-none font-display mb-16 text-center flex flex-col items-center">
+    <h2 class="section-title-centered font-bold tracking-tight">
+      <span class="text-about-title-1">{{ t().titleLine1 }}</span>
+      <span class="text-about-title-2 ml-2">{{ t().titleLine2 }}</span><span class="text-accent">.</span>
+    </h2>
+    <div class="section-line mt-4 mx-auto"></div>
+  </div>
+
+  <div class="bullets-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+    <div class="bullet-wrap bullet-left flex flex-col items-center text-center">
+      <div class="shape-wrap mb-4">
+        <div class="core-value-shape">
+          <fa-icon [icon]="faGauge"></fa-icon>
+        </div>
+      </div>
+      <h3 class="bullet-title font-sans text-xl font-bold mb-2">{{ t().valFastTitle }}</h3>
+      <p class="bullet-text font-sans text-sm opacity-85 max-w-[240px] leading-relaxed">{{ t().valFastDesc }}</p>
+    </div>
+
+    <div class="bullet-wrap bullet-left flex flex-col items-center text-center">
+      <div class="shape-wrap mb-4">
+        <div class="core-value-shape">
+          <fa-icon [icon]="faLaptop"></fa-icon>
+        </div>
+      </div>
+      <h3 class="bullet-title font-sans text-xl font-bold mb-2">{{ t().valResponsiveTitle }}</h3>
+      <p class="bullet-text font-sans text-sm opacity-85 max-w-[240px] leading-relaxed">{{ t().valResponsiveDesc }}</p>
+    </div>
+
+    <div class="bullet-wrap bullet-right flex flex-col items-center text-center">
+      <div class="shape-wrap mb-4">
+        <div class="core-value-shape">
+          <fa-icon [icon]="faLightbulb"></fa-icon>
+        </div>
+      </div>
+      <h3 class="bullet-title font-sans text-xl font-bold mb-2">{{ t().valIntuitiveTitle }}</h3>
+      <p class="bullet-text font-sans text-sm opacity-85 max-w-[240px] leading-relaxed">{{ t().valIntuitiveDesc }}</p>
+    </div>
+
+    <div class="bullet-wrap bullet-right flex flex-col items-center text-center">
+      <div class="shape-wrap mb-4">
+        <div class="core-value-shape">
+          <fa-icon [icon]="faRocket"></fa-icon>
+        </div>
+      </div>
+      <h3 class="bullet-title font-sans text-xl font-bold mb-2">{{ t().valDynamicTitle }}</h3>
+      <p class="bullet-text font-sans text-sm opacity-85 max-w-[240px] leading-relaxed">{{ t().valDynamicDesc }}</p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-28 items-start pt-10">
+    <div class="about-stack-left">
       <app-about-me class="w-full" />
     </div>
-    <div class="panel-section w-1/2 flex items-center justify-center">
+    <div class="about-stack-right">
       <app-stack class="w-full" />
     </div>
   </div>
+
 </div>

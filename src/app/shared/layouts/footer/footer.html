@@ -1,8 +1,8 @@
 <footer class="portfolio-footer">
   <button class="scroll-top-btn focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
-          (click)="scrollToTop()"
-          aria-label="Volver arriba">
-    <svg class="scroll-arrow-up-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    (click)="scrollToTop()" aria-label="Volver arriba">
+    <svg class="scroll-arrow-up-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
       <path class="arrow-line-1" d="M7 15l5-5 5 5" />
       <path class="arrow-line-2" d="M7 20l5-5 5 5" />
     </svg>
@@ -10,26 +10,32 @@
 
   <div class="max-w-7xl mx-auto px-6 flex flex-col items-center justify-center gap-6">
     <div class="flex items-center justify-center gap-4">
-      <a href="https://github.com/Jlp94" target="_blank" rel="noopener noreferrer" class="footer-social-box focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400" aria-label="GitHub de Jose Luis">
+      <a href="https://github.com/Jlp94" target="_blank" rel="noopener noreferrer"
+        class="footer-social-box focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+        aria-label="GitHub de Jose Luis">
         <fa-icon [icon]="faGithub" class="text-lg"></fa-icon>
       </a>
-      <a href="https://linkedin.com/in/jose-luis-prieto" target="_blank" rel="noopener noreferrer" class="footer-social-box focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400" aria-label="LinkedIn de Jose Luis">
+      <a href="https://linkedin.com/in/jose-luis-prieto" target="_blank" rel="noopener noreferrer"
+        class="footer-social-box focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+        aria-label="LinkedIn de Jose Luis">
         <fa-icon [icon]="faLinkedin" class="text-lg"></fa-icon>
       </a>
       <div class="relative flex items-center justify-center">
-        <button (click)="copyEmail()" class="footer-social-box focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400" aria-label="Copiar correo de Jose Luis">
+        <button (click)="copyEmail()"
+          class="footer-social-box focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+          aria-label="Copiar correo de Jose Luis">
           <fa-icon [icon]="faEnvelope" class="text-lg"></fa-icon>
         </button>
         @if (showTooltip()) {
-          <div class="copied-tooltip">
-            {{ languageService.translations().footer.copied }}
-          </div>
+        <div class="copied-tooltip">
+          {{ languageService.translations().footer.copied }}
+        </div>
         }
       </div>
     </div>
 
     <p class="footer-copyright-text">
-      Jose Luis Prieto <span class="copyright-year">© 2026</span>
+      Jose Luis Prieto <span class="copyright-year ms-1">© 2026</span>
     </p>
   </div>
 </footer>

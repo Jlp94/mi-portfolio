@@ -11,12 +11,12 @@
 
   --title-1-color: var(--theme-timeline-header);
   --title-2-color: var(--theme-name-prieto);
-  --statement-color: var(--theme-surface-special-text);
+  --statement-color: var(--theme-timeline-header);
   --statement-shadow: var(--theme-surface-special-text-shadow);
-  --highlight-1: var(--theme-highlight-1);
-  --highlight-2: var(--theme-highlight-2);
-  --highlight-3: var(--theme-highlight-3);
-  --highlight-4: var(--theme-highlight-4);
+  --highlight-1: var(--color-sky-500);
+  --highlight-2: var(--color-sky-500);
+  --highlight-3: var(--color-sky-500);
+  --highlight-4: var(--color-sky-500);
 }
 
 :host-context(.dark) {
@@ -24,6 +24,10 @@
   --theme-code-tag: var(--color-red-400);
   --theme-code-attr: var(--color-amber-300);
   --theme-code-val: var(--color-lime-300);
+  --highlight-1: var(--theme-title-accent-1);
+  --highlight-2: var(--theme-title-accent-1);
+  --highlight-3: var(--theme-title-accent-1);
+  --highlight-4: var(--theme-title-accent-1);
 }
 
 .about-me-content {
@@ -37,6 +41,39 @@
 
 .text-about-title-2 {
   color: var(--title-2-color);
+}
+
+.profile-image-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-image-container {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  border-top-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  transform: rotate(45deg);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+}
+
+.profile-img {
+  width: 112%;
+  height: 112%;
+  object-fit: cover;
+  transform: translateY(4px) rotate(-45deg);
+}
+
+.about-me-subtitle {
+  color: var(--title-1-color);
 }
 
 .about-me-statement {

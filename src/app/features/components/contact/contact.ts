@@ -14,6 +14,7 @@ import { EmailService } from '../../../core/services/email-service';
 import { FormValidators } from '../../../validators/FormValidators';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ButtonFill1 } from '../../../shared/components/button-fill-1/button-fill-1';
 
 interface CardLayout {
   gridColumn: string;
@@ -49,7 +50,7 @@ const LAYOUTS: CardLayout[][] = [
 
 @Component({
   selector: 'app-contact',
-  imports: [FormRoot, FormField],
+  imports: [FormRoot, FormField, ButtonFill1],
   providers: [EmailService],
   templateUrl: './contact.html',
   styleUrl: './contact.css',
@@ -203,49 +204,5 @@ export class Contact {
         }
       }, 5000);
     }
-  }
-
-  protected onBtnMouseEnter(event: MouseEvent): void {
-    const button = event.currentTarget as HTMLElement;
-    const bg = button.querySelector('.btn-hover-bg') as HTMLElement;
-    if (!bg) return;
-
-    const rect = button.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-
-    gsap.killTweensOf(bg);
-    gsap.fromTo(
-      bg,
-      {
-        left: `${x}px`,
-        top: `${y}px`,
-        scale: 0,
-      },
-      {
-        scale: 1,
-        duration: 1,
-        ease: 'power2.out',
-      },
-    );
-  }
-
-  protected onBtnMouseLeave(event: MouseEvent): void {
-    const button = event.currentTarget as HTMLElement;
-    const bg = button.querySelector('.btn-hover-bg') as HTMLElement;
-    if (!bg) return;
-
-    const rect = button.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-
-    gsap.killTweensOf(bg);
-    gsap.to(bg, {
-      left: `${x}px`,
-      top: `${y}px`,
-      scale: 0,
-      duration: 0.8,
-      ease: 'power2.inOut',
-    });
   }
 }

@@ -15,11 +15,6 @@
   --contact-input-placeholder: rgba(5, 47, 74, 0.5);
   --contact-input-focus: var(--color-cyan-500);
 
-  --contact-btn-color: #052f4a;
-  --contact-btn-border: #052f4a;
-  --contact-btn-hover-bg: #052f4a;
-  --contact-btn-hover-text: #ffffff;
-
   --contact-top-line-color: var(--color-cyan-500);
 
   --noise-opacity: var(--theme-noise-opacity);
@@ -36,10 +31,10 @@
 
 :host-context(.dark) {
   --contact-bg: linear-gradient(rgba(14, 15, 20, 0.85), rgba(14, 15, 20, 0.75));
-  --contact-left-bg: var(--theme-body-bg);
+  --contact-left-bg: #181922;
   --contact-text-color: var(--theme-body-color);
-  --contact-title-color: var(--theme-title-accent-2);
-  --contact-subtitle-color: var(--theme-badge-arrow);
+  --contact-title-color: #ffffff;
+  --contact-subtitle-color: var(--theme-title-accent-2);
   --contact-line-color: var(--contact-title-color);
 
   --contact-input-bg: var(--contact-bg);
@@ -47,11 +42,6 @@
   --contact-input-border: rgba(255, 255, 255, 0.08);
   --contact-input-placeholder: rgba(255, 255, 255, 0.35);
   --contact-input-focus: var(--theme-accent-primary);
-
-  --contact-btn-color: var(--color-rose-100);
-  --contact-btn-border: var(--color-rose-100);
-  --contact-btn-hover-bg: var(--color-rose-500);
-  --contact-btn-hover-text: #181922;
 
   --contact-top-line-color: var(--color-violet-900);
 
@@ -193,56 +183,6 @@
 .form-textarea.input-error:focus {
   border-color: #f43f5e;
   box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.2);
-}
-
-.contact-submit-btn {
-  position: relative;
-  overflow: hidden;
-  padding: 0.75rem 2rem;
-  font-family: var(--font-sans);
-  font-size: 0.875rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--contact-btn-color);
-  background-color: transparent;
-  border: 1.5px solid var(--contact-btn-border);
-  border-radius: 2px;
-  cursor: pointer;
-  transition:
-    color 0.3s ease,
-    border-color 0.3s ease,
-    transform 0.2s ease;
-}
-
-.contact-submit-btn .btn-text {
-  position: relative;
-  z-index: 2;
-  pointer-events: none;
-  transition: color 0.3s ease;
-}
-
-.contact-submit-btn:hover .btn-text {
-  color: var(--contact-btn-hover-text);
-}
-
-.contact-submit-btn:hover {
-  border-color: var(--contact-btn-hover-bg);
-}
-
-.contact-submit-btn .btn-hover-bg {
-  position: absolute;
-  width: 250%;
-  padding-bottom: 250%;
-  border-radius: 50%;
-  background-color: var(--contact-btn-hover-bg);
-  z-index: 1;
-  pointer-events: none;
-  transform: translate(-50%, -50%) scale(0);
-}
-
-.contact-submit-btn:active {
-  transform: scale(0.98);
 }
 
 .contact-card-grid {

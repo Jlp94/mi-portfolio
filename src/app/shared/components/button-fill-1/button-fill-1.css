@@ -1,0 +1,87 @@
+:host {
+  display: inline-block;
+
+  --btn-fill-color: #052f4a;
+  --btn-fill-border: #052f4a;
+  --btn-fill-hover-bg: #052f4a;
+  --btn-fill-hover-text: #ffffff;
+}
+
+:host-context(.dark) {
+  --btn-fill-color: var(--color-rose-100);
+  --btn-fill-border: var(--color-rose-100);
+  --btn-fill-hover-bg: var(--color-rose-500);
+  --btn-fill-hover-text: #181922;
+}
+
+.btn-fill {
+  position: relative;
+  overflow: hidden;
+  padding: 0.75rem 2rem;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background-color: transparent;
+  border-radius: 2px;
+  cursor: pointer;
+  transition:
+    color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.2s ease;
+}
+
+.btn-fill--primary {
+  color: var(--btn-fill-color);
+  border: 1.5px solid var(--btn-fill-border);
+}
+
+.btn-fill--primary:hover {
+  border-color: var(--btn-fill-hover-bg);
+}
+
+.btn-fill--primary:hover .btn-fill-text {
+  color: var(--btn-fill-hover-text);
+}
+
+.btn-fill--ghost {
+  color: var(--btn-fill-color);
+  border: 1.5px solid transparent;
+}
+
+.btn-fill--ghost:hover {
+  border-color: var(--btn-fill-hover-bg);
+}
+
+.btn-fill--ghost:hover .btn-fill-text {
+  color: var(--btn-fill-hover-text);
+}
+
+.btn-fill:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn-fill:active {
+  transform: scale(0.98);
+}
+
+.btn-fill-text {
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+  transition: color 0.3s ease;
+}
+
+.btn-fill-bg {
+  position: absolute;
+  width: 250%;
+  padding-bottom: 250%;
+  border-radius: 50%;
+  background-color: var(--btn-fill-hover-bg);
+  z-index: 1;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0);
+}

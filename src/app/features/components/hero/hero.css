@@ -1,12 +1,26 @@
 :host {
   --hero-bg: var(--theme-surface-hero-bg);
-  --hero-subtitle: var(--theme-accent-primary-soft);
-  --name-jose: var(--theme-accent-primary);
-  --name-luis: var(--theme-accent-secondary);
-  --name-prieto: var(--theme-accent-tertiary);
+  --hero-subtitle: var(--theme-timeline-header);
+  --name-jose: var(--theme-timeline-header);
+  --name-luis: var(--theme-timeline-header);
+  --name-prieto: var(--theme-timeline-header);
   --hero-role: var(--theme-accent-deep);
   --hero-btn-primary-bg: var(--theme-accent-solid);
-  --hero-btn-secondary-color: var(--theme-accent-primary);
+  --hero-btn-secondary-color: var(--theme-accent-deep);
+  background-color: #8282821e;
+  border-bottom: 1px solid var(--color-cyan-500);
+}
+
+:host-context(.dark) {
+  --hero-subtitle: rgb(255, 255, 255);
+  --name-jose: rgb(255, 255, 255);
+  --name-luis: rgb(255, 255, 255);
+  --name-prieto: rgb(255, 255, 255);
+  --hero-role: var(--color-violet-500);
+  --hero-btn-primary-bg: var(--color-violet-500);
+  --hero-btn-secondary-color: var(--color-violet-500);
+  background-color: #01020272;
+  border-bottom: 1px solid var(--color-violet-500);
 }
 
 .hero-section {
@@ -26,33 +40,23 @@
   transition: color 0.5s ease;
 }
 
-.hero-title .text-accent {
-  color: #181922 !important;
-}
-
-:host-context(.dark) .hero-title .text-accent {
-  color: #ffffff !important;
-}
-
-.hero-title span:nth-child(1) {
+.hero-greeting,
+.hero-dot,
+.hero-role {
   color: var(--name-jose);
   transition: color 0.5s ease;
 }
 
-.hero-title span:nth-child(2) {
-  color: var(--name-luis);
-  transition: color 0.5s ease;
-}
-
-.hero-title span:nth-child(3) {
-  color: var(--name-prieto);
-  transition: color 0.5s ease;
-}
-
-.hero-role {
+.hero-name {
   color: var(--hero-role);
-  opacity: 0.8;
   transition: color 0.5s ease;
+}
+
+.hero-cv-container {
+  width: 5.5rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .hero-cv-btn {
@@ -120,8 +124,23 @@
   }
 }
 
+@keyframes slide-from-right {
+  from {
+    opacity: 0;
+    transform: translateX(64px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .hero-slide-in {
   animation: slide-from-left 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-slide-in-right {
+  animation: slide-from-right 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .hero-slide-in-1 {

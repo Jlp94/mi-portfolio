@@ -1,6 +1,4 @@
 :host {
-  /* display: contents para que <article> sea el hijo directo del grid del padre,
-     no <app-project-card>. Sin esto, grid-column/grid-row no colocan la card. */
   display: contents;
 }
 
@@ -21,11 +19,6 @@
   transition:
     transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.project-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--card-shadow-hover);
 }
 
 .card-image-wrap {
@@ -51,6 +44,11 @@
 
 .card-footer {
   position: relative;
+  /* background: rgba(226, 232, 240, 0.92); */
+}
+
+:host-context(.dark) .card-footer {
+  background: rgba(20, 21, 30, 0.92);
 }
 
 .card-footer-inner {
@@ -103,13 +101,13 @@
 }
 
 .project-card--hovered .card-techs {
-  transform: translateY(-130%);
+  transform: translateY(-100%);
   opacity: 0;
   pointer-events: none;
 }
 
 .card-view-label {
-  transform: translateY(130%);
+  transform: translateY(140%);
   opacity: 0;
   color: var(--accent-color);
   pointer-events: none;

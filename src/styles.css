@@ -8,8 +8,8 @@
 }
 
 @theme {
-  --font-sans: 'Poppins', sans-serif;
-  --font-display: 'Poppins', sans-serif;
+  --font-sans: 'Raleway', sans-serif;
+  --font-display: 'Raleway', sans-serif;
   --font-mono: 'Fira Code', monospace;
 }
 
@@ -22,7 +22,7 @@
 
   --theme-panel-bg: color-mix(in srgb, var(--color-sky-300) 90%, transparent);
   --theme-panel-border: color-mix(in srgb, var(--color-sky-400) 45%, transparent);
-  --theme-panel-link: color-mix(in srgb, var(--color-sky-800) 80%, transparent);
+  --theme-panel-link: color-mix(in srgb, var(--color-sky-950) 80%, transparent);
   --theme-panel-link-hover: var(--color-sky-900);
   --theme-panel-button: var(--color-sky-800);
   --theme-toggle-hover-bg: color-mix(in srgb, var(--color-sky-700) 15%, transparent);
@@ -33,7 +33,7 @@
   --theme-accent-primary: var(--color-sky-600);
   --theme-accent-primary-soft: var(--color-sky-600);
   --theme-accent-secondary: var(--color-cyan-600);
-  --theme-accent-tertiary: var(--color-cyan-800);
+  --theme-accent-tertiary: var(--color-sky-800);
   --theme-accent-deep: var(--color-sky-700);
   --theme-accent-solid: var(--color-sky-700);
   --theme-surface-hero-bg: transparent;
@@ -108,7 +108,7 @@
   --theme-accent-soft-hover: var(--color-sky-200);
   --theme-surface-card-bg: var(--color-sky-900);
   --theme-text-accent-subtitle: var(--color-sky-300);
-  --theme-timeline-header: var(--color-sky-600);
+  --theme-timeline-header: #052f4a;
   --theme-timeline-dot-experience: var(--color-sky-900);
   --theme-timeline-dot-education: var(--color-sky-800);
   --theme-name-prieto: var(--theme-accent-tertiary);
@@ -120,12 +120,12 @@ html.dark {
   --theme-body-bg: #181922;
   --theme-body-color: var(--color-rose-100);
   --theme-scrollbar-track: #1e1f29;
-  --theme-scrollbar-thumb: var(--color-rose-500);
-  --theme-scrollbar-thumb-hover: var(--color-rose-600);
+  --theme-scrollbar-thumb: var(--color-violet-500);
+  --theme-scrollbar-thumb-hover: var(--color-violet-600);
 
   --theme-panel-bg: color-mix(in srgb, #1e1f29 80%, transparent);
   --theme-panel-border: color-mix(in srgb, var(--color-violet-500) 15%, transparent);
-  --theme-panel-link: color-mix(in srgb, var(--color-rose-300) 80%, transparent);
+  --theme-panel-link: rgb(255, 255, 255);
   --theme-panel-link-hover: var(--color-rose-400);
   --theme-panel-button: var(--color-yellow-400);
   --theme-toggle-hover-bg: color-mix(in srgb, var(--color-violet-500) 15%, transparent);
@@ -211,7 +211,7 @@ html.dark {
   --theme-accent-soft-hover: var(--color-rose-500);
   --theme-surface-card-bg: rgba(30, 31, 41, 0.45);
   --theme-text-accent-subtitle: var(--color-rose-300);
-  --theme-timeline-header: var(--color-fuchsia-300);
+  --theme-timeline-header: #ffffff;
   --theme-timeline-dot-experience: var(--color-violet-300);
   --theme-timeline-dot-education: var(--color-violet-300);
   --theme-name-prieto: var(--color-violet-900);
@@ -230,6 +230,7 @@ html {
 body {
   font-family: var(--font-sans);
   background: var(--theme-body-bg);
+  background-attachment: fixed;
   color: var(--theme-body-color);
   margin: 0;
   padding: 0;
@@ -407,4 +408,54 @@ html.dark .text-accent {
   position: relative;
   z-index: 10;
   transform: scale(1.05) translateY(-3px) rotate(-1deg);
+}
+
+.section-header-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.section-title-centered {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+}
+
+.section-title-centered,
+.contact-title {
+  font-size: 1.5rem !important;
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  .section-title-centered,
+  .contact-title {
+    font-size: 2rem !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-title-centered,
+  .contact-title {
+    font-size: 2.5rem !important;
+  }
+}
+
+.section-line {
+  width: 7rem;
+  height: 4px;
+  background-color: var(--theme-timeline-header);
+  transition: background-color 0.5s ease;
+  margin-top: 1rem;
+}
+
+html.dark .section-line {
+  background-color: var(--theme-title-accent-2);
+}
+
+section[id],
+app-experience[id] {
+  scroll-margin-top: 210px;
 }

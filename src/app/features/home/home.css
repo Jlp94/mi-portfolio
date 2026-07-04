@@ -1,18 +1,23 @@
-.global-blob {
-  border-radius: 50%;
-  pointer-events: none;
+.meteor-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
   z-index: 0;
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), background-image 0.5s ease;
-  will-change: transform;
-  width: var(--blob-size-mobile);
-  height: var(--blob-size-mobile);
-  filter: blur(var(--blob-blur-mobile));
+  pointer-events: none;
 }
-
-@media (min-width: 768px) {
-  .global-blob {
-    width: var(--blob-size-desktop);
-    height: var(--blob-size-desktop);
-    filter: blur(var(--blob-blur-desktop));
-  }
-}
+/* 
+:host-context(.dark) .hero-dark-overlay {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.6) 60%,
+    rgba(27, 27, 35, 0.5) 85%,
+    transparent 100%
+  );
+} */

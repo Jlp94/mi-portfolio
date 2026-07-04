@@ -1,4 +1,6 @@
-<header class="navbar-header fixed top-0 left-0 w-full z-50 border-b pt-[5px] md:pt-0">
+<header class="navbar-header fixed top-0 left-0 w-full z-50 pt-[5px] md:pt-0"
+        [class.navbar-scrolled]="isScrolled()"
+        [class.navbar-hidden]="isHidden()">
   <div class="max-w-7xl mx-auto px-6 h-12 flex items-center justify-between">
     <div class="md:flex-1 flex items-center">
       <a href="#"
@@ -7,24 +9,21 @@
           class="logo-bracket font-bold">/&gt;</span>
       </a>
     </div>
-    <!-- 
+
     <nav class="hidden md:flex items-center gap-10" aria-label="Navegación de escritorio">
       <a href="#about-me" class="nav-link text-xs tracking-wide focus:outline-none focus-visible:ring-1 rounded px-2 py-1">
         <span class="nav-link-text">{{ languageService.translations().navbar.about }}</span>
       </a>
-      <a href="#stacks" class="nav-link text-xs tracking-wide focus:outline-none focus-visible:ring-1 rounded px-2 py-1">
-        <span class="nav-link-text">{{ languageService.translations().navbar.stack }}</span>
-      </a>
-      <a href="#experience-education" class="nav-link text-xs tracking-wide focus:outline-none focus-visible:ring-1 rounded px-2 py-1">
-        <span class="nav-link-text">{{ languageService.translations().navbar.experience }}</span>
-      </a>
       <a href="#projects" class="nav-link text-xs tracking-wide focus:outline-none focus-visible:ring-1 rounded px-2 py-1">
         <span class="nav-link-text">{{ languageService.translations().navbar.projects }}</span>
+      </a>
+      <a href="#experience" class="nav-link text-xs tracking-wide focus:outline-none focus-visible:ring-1 rounded px-2 py-1">
+        <span class="nav-link-text">{{ languageService.translations().navbar.experience }}</span>
       </a>
       <a href="#contact" class="nav-link text-xs tracking-wide focus:outline-none focus-visible:ring-1 rounded px-2 py-1">
         <span class="nav-link-text">{{ languageService.translations().navbar.contact }}</span>
       </a>
-    </nav> -->
+    </nav>
 
     <div class="flex items-center gap-4 md:flex-1 justify-end">
       <button (click)="toggleLanguage()"
@@ -46,7 +45,7 @@
         <fa-icon [icon]="faMoon" class="text-sm"></fa-icon>
         }
       </button>
-      <!-- 
+
       <button (click)="toggleMenu()"
         class="burger-btn md:hidden w-8 h-8 flex flex-col items-center justify-center gap-1 focus:outline-none focus-visible:ring-1 rounded transition-colors"
         [attr.aria-expanded]="isMenuOpen()" aria-controls="mobile-nav" aria-label="Menú de navegación">
@@ -55,11 +54,11 @@
         <span class="w-4.5 h-0.5 bg-current transition-all duration-300" [class.opacity-0]="isMenuOpen()"></span>
         <span class="w-4.5 h-0.5 bg-current transition-all duration-300" [class.-rotate-45]="isMenuOpen()"
           [class.-translate-y-1.5]="isMenuOpen()"></span>
-      </button> -->
+      </button>
     </div>
   </div>
 
-  <!-- <div id="mobile-nav"
+  <div id="mobile-nav"
     class="mobile-menu-container md:hidden fixed top-[53px] left-0 w-full h-[calc(100vh-53px)] backdrop-blur-lg transition-all duration-300 ease-in-out transform flex flex-col items-center justify-center gap-8 z-40"
     [class.translate-x-0]="isMenuOpen()" [class.opacity-100]="isMenuOpen()" [class.pointer-events-auto]="isMenuOpen()"
     [class.translate-x-full]="!isMenuOpen()" [class.opacity-0]="!isMenuOpen()"
@@ -67,17 +66,14 @@
     <a (click)="closeMenu()" href="#about-me" class="mobile-nav-link text-lg transition-colors">
       {{ languageService.translations().navbar.about }}
     </a>
-    <a (click)="closeMenu()" href="#stacks" class="mobile-nav-link text-lg transition-colors">
-      {{ languageService.translations().navbar.stack }}
-    </a>
-    <a (click)="closeMenu()" href="#experience-education" class="mobile-nav-link text-lg transition-colors">
-      {{ languageService.translations().navbar.experience }}
-    </a>
     <a (click)="closeMenu()" href="#projects" class="mobile-nav-link text-lg transition-colors">
       {{ languageService.translations().navbar.projects }}
+    </a>
+    <a (click)="closeMenu()" href="#experience" class="mobile-nav-link text-lg transition-colors">
+      {{ languageService.translations().navbar.experience }}
     </a>
     <a (click)="closeMenu()" href="#contact" class="mobile-nav-link text-lg transition-colors">
       {{ languageService.translations().navbar.contact }}
     </a>
-  </div> -->
+  </div>
 </header>

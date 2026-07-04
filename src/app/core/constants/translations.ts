@@ -75,13 +75,14 @@ export const TRANSLATIONS = {
     },
     hero: {
       greeting: 'Hola, soy',
-      role: 'Desarrollador Full Stack',
+      role: 'Soy desarrollador web full-stack.',
       cv: 'Descargar CV',
       cvAriaLabel: 'Descargar Currículum Vitae de Jose Luis Prieto en PDF',
     },
     aboutMe: {
       titleLine1: 'Sobre',
       titleLine2: 'mí',
+      whoAmITitle: '¿Quién soy?',
       text1: 'Soy técnico en ',
       highlight1: 'desarrollo de aplicaciones web',
       text2: '.',
@@ -92,9 +93,17 @@ export const TRANSLATIONS = {
       text4: 'En mi tiempo libre continúo capacitándome y ',
       highlight3: 'adquiriendo nuevos conocimientos',
       text4_2: ' por cuenta propia.',
-      text5_pre: 'Ahora mismo estoy en ',
-      highlight4: 'busca de un equipo',
+      text5_pre: 'Ahora mismo estoy ',
+      highlight4: 'en busca de un equipo',
       text5: ' donde seguir creciendo y consolidar mi carrera.',
+      valFastTitle: 'Rápido',
+      valFastDesc: 'Tiempos de carga rápidos e interacción sin lag, mi máxima prioridad.',
+      valResponsiveTitle: 'Responsive',
+      valResponsiveDesc: 'Mis diseños funcionarán en cualquier dispositivo, grande o pequeño.',
+      valIntuitiveTitle: 'Intuitivo',
+      valIntuitiveDesc: 'Fuerte preferencia por UX/UI fácil de usar e intuitiva.',
+      valDynamicTitle: 'Dinámico',
+      valDynamicDesc: 'Las webs no tienen por qué ser estáticas, me encanta darles vida.',
     },
     stacks: {
       titleLine1: 'Tecnologías',
@@ -112,6 +121,8 @@ export const TRANSLATIONS = {
         'SCSS — Estilos modulares y mantenibles, variables y mixins para una arquitectura visual escalable.',
       ],
       frontendLibraries: ['Tailwind CSS', 'Bootstrap', 'PrimeNG', 'Swiper', 'GSAP'],
+      futureTitle: 'A futuro:',
+      frontendLearning: ['A futuro aprender GraphQL en Front y en Back'],
       backendDesc:
         'Especializado en el ecosistema Spring, construyendo APIs robustas con Spring Boot, arquitectura por capas y un diseño orientado a dominio (DDD) que mantiene la lógica de negocio desacoplada de la infraestructura.',
       backendEcosystem: [
@@ -187,7 +198,8 @@ export const TRANSLATIONS = {
         {
           id: 'portfolio',
           title: 'Portfolio Personal',
-          description: 'Portfolio personal desarrollado con Angular 19 standalone, GSAP (ScrollTrigger, Flip) y Tailwind CSS. Diseño 100% personalizado con modo oscuro/claro, soporte multiidioma ES/EN, animaciones de entrada con scroll y sección de contacto con EmailJS.',
+          description:
+            'Portfolio personal desarrollado con Angular 19 standalone, GSAP (ScrollTrigger, Flip) y Tailwind CSS. Diseño 100% personalizado con modo oscuro/claro, soporte multiidioma ES/EN, animaciones de entrada con scroll y sección de contacto con EmailJS.',
           tags: ['angular'],
           techs: ['Angular', 'TypeScript', 'GSAP', 'Tailwind CSS', 'SCSS'],
           images: ['assets/projects/portfolio.webp'],
@@ -196,7 +208,8 @@ export const TRANSLATIONS = {
         {
           id: 'api-spring',
           title: 'API REST — Spring Boot',
-          description: 'API REST robusta construida con Spring Boot 3.5 y Java 17. Arquitectura hexagonal, seguridad con Spring Security y JWT, documentación con Swagger/OpenAPI, JPA con PostgreSQL y despliegue contenerizado con Docker.',
+          description:
+            'API REST robusta construida con Spring Boot 3.5 y Java 17. Arquitectura hexagonal, seguridad con Spring Security y JWT, documentación con Swagger/OpenAPI, JPA con PostgreSQL y despliegue contenerizado con Docker.',
           tags: ['spring'],
           techs: ['Spring Boot', 'Java', 'PostgreSQL', 'JWT', 'Docker', 'Swagger'],
           images: ['assets/projects/spring-api.webp'],
@@ -205,7 +218,8 @@ export const TRANSLATIONS = {
         {
           id: 'angular-app',
           title: 'Aplicación Angular SPA',
-          description: 'Single Page Application reactiva con Angular v19+, arquitectura modular standalone, gestión de estado con Signals y RxJS, componentes de PrimeNG personalizados e integración con APIs REST externas mediante interceptores HTTP.',
+          description:
+            'Single Page Application reactiva con Angular v19+, arquitectura modular standalone, gestión de estado con Signals y RxJS, componentes de PrimeNG personalizados e integración con APIs REST externas mediante interceptores HTTP.',
           tags: ['angular'],
           techs: ['Angular', 'TypeScript', 'RxJS', 'PrimeNG', 'SCSS'],
           images: ['assets/projects/angular-app.webp'],
@@ -214,7 +228,8 @@ export const TRANSLATIONS = {
         {
           id: 'nest-api',
           title: 'API REST — NestJS',
-          description: 'API RESTful con NestJS y TypeScript siguiendo arquitectura modular. Autenticación con JWT y Guards, validación con class-validator, documentación automática con Swagger, conexión a MongoDB con Mongoose y tests con Vitest.',
+          description:
+            'API RESTful con NestJS y TypeScript siguiendo arquitectura modular. Autenticación con JWT y Guards, validación con class-validator, documentación automática con Swagger, conexión a MongoDB con Mongoose y tests con Vitest.',
           tags: ['nest'],
           techs: ['NestJS', 'TypeScript', 'MongoDB', 'JWT', 'Swagger', 'Vitest'],
           images: ['assets/projects/nest-api.webp'],
@@ -223,7 +238,8 @@ export const TRANSLATIONS = {
         {
           id: 'php-web',
           title: 'Aplicación Web PHP',
-          description: 'Aplicación web dinámica en PHP con patrón MVC artesanal, autenticación de usuarios con sesiones y roles, CRUD completo con MySQL, panel de administración y UI responsiva con Bootstrap 5 y JavaScript vanilla.',
+          description:
+            'Aplicación web dinámica en PHP con patrón MVC artesanal, autenticación de usuarios con sesiones y roles, CRUD completo con MySQL, panel de administración y UI responsiva con Bootstrap 5 y JavaScript vanilla.',
           tags: ['php'],
           techs: ['PHP', 'MySQL', 'Bootstrap', 'JavaScript', 'HTML5'],
           images: ['assets/projects/php-web.webp'],
@@ -245,14 +261,15 @@ export const TRANSLATIONS = {
       contact: 'Contact',
     },
     hero: {
-      greeting: "Hi, I'm",
-      role: 'Full Stack Developer',
+      greeting: "Hello, I'm",
+      role: "I'm a full-stack web developer.",
       cv: 'Download CV',
       cvAriaLabel: "Download Jose Luis Prieto's Curriculum Vitae in PDF format",
     },
     aboutMe: {
       titleLine1: 'About',
       titleLine2: 'me',
+      whoAmITitle: 'Who am I?',
       text1: 'I am a technician in ',
       highlight1: 'web application development',
       text2: '.',
@@ -264,8 +281,16 @@ export const TRANSLATIONS = {
       highlight3: 'acquiring new knowledge',
       text4_2: ' on my own.',
       text5_pre: 'Right now I am looking for ',
-      highlight4: 'a team',
+      highlight4: 'looking for a team',
       text5: ' where I can keep growing and consolidate my career.',
+      valFastTitle: 'Fast',
+      valFastDesc: 'Fast load times and lag free interaction, my highest priority.',
+      valResponsiveTitle: 'Responsive',
+      valResponsiveDesc: 'My layouts will work on any device, big or small.',
+      valIntuitiveTitle: 'Intuitive',
+      valIntuitiveDesc: 'Strong preference for easy to use, intuitive UX/UI.',
+      valDynamicTitle: 'Dynamic',
+      valDynamicDesc: "Websites don't have to be static, I love making pages come to life.",
     },
     stacks: {
       titleLine1: 'Stack',
@@ -283,6 +308,8 @@ export const TRANSLATIONS = {
         'SCSS — Modular and maintainable styles, variables, and mixins for a visual scalable architecture.',
       ],
       frontendLibraries: ['Tailwind CSS', 'Bootstrap', 'PrimeNG', 'Swiper', 'GSAP'],
+      futureTitle: 'In the future:',
+      frontendLearning: ['Learn GraphQL in Front and Back in the future'],
       backendDesc:
         'Specialized in the Spring ecosystem, building robust APIs with Spring Boot, layered architecture, and a domain-driven design (DDD) that keeps business logic decoupled from infrastructure.',
       backendEcosystem: [
@@ -313,7 +340,7 @@ export const TRANSLATIONS = {
       technologies: TECHNOLOGIES,
     },
     experience: {
-      titleLine1: 'Work',
+      titleLine1: 'Profesional',
       titleLine2: 'Experience',
       nunsysTitle: 'Full Stack Developer (Internship)',
       nunsysCompany: 'Nunsys Group',
@@ -350,7 +377,8 @@ export const TRANSLATIONS = {
         {
           id: 'portfolio',
           title: 'Personal Portfolio',
-          description: 'Personal portfolio built with Angular 19 standalone, GSAP (ScrollTrigger, Flip) and Tailwind CSS. Fully custom design with dark/light mode, ES/EN multilingual support, scroll-driven entry animations and contact section powered by EmailJS.',
+          description:
+            'Personal portfolio built with Angular 19 standalone, GSAP (ScrollTrigger, Flip) and Tailwind CSS. Fully custom design with dark/light mode, ES/EN multilingual support, scroll-driven entry animations and contact section powered by EmailJS.',
           tags: ['angular'],
           techs: ['Angular', 'TypeScript', 'GSAP', 'Tailwind CSS', 'SCSS'],
           images: ['assets/projects/portfolio.webp'],
@@ -359,7 +387,8 @@ export const TRANSLATIONS = {
         {
           id: 'api-spring',
           title: 'REST API — Spring Boot',
-          description: 'Robust REST API built with Spring Boot 3.5 and Java 17. Hexagonal architecture, security with Spring Security and JWT, Swagger/OpenAPI documentation, JPA with PostgreSQL and containerized deployment with Docker.',
+          description:
+            'Robust REST API built with Spring Boot 3.5 and Java 17. Hexagonal architecture, security with Spring Security and JWT, Swagger/OpenAPI documentation, JPA with PostgreSQL and containerized deployment with Docker.',
           tags: ['spring'],
           techs: ['Spring Boot', 'Java', 'PostgreSQL', 'JWT', 'Docker', 'Swagger'],
           images: ['assets/projects/spring-api.webp'],
@@ -368,7 +397,8 @@ export const TRANSLATIONS = {
         {
           id: 'angular-app',
           title: 'Angular SPA Application',
-          description: 'Reactive Single Page Application with Angular v19+, standalone modular architecture, state management with Signals and RxJS, customized PrimeNG components and integration with external REST APIs via HTTP interceptors.',
+          description:
+            'Reactive Single Page Application with Angular v19+, standalone modular architecture, state management with Signals and RxJS, customized PrimeNG components and integration with external REST APIs via HTTP interceptors.',
           tags: ['angular'],
           techs: ['Angular', 'TypeScript', 'RxJS', 'PrimeNG', 'SCSS'],
           images: ['assets/projects/angular-app.webp'],
@@ -377,7 +407,8 @@ export const TRANSLATIONS = {
         {
           id: 'nest-api',
           title: 'REST API — NestJS',
-          description: 'RESTful API with NestJS and TypeScript following modular architecture. JWT authentication with Guards, class-validator validation, automatic Swagger documentation, MongoDB with Mongoose and tests with Vitest.',
+          description:
+            'RESTful API with NestJS and TypeScript following modular architecture. JWT authentication with Guards, class-validator validation, automatic Swagger documentation, MongoDB with Mongoose and tests with Vitest.',
           tags: ['nest'],
           techs: ['NestJS', 'TypeScript', 'MongoDB', 'JWT', 'Swagger', 'Vitest'],
           images: ['assets/projects/nest-api.webp'],
@@ -386,7 +417,8 @@ export const TRANSLATIONS = {
         {
           id: 'php-web',
           title: 'PHP Web Application',
-          description: 'Dynamic web application in PHP with handcrafted MVC pattern, session-based user authentication with roles, full CRUD with MySQL, admin panel and responsive UI with Bootstrap 5 and vanilla JavaScript.',
+          description:
+            'Dynamic web application in PHP with handcrafted MVC pattern, session-based user authentication with roles, full CRUD with MySQL, admin panel and responsive UI with Bootstrap 5 and vanilla JavaScript.',
           tags: ['php'],
           techs: ['PHP', 'MySQL', 'Bootstrap', 'JavaScript', 'HTML5'],
           images: ['assets/projects/php-web.webp'],

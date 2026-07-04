@@ -31,18 +31,32 @@ export class Education {
 
       const host = this.elementRef.nativeElement;
 
-      const header = host.querySelector('.section-header');
-      if (header) {
-        gsap.set(header, { opacity: 0, y: 30, filter: 'blur(8px)' });
-        gsap.to(header, {
-          opacity: 1,
-          y: 0,
-          filter: 'blur(0px)',
-          clearProps: 'filter',
-          duration: 0.9,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: header, start: 'top 90%' },
+      const headerTitle = host.querySelector('.section-header-centered h2');
+      const headerLine = host.querySelector('.section-header-centered .section-line');
+      if (headerTitle && headerLine) {
+        gsap.set(headerTitle, { opacity: 0, x: -200 });
+        gsap.set(headerLine, { scaleX: 0, transformOrigin: 'left center' });
+        
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: host.querySelector('.section-header-centered'),
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          },
+          delay: 0.2,
         });
+
+        tl.to(headerTitle, {
+          opacity: 1,
+          x: 0,
+          duration: 1.2,
+          ease: 'power2.out',
+        })
+        .to(headerLine, {
+          scaleX: 1,
+          duration: 0.8,
+          ease: 'power2.out',
+        }, '-=0.8');
       }
 
       const cards = host.querySelectorAll('.timeline-card');

@@ -160,7 +160,7 @@
 }
 
 .footer-copyright-text {
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   transition: color 0.5s ease;
   color: #64748b;
 
@@ -170,11 +170,11 @@
 }
 
 .copyright-year {
-  color: var(--color-cyan-500);
+  color: var(--color-cyan-800);
   transition: color 0.5s ease;
 
   :host-context(.dark) & {
-    color: var(--color-violet-900);
+    color: var(--color-violet-500);
   }
 }
 
