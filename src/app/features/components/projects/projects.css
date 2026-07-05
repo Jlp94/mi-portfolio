@@ -27,7 +27,7 @@
   --pill-border: color-mix(in srgb, var(--color-violet-400) 25%, transparent);
   --breadcrumb-color: var(--color-violet-300);
   --breadcrumb-active: var(--color-violet-400);
-  background-color: #13141b72;
+  background-color: #0e0f1472;
   border-bottom: 1px solid var(--color-violet-900);
 }
 

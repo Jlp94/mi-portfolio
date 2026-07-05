@@ -13,10 +13,6 @@
   --title-2-color: var(--theme-name-prieto);
   --statement-color: var(--theme-timeline-header);
   --statement-shadow: var(--theme-surface-special-text-shadow);
-  --highlight-1: var(--color-sky-500);
-  --highlight-2: var(--color-sky-500);
-  --highlight-3: var(--color-sky-500);
-  --highlight-4: var(--color-sky-500);
 }
 
 :host-context(.dark) {
@@ -24,10 +20,6 @@
   --theme-code-tag: var(--color-red-400);
   --theme-code-attr: var(--color-amber-300);
   --theme-code-val: var(--color-lime-300);
-  --highlight-1: var(--theme-title-accent-1);
-  --highlight-2: var(--theme-title-accent-1);
-  --highlight-3: var(--theme-title-accent-1);
-  --highlight-4: var(--theme-title-accent-1);
 }
 
 .about-me-content {
@@ -53,37 +45,37 @@
   position: relative;
   width: 160px;
   height: 160px;
-  border-top-left-radius: 50%;
-  border-bottom-right-radius: 50%;
-  border-top-right-radius: 8px;
-  border-bottom-left-radius: 8px;
-  transform: rotate(45deg);
+  border-radius: 50%;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #ffffff;
+  border: 4px solid var(--theme-panel-border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  transition: border-color 0.5s ease, box-shadow 0.5s ease;
 }
 
 .profile-img {
-  width: 112%;
-  height: 112%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  transform: translateY(4px) rotate(-45deg);
 }
 
 .about-me-subtitle {
   color: var(--title-1-color);
 }
 
-.about-me-statement {
+.about-me-text {
   color: var(--statement-color);
   text-shadow: var(--statement-shadow);
+  font-size: 1.125rem;
 }
 
 .highlight {
   display: inline-block;
   font-weight: 800;
+  color: var(--color-sky-500);
   transform-origin: center;
   transition:
     color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
@@ -91,24 +83,12 @@
     transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+:host-context(.dark) .highlight {
+  color: var(--theme-title-accent-1);
+}
+
 .highlight:hover {
   position: relative;
   z-index: 10;
   transform: scale(1.05) translateY(-3px) rotate(-1deg);
-}
-
-.highlight-1 {
-  color: var(--highlight-1);
-}
-
-.highlight-2 {
-  color: var(--highlight-2);
-}
-
-.highlight-3 {
-  color: var(--highlight-3);
-}
-
-.highlight-4 {
-  color: var(--highlight-4);
 }

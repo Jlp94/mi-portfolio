@@ -63,7 +63,7 @@
 
   <div class="contact-right-panel flex items-center justify-center relative z-10">
     <div class="contact-card-grid">
-      @for (card of t().cards; track $index) {
+      @for (card of t().cards.slice(0, 4); track $index) {
       <div class="contact-card" [style.grid-column]="activeLayout()[$index]?.gridColumn"
         [style.grid-row]="activeLayout()[$index]?.gridRow">
         <svg viewBox="0 0 24 24" class="contact-card-quote" fill="currentColor" aria-hidden="true">

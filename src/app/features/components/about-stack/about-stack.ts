@@ -1,4 +1,4 @@
-import { Component, inject, computed, ElementRef, afterNextRender } from '@angular/core';
+import { Component, inject, computed, ElementRef, afterNextRender, signal } from '@angular/core';
 import { AboutMe } from '../about-me/about-me';
 import { Stack } from '../stack/stack';
 import { LanguageService } from '../../../core/services/language.service';
@@ -24,6 +24,41 @@ export class AboutStack {
   protected readonly faLaptop = faLaptop;
   protected readonly faLightbulb = faLightbulb;
   protected readonly faRocket = faRocket;
+
+  protected readonly bulletIcons = signal(['gauge', 'laptop', 'lightbulb', 'rocket']);
+
+  protected getIcon(index: number) {
+    const name = this.bulletIcons()[index];
+    switch (name) {
+      case 'gauge': return this.faGauge;
+      case 'laptop': return this.faLaptop;
+      case 'lightbulb': return this.faLightbulb;
+      case 'rocket': return this.faRocket;
+      default: return this.faGauge;
+    }
+  }
+
+  protected getTitle(index: number): string {
+    const translations = this.t();
+    switch (index) {
+      case 0: return translations.valFastTitle;
+      case 1: return translations.valResponsiveTitle;
+      case 2: return translations.valIntuitiveTitle;
+      case 3: return translations.valDynamicTitle;
+      default: return '';
+    }
+  }
+
+  protected getDesc(index: number): string {
+    const translations = this.t();
+    switch (index) {
+      case 0: return translations.valFastDesc;
+      case 1: return translations.valResponsiveDesc;
+      case 2: return translations.valIntuitiveDesc;
+      case 3: return translations.valDynamicDesc;
+      default: return '';
+    }
+  }
 
   constructor() {
     afterNextRender(() => {

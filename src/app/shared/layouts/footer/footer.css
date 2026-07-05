@@ -106,7 +106,7 @@
   border-radius: 2px;
   background: rgba(255, 255, 255, 0.35);
   color: #334155;
-  overflow: hidden;
+  overflow: visible;
   border: none;
   cursor: pointer;
   transition:
@@ -114,6 +114,16 @@
     color 0.3s,
     box-shadow 0.3s,
     transform 0.3s;
+
+  .footer-icon-clip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: inherit;
+  }
 
   fa-icon {
     display: inline-block;
@@ -175,49 +185,5 @@
 
   :host-context(.dark) & {
     color: var(--color-violet-500);
-  }
-}
-
-.copied-tooltip {
-  position: absolute;
-  bottom: 50px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--color-sky-950);
-  color: #ffffff;
-  font-family: var(--font-sans);
-  font-size: 0.7rem;
-  font-weight: 500;
-  padding: 0.35rem 0.65rem;
-  border-radius: 4px;
-  white-space: nowrap;
-  pointer-events: none;
-  z-index: 20;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  animation: fadeInOut 2s ease-in-out forwards;
-}
-
-:host-context(.dark) .copied-tooltip {
-  background: var(--color-rose-950);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  color: var(--color-rose-100);
-}
-
-@keyframes fadeInOut {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, 4px);
-  }
-  15% {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
-  85% {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -4px);
   }
 }

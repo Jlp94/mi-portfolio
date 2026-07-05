@@ -13,24 +13,32 @@
       <a href="https://github.com/Jlp94" target="_blank" rel="noopener noreferrer"
         class="footer-social-box focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
         aria-label="GitHub de Jose Luis">
-        <fa-icon [icon]="faGithub" class="text-lg"></fa-icon>
+        <span class="footer-icon-clip">
+          <fa-icon [icon]="faGithub" class="text-lg"></fa-icon>
+        </span>
       </a>
       <a href="https://linkedin.com/in/jose-luis-prieto" target="_blank" rel="noopener noreferrer"
         class="footer-social-box focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
         aria-label="LinkedIn de Jose Luis">
-        <fa-icon [icon]="faLinkedin" class="text-lg"></fa-icon>
+        <span class="footer-icon-clip">
+          <fa-icon [icon]="faLinkedin" class="text-lg"></fa-icon>
+        </span>
       </a>
       <div class="relative flex items-center justify-center">
-        <button (click)="copyEmail()"
+        <button
+          appPressable
+          [pressedMessage]="t().releaseToCopy"
+          appCopyButton
+          [tooltip]="t().copyEmail"
+          [copiedMessage]="t().copied"
+          copyFailedMessage="Error"
+          copyText="jlpcdr94@gmail.com"
           class="footer-social-box focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
           aria-label="Copiar correo de Jose Luis">
-          <fa-icon [icon]="faEnvelope" class="text-lg"></fa-icon>
+          <span class="footer-icon-clip">
+            <fa-icon [icon]="faEnvelope" class="text-lg"></fa-icon>
+          </span>
         </button>
-        @if (showTooltip()) {
-        <div class="copied-tooltip">
-          {{ languageService.translations().footer.copied }}
-        </div>
-        }
       </div>
     </div>
 

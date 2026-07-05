@@ -21,32 +21,7 @@ interface CardLayout {
   gridRow: string;
 }
 
-const LAYOUTS: CardLayout[][] = [
-  [
-    { gridColumn: 'span 2 / span 2', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 2 / span 2' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-  ],
-  [
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 2 / span 2', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 2 / span 2' },
-  ],
-  [
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 2 / span 2' },
-    { gridColumn: 'span 2 / span 2', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-  ],
-  [
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 2 / span 2' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 2 / span 2', gridRow: 'span 1 / span 1' },
-  ],
-];
+
 
 @Component({
   selector: 'app-contact',
@@ -89,19 +64,15 @@ export class Contact {
   protected readonly submissionStatus = signal<'idle' | 'success' | 'error'>('idle');
 
   protected readonly activeLayout = signal<CardLayout[]>([
-    { gridColumn: 'span 2 / span 2', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 2 / span 2' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
+    { gridColumn: '2 / 3', gridRow: '1 / 2' },
+    { gridColumn: '2 / 4', gridRow: '2 / 3' },
+    { gridColumn: '3 / 4', gridRow: '1 / 2' },
+    { gridColumn: '1 / 2', gridRow: '1 / 3' },
   ]);
 
   constructor() {
     gsap.registerPlugin(ScrollTrigger);
-
     afterNextRender(() => {
-      const randomIndex = Math.floor(Math.random() * LAYOUTS.length);
-      this.activeLayout.set(LAYOUTS[randomIndex]);
-
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReducedMotion) {
         return;

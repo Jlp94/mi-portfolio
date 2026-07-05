@@ -114,7 +114,7 @@
 }
 
 :host-context(.dark) .category-chevron {
-  color: var(--color-rose-300);
+  color: var(--theme-name-prieto);
 }
 
 .category-subtitle {
@@ -127,7 +127,7 @@
 }
 
 :host-context(.dark) .category-subtitle {
-  color: var(--color-rose-300);
+  color: #ffffff;
 }
 
 .category-card {
@@ -152,7 +152,6 @@
   gap: 0.75rem;
   padding: 0.5rem 0;
   width: 100%;
-  max-width: 310px;
 
   .tech-symbol-btn {
     display: flex;
@@ -188,9 +187,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 62px;
+    width: auto;
     height: auto;
-    min-height: 56px;
     border-radius: 0.75rem;
     cursor: default;
     background: transparent;
@@ -216,14 +214,14 @@
 
   .tech-name-label {
     font-family: var(--font-mono);
-    font-size: 0.52rem;
+    font-size: 0.6rem;
     color: var(--tech-label-color) !important;
     opacity: 0.95;
     text-align: center;
     margin-top: 0.15rem;
     line-height: 1.1;
     word-break: normal;
-    white-space: nowrap;
+    white-space: wrap;
   }
 }
 

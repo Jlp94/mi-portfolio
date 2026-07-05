@@ -24,16 +24,7 @@
   color: var(--title-2-color);
 }
 
-.section-line {
-  width: 70px;
-  height: 4px;
-  background-color: var(--theme-timeline-header);
-  transition: background-color 0.5s ease;
-}
 
-:host-context(.dark) .section-line {
-  background-color: var(--theme-title-accent-2);
-}
 
 .bullets-container {
   width: 100%;

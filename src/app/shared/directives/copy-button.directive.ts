@@ -11,6 +11,7 @@ import { TooltipDirective } from './tooltip.directive';
   ],
   host: {
     '(click)': 'copy()',
+    'class': 'is-copy-tooltip',
   },
 })
 export class CopyButtonDirective {
