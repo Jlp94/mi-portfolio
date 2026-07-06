@@ -1,48 +1,6 @@
 :host {
   display: block;
   width: 100%;
-  --accent-color: var(--theme-accent-soft);
-  --accent-color-hover: var(--theme-accent-soft-hover);
-  --accent-color-muted: color-mix(in srgb, var(--theme-accent-soft) 10%, transparent);
-  --accent-color-border: color-mix(in srgb, var(--theme-accent-soft) 15%, transparent);
-  --card-bg: rgba(193, 207, 237, 0.45);
-  --card-border: rgba(209, 213, 219, 0.7);
-  --text-title: var(--theme-surface-special-text);
-  --text-subtitle: var(--theme-title-accent-2);
-  --text-body: var(--theme-surface-special-text);
-  --dot-bg: var(--theme-timeline-dot-education);
-  --body-bg-solid: #f8fafc;
-  --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
-  --card-shadow-hover: 0 20px 40px -15px rgba(0, 0, 0, 0.12);
-  --date-color: var(--theme-surface-special-text);
-  --title-1-color: var(--theme-timeline-header);
-  --theme-code-bracket: var(--color-violet-900);
-  --theme-code-tag: var(--color-violet-900);
-  --theme-code-attr: var(--color-sky-900);
-  --theme-code-val: #15803d;
-  --noise-opacity: var(--theme-noise-opacity);
-  --noise-bg: var(--theme-noise-bg);
-}
-
-:host-context(.dark) {
-  --accent-color: var(--color-violet-300);
-  --accent-color-hover: var(--theme-accent-soft-hover);
-  --accent-color-muted: color-mix(in srgb, var(--theme-accent-soft) 10%, transparent);
-  --accent-color-border: color-mix(in srgb, var(--theme-accent-soft) 15%, transparent);
-  --card-bg: var(--theme-surface-card-bg);
-  --card-border: rgba(255, 255, 255, 0.05);
-  --text-title: var(--color-violet-300);
-  --text-body: #cbd5e1;
-  --dot-bg: var(--theme-timeline-dot-education);
-  --body-bg-solid: #181922;
-  --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
-  --card-shadow-hover: 0 12px 40px 0 rgba(0, 0, 0, 0.35);
-  --date-color: var(--color-violet-300);
-  --title-1-color: var(--theme-timeline-header);
-  --theme-code-bracket: var(--color-red-400);
-  --theme-code-tag: var(--color-red-400);
-  --theme-code-attr: var(--color-amber-300);
-  --theme-code-val: var(--color-lime-300);
 }
 
 .timeline-container {
@@ -53,28 +11,27 @@
   position: relative;
   overflow: hidden;
   z-index: 1;
-  background: var(--card-bg);
-  border-top: 2px solid var(--color-cyan-500);
-  border-left: none;
-  border-bottom: none;
-  border-right: none;
-  border-radius: 0.2rem;
-  padding: 0;
-  box-shadow: var(--card-shadow);
+  background: var(--theme-timeline-card-bg);
+  border-top: 2px solid var(--theme-timeline-border-color);
+  border-radius: 2rem 0;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   filter: grayscale(50%);
   transition:
-    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   width: 100%;
 }
 
-.timeline-card:hover,
+.timeline-card:hover {
+  filter: grayscale(0%);
+}
+
 .timeline-card.is-expanded {
   filter: grayscale(0%);
+  border-radius: 2rem 0 0 0;
 }
 
 .timeline-card::before {
@@ -84,6 +41,7 @@
 .timeline-card > * {
   position: relative;
   z-index: 2;
+  border-radius: 2rem 0 0 0;
 }
 
 .card-icon-wrapper {
@@ -111,18 +69,19 @@
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.05em;
-  color: var(--date-color);
+  color: var(--theme-timeline-date-color);
   text-transform: uppercase;
   display: block;
   margin-top: 0.35rem;
 }
 
 .card-title {
+  border-radius: 2rem 0 0 0;
   font-family: var(--font-sans);
   font-size: 1.25rem;
   font-weight: 700;
   margin: 0 0 0.15rem;
-  color: var(--text-title);
+  color: var(--theme-timeline-text-title);
   line-height: 1.25;
 }
 
@@ -131,7 +90,7 @@
   font-size: 0.95rem;
   font-weight: 500;
   margin: 0;
-  color: var(--text-subtitle);
+  color: var(--theme-timeline-text-subtitle);
 }
 
 .card-header {
@@ -140,13 +99,13 @@
   align-items: start;
   justify-content: space-between;
   gap: 1rem;
-  border-left: 2px solid var(--color-cyan-500);
+  border-left: 2px solid var(--theme-timeline-border-color);
   border-bottom: 2px solid transparent;
   transition: border-color 0.3s ease;
 }
 
 .timeline-card.is-expanded .card-header {
-  border-bottom-color: var(--color-cyan-500);
+  border-bottom-color: var(--theme-timeline-border-color);
 }
 
 .card-bullets {
@@ -161,7 +120,7 @@
   font-family: var(--font-sans);
   font-size: 0.875rem;
   line-height: 1.5;
-  color: var(--text-body);
+  color: var(--theme-timeline-text-body);
 }
 
 .tech-icons-grid {
@@ -169,7 +128,7 @@
   flex-wrap: wrap;
   gap: 0.75rem;
   border-top: none;
-  border-right: 2px solid var(--color-cyan-500);
+  border-right: 2px solid var(--theme-timeline-border-color);
   padding: 1rem 1.5rem;
 }
 
@@ -213,8 +172,8 @@
 }
 
 .quote-badge {
-  background: var(--accent-color-muted);
-  border-left: 3px solid var(--accent-color);
+  background: var(--theme-timeline-accent-muted);
+  border-left: 3px solid var(--theme-timeline-accent);
   padding: 0.75rem 1rem;
   border-radius: 0 0.75rem 0.75rem 0;
   margin: 0.75rem 0;
@@ -227,7 +186,7 @@
   font-family: serif;
   font-size: 1.75rem;
   line-height: 1;
-  color: var(--accent-color);
+  color: var(--theme-timeline-accent);
   font-weight: bold;
 }
 
@@ -236,7 +195,7 @@
   font-size: 0.85rem;
   font-style: italic;
   line-height: 1.4;
-  color: var(--text-title);
+  color: var(--theme-timeline-text-title);
 }
 
 .expand-chevron-btn {
@@ -244,7 +203,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--accent-color);
+  color: var(--theme-timeline-accent);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -306,23 +265,7 @@
   bottom: 0;
   pointer-events: none;
   z-index: -1;
-  opacity: var(--noise-opacity);
-  background-image: var(--noise-bg);
+  opacity: var(--theme-noise-opacity);
+  background-image: var(--theme-noise-bg);
   background-size: 800px 800px;
-}
-
-:host-context(.dark) .timeline-card {
-  border-top-color: var(--color-violet-900);
-}
-
-:host-context(.dark) .card-header {
-  border-left-color: var(--color-violet-900);
-}
-
-:host-context(.dark) .timeline-card.is-expanded .card-header {
-  border-bottom-color: var(--color-violet-900);
-}
-
-:host-context(.dark) .tech-icons-grid {
-  border-right-color: var(--color-violet-900);
 }

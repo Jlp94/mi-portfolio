@@ -1,1 +1,37 @@
-<p>projects works!</p>
+<div class="max-w-7xl mx-auto px-6">
+
+  <div class="section-header-centered select-none font-display">
+    <h2 class="section-title-centered font-bold tracking-tight">
+      <span class="text-[var(--title-1-color)]">{{ t().titleLine1 }}</span>
+      <span class="text-[var(--theme-name-prieto)] ml-2">{{ t().titleLine2 }}</span><span class="text-accent">.</span>
+    </h2>
+    <div class="section-line"></div>
+  </div>
+
+  <nav class="projects-breadcrumb flex flex-wrap items-center mb-8" aria-label="Filtro de proyectos">
+    @for (key of filterKeys; track key; let last = $last) {
+    <button
+      class="breadcrumb-item px-2 py-1 bg-transparent border-none font-sans text-sm font-semibold cursor-pointer leading-none transition-all duration-200"
+      [class.breadcrumb-item--active]="activeFilter() === key" (click)="setFilter(key)"
+      [attr.aria-pressed]="activeFilter() === key">
+      {{ getFilterLabel(key) }}<sup class="text-[0.5rem] font-bold ml-[0.1rem] opacity-80">{{ projectCount()[key]
+        }}</sup>
+    </button>
+    @if (!last) {
+    <span class="text-sm font-light opacity-30 px-[0.1rem] select-none" aria-hidden="true">/</span>
+    }
+    }
+  </nav>
+
+  <div class="projects-grid">
+    @for (project of filteredProjects(); track trackById($index, project); let i = $index) {
+    <app-project-card [project]="project" [layout]="activeLayout()[i % activeLayout().length]"
+      [viewLabel]="t().viewProject" (cardOpen)="openModal($event)" />
+    }
+  </div>
+
+  @if (activeModal(); as project) {
+  <app-project-modal [project]="project" (close)="closeModal()" />
+  }
+
+</div>

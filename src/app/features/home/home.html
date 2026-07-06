@@ -1,31 +1,27 @@
 <app-navbar />
 
 <main class="relative w-full overflow-hidden">
-  <div class="background-blobs-container absolute inset-0 pointer-events-none overflow-hidden z-0">
-    @for (blob of blobs(); track $index) {
-      <div 
-        class="global-blob absolute" 
-        [style]="'top: ' + blob.top + '; left: ' + blob.left + '; background: ' + blob.bg + '; opacity: ' + blob.opacity + '; animation: ' + blob.animation + '; transform: ' + blob.transform + '; --blob-size-mobile: ' + blob.sizeMobile + 'vw; --blob-size-desktop: ' + blob.sizeDesktop + 'vw; --blob-blur-mobile: ' + blob.blurMobile + 'px; --blob-blur-desktop: ' + blob.blurDesktop + 'px;'"
-        aria-hidden="true"
-      ></div>
-    }
-  </div>
+  <canvas #meteorCanvas class="meteor-canvas" aria-hidden="true"></canvas>
 
   <section id="hero" class="w-full min-h-screen flex items-center justify-center relative">
+    <div class="hero-dark-overlay" aria-hidden="true"></div>
     <app-hero class="w-full h-full relative z-10" />
   </section>
 
-  <app-about-stack class="w-full" />
+  <section id="about-me" class="w-full min-h-screen">
+    <app-about-stack class="w-full" />
+  </section>
 
-  <section id="experience-education" class="w-full min-h-screen flex items-center justify-center relative py-20">
+
+  <section id="projects" class="w-full min-h-screen flex items-center justify-center relative pt-10">
+    <app-projects class="w-full" />
+  </section>
+
+  <section id="experience" class="w-full flex items-center justify-center relative pt-20 pb-30">
     <div class="container mx-auto px-4 max-w-4xl flex flex-col gap-16 relative">
       <app-experience class="w-full" />
       <app-education class="w-full" />
     </div>
-  </section>
-
-  <section id="projects" class="w-full min-h-screen flex items-center justify-center relative py-20">
-    <app-projects class="w-full" />
   </section>
 
   <section id="contact" class="w-full flex relative mt-20">

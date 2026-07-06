@@ -57,3 +57,6 @@ AGENTS.md
 # Local environment secret overrides
 .env.local
 .env.*.local
+
+# Notas locales
+NOTAS_*.md

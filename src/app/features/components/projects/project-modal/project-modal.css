@@ -1,0 +1,141 @@
+:host {
+  --accent-color: var(--color-cyan-500);
+  --overlay-bg: rgba(15, 23, 42, 0.88);
+  --modal-bg: #fff;
+  --modal-border: var(--color-cyan-500);
+  --modal-text: var(--color-sky-950);
+  --pill-color: var(--color-cyan-800);
+}
+
+:host-context(.dark) {
+  --accent-color: var(--theme-title-accent-2);
+  --modal-bg: #1b1c27;
+  --modal-border: var(--color-violet-900);
+  --modal-text: var(--color-slate-100);
+  --pill-color: var(--color-violet-300);
+}
+
+.modal-overlay {
+  background: var(--overlay-bg);
+}
+
+.modal-overlay-enter {
+  animation: fadeInOverlay 0.35s ease both;
+}
+
+.modal-overlay-leave {
+  animation: fadeOutOverlay 0.3s ease both;
+}
+
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutOverlay {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.modal-inner {
+  background: var(--modal-bg);
+  border-top: 2px solid var(--modal-border);
+  border-right: 2px solid var(--modal-border);
+  border-radius: 0 1.5rem 0 0;
+  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.45);
+  scrollbar-width: thin;
+}
+
+.modal-inner-enter {
+  animation: slideUpModal 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.modal-inner-leave {
+  animation: slideDownModal 0.28s cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+@keyframes slideUpModal {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slideDownModal {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+}
+
+.modal-title {
+  color: var(--modal-text);
+}
+
+.modal-description {
+  color: var(--modal-text);
+}
+
+.tech-pill {
+  border-color: transparent;
+  background: transparent;
+  color: var(--pill-color);
+  border-radius: 2px;
+  gap: 0.25rem;
+}
+
+.carousel-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.65);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  z-index: 10;
+}
+
+.carousel-btn:hover {
+  background: rgba(15, 23, 42, 0.9);
+}
+
+.carousel-dot {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.carousel-dot--active {
+  background: var(--accent-color);
+  transform: scale(1.3);
+}
+
+.modal-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--modal-text);
+  opacity: 0.55;
+}
+
+.modal-close-btn:hover {
+  opacity: 1;
+  transform: rotate(90deg);
+}

@@ -1,0 +1,75 @@
+<div class="modal-overlay fixed inset-0 z-[1000] flex items-center justify-center p-4"
+  animate.enter="modal-overlay-enter" animate.leave="modal-overlay-leave" (click)="onOverlayClick($event)"
+  (keydown.escape)="onClose()" role="dialog" aria-modal="true" tabindex="-1"
+  [attr.aria-labelledby]="'modal-title-' + project().id">
+  <div class="modal-inner relative w-full max-w-[44rem] max-h-[90vh] overflow-y-auto"
+    animate.enter="modal-inner-enter" animate.leave="modal-inner-leave" role="document">
+
+    <div class="modal-carousel relative w-full aspect-video overflow-hidden bg-slate-900">
+      <img [src]="project().images[activeSlide()]" [alt]="project().title" class="w-full h-full object-cover block" />
+
+      @if (project().images.length > 1) {
+      <button class="carousel-btn absolute top-1/2 left-3 -translate-y-1/2" (click)="prevSlide()"
+        aria-label="Imagen anterior">
+        <svg class="w-[1.1rem] h-[1.1rem]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+      </button>
+      <button class="carousel-btn absolute top-1/2 right-3 -translate-y-1/2" (click)="nextSlide()"
+        aria-label="Imagen siguiente">
+        <svg class="w-[1.1rem] h-[1.1rem]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="9 18 15 12 9 6" />
+        </svg>
+      </button>
+      <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+        @for (img of project().images; track $index) {
+        <button
+          class="carousel-dot w-[0.45rem] h-[0.45rem] rounded-full border-none p-0 cursor-pointer transition-all duration-200"
+          [class.carousel-dot--active]="activeSlide() === $index" (click)="activeSlide.set($index)"
+          [attr.aria-label]="'Imagen ' + ($index + 1)"></button>
+        }
+      </div>
+      }
+    </div>
+
+    <div class="px-7 pt-6 pb-20 flex flex-col gap-4">
+      <h2 [id]="'modal-title-' + project().id"
+        class="font-sans text-[1.35rem] font-extrabold m-0 leading-tight modal-title">{{ project().title }}</h2>
+
+      <div class="flex flex-wrap gap-1.5">
+        @for (tech of project().techs; track tech) {
+        <span
+          class="tech-pill tech-pill--modal inline-flex items-center justify-center h-7 px-2.5 rounded-sm border font-mono text-[0.7rem] font-semibold whitespace-nowrap">
+          {{ tech }}
+        </span>
+        }
+      </div>
+
+      <p class="font-sans text-[0.9rem] leading-relaxed m-0 opacity-85 modal-description">{{ project().description }}
+      </p>
+
+      <div class="flex gap-3 flex-wrap mt-1">
+        @if (project().repoUrl) {
+        <app-button-fill-1 (clicked)="openExternalLink(project().repoUrl)">
+          <div class="flex items-center gap-2">
+            <app-tech-icon key="github" [customClass]="'w-6 h-6'" />
+            {{ t().sourceCode }}
+          </div>
+        </app-button-fill-1>
+        }
+      </div>
+    </div>
+
+    <button
+      class="modal-close-btn absolute bottom-4 right-5 w-11 h-11 flex items-center justify-center cursor-pointer transition-all duration-200"
+      (click)="onClose()" [attr.aria-label]="t().closeModal">
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    </button>
+  </div>
+</div>

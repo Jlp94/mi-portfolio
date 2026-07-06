@@ -1,81 +1,27 @@
-<app-shared-section id="about-me" title="" maxWidth="max-w-7xl"
-  heightClass="h-auto flex flex-col justify-start pt-12 md:pt-20 pb-8 overflow-visible">
-  <div class="about-me-content">
-    <div class="about-me-header mb-6 select-none font-display">
-      <span class="text-xs font-mono opacity-65 mb-1 block">
-        <app-code-tag tag="h2" attrName="class" attrVal="section-title"></app-code-tag>
-      </span>
-      <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-none">
-        <span class="block text-about-title-1 pl-4">{{ t().titleLine1 }}</span>
-        <span class="block text-about-title-2 ml-28 md:ml-[9rem] lg:ml-[11.5rem] -mt-2 md:-mt-4 lg:-mt-5">
-          {{ t().titleLine2 }}<span class="text-accent">.</span>
-        </span>
-      </h2>
-      <span class="text-xs font-mono opacity-65 mt-1 block">
-        <app-code-tag tag="h2" [isClose]="true"></app-code-tag>
-      </span>
-    </div>
+<div class="about-me-content w-full flex flex-col items-center">
 
-    <div class="about-me-body pl-0">
-      <div class="about-me-statements flex flex-col gap-8">
-        
-        <div class="flex flex-col">
-          <span class="text-xs font-mono opacity-65 mb-1 block">
-            <app-code-tag tag="p" attrName="class" attrVal="profile"></app-code-tag>
-          </span>
-          <p class="about-me-statement pl-4 text-base md:text-lg lg:text-xl font-bold tracking-tight leading-relaxed md:leading-normal">
-            <span>{{ t().text1 }}</span>
-            <span class="highlight highlight-1">{{ t().highlight1 }}</span>
-            <span>{{ t().text2 }}</span>
-          </p>
-          <span class="text-xs font-mono opacity-65 mt-1 block">
-            <app-code-tag tag="p" [isClose]="true"></app-code-tag>
-          </span>
-        </div>
-
-        <div class="flex flex-col">
-          <span class="text-xs font-mono opacity-65 mb-1 block">
-            <app-code-tag tag="p" attrName="class" attrVal="profile"></app-code-tag>
-          </span>
-          <p class="about-me-statement pl-4 text-base md:text-lg lg:text-xl font-bold tracking-tight leading-relaxed md:leading-normal">
-            <span>{{ t().text3 }}</span>
-            <span class="highlight highlight-2">{{ t().highlight2 }}</span>
-            <span>{{ t().text3_2 }}</span>
-          </p>
-          <span class="text-xs font-mono opacity-65 mt-1 block">
-            <app-code-tag tag="p" [isClose]="true"></app-code-tag>
-          </span>
-        </div>
-
-        <div class="flex flex-col">
-          <span class="text-xs font-mono opacity-65 mb-1 block">
-            <app-code-tag tag="p" attrName="class" attrVal="profile"></app-code-tag>
-          </span>
-          <p class="about-me-statement pl-4 text-base md:text-lg lg:text-xl font-bold tracking-tight leading-relaxed md:leading-normal">
-            <span>{{ t().text4 }}</span>
-            <span class="highlight highlight-3">{{ t().highlight3 }}</span>
-            <span>{{ t().text4_2 }}</span>
-          </p>
-          <span class="text-xs font-mono opacity-65 mt-1 block">
-            <app-code-tag tag="p" [isClose]="true"></app-code-tag>
-          </span>
-        </div>
-
-        <div class="flex flex-col">
-          <span class="text-xs font-mono opacity-65 mb-1 block">
-            <app-code-tag tag="p" attrName="class" attrVal="profile"></app-code-tag>
-          </span>
-          <p class="about-me-statement pl-4 text-base md:text-lg lg:text-xl font-bold tracking-tight leading-relaxed md:leading-normal">
-            <span>{{ t().text5_pre }}</span>
-            <span class="highlight highlight-4">{{ t().highlight4 }}</span>
-            <span>{{ t().text5 }}</span>
-          </p>
-          <span class="text-xs font-mono opacity-65 mt-1 block">
-            <app-code-tag tag="p" [isClose]="true"></app-code-tag>
-          </span>
-        </div>
-
-      </div>
+  <div class="profile-image-wrap mb-8 w-full flex justify-center">
+    <div class="profile-image-container">
+      <img src="Yo.jpeg" alt="Jose Luis Prieto" class="profile-img" />
     </div>
   </div>
-</app-shared-section>
+
+  <h3 class="about-me-subtitle font-sans text-2xl font-bold mb-6 w-full text-center">{{ t().whoAmITitle }}</h3>
+
+  <div class="about-me-body w-full text-center px-4">
+    <p class="about-me-text font-normal tracking-normal leading-relaxed text-center max-w-2xl mx-auto">
+      <span>{{ t().p1_1 }}</span>
+      <span class="highlight">{{ t().p1_h1 }}</span>.<br />
+      <span>{{ t().p2_1 }}</span>
+      <span class="highlight">{{ t().p2_h1 }}</span>
+      <span>{{ t().p2_2 }}</span>
+      <span class="highlight">{{ t().p2_h2 }}</span>
+      <span>{{ t().p2_3 }}</span><br />
+      <span>{{ t().p3 }}</span>
+      <span>{{ t().p4_1 }}</span>
+      <span class="highlight">{{ t().p4_h1 }}</span>
+      <span>{{ t().p4_2 }}</span><br />
+      <span class="highlight">{{ t().p5 }}</span>
+    </p>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+<button [type]="type()" class="btn-fill" [class]="'btn-fill--' + variant()" [disabled]="disabled() || loading()"
+    (mouseenter)="onMouseEnter($event)" (mouseleave)="onMouseLeave($event)" (click)="clicked.emit()">
+    <span class="btn-fill-bg" #hoverBg></span>
+    <span class="btn-fill-text"><ng-content /></span>
+</button>

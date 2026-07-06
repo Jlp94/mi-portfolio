@@ -14,42 +14,18 @@ import { EmailService } from '../../../core/services/email-service';
 import { FormValidators } from '../../../validators/FormValidators';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ButtonFill1 } from '../../../shared/components/button-fill-1/button-fill-1';
 
 interface CardLayout {
   gridColumn: string;
   gridRow: string;
 }
 
-const LAYOUTS: CardLayout[][] = [
-  [
-    { gridColumn: 'span 2 / span 2', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 2 / span 2' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-  ],
-  [
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 2 / span 2', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 2 / span 2' },
-  ],
-  [
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 2 / span 2' },
-    { gridColumn: 'span 2 / span 2', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-  ],
-  [
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 2 / span 2' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 2 / span 2', gridRow: 'span 1 / span 1' },
-  ],
-];
+
 
 @Component({
   selector: 'app-contact',
-  imports: [FormRoot, FormField],
+  imports: [FormRoot, FormField, ButtonFill1],
   providers: [EmailService],
   templateUrl: './contact.html',
   styleUrl: './contact.css',
@@ -88,19 +64,15 @@ export class Contact {
   protected readonly submissionStatus = signal<'idle' | 'success' | 'error'>('idle');
 
   protected readonly activeLayout = signal<CardLayout[]>([
-    { gridColumn: 'span 2 / span 2', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 2 / span 2' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
+    { gridColumn: '2 / 3', gridRow: '1 / 2' },
+    { gridColumn: '2 / 4', gridRow: '2 / 3' },
+    { gridColumn: '3 / 4', gridRow: '1 / 2' },
+    { gridColumn: '1 / 2', gridRow: '1 / 3' },
   ]);
 
   constructor() {
     gsap.registerPlugin(ScrollTrigger);
-
     afterNextRender(() => {
-      const randomIndex = Math.floor(Math.random() * LAYOUTS.length);
-      this.activeLayout.set(LAYOUTS[randomIndex]);
-
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReducedMotion) {
         return;
@@ -203,49 +175,5 @@ export class Contact {
         }
       }, 5000);
     }
-  }
-
-  protected onBtnMouseEnter(event: MouseEvent): void {
-    const button = event.currentTarget as HTMLElement;
-    const bg = button.querySelector('.btn-hover-bg') as HTMLElement;
-    if (!bg) return;
-
-    const rect = button.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-
-    gsap.killTweensOf(bg);
-    gsap.fromTo(
-      bg,
-      {
-        left: `${x}px`,
-        top: `${y}px`,
-        scale: 0,
-      },
-      {
-        scale: 1,
-        duration: 1,
-        ease: 'power2.out',
-      },
-    );
-  }
-
-  protected onBtnMouseLeave(event: MouseEvent): void {
-    const button = event.currentTarget as HTMLElement;
-    const bg = button.querySelector('.btn-hover-bg') as HTMLElement;
-    if (!bg) return;
-
-    const rect = button.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-
-    gsap.killTweensOf(bg);
-    gsap.to(bg, {
-      left: `${x}px`,
-      top: `${y}px`,
-      scale: 0,
-      duration: 0.8,
-      ease: 'power2.inOut',
-    });
   }
 }

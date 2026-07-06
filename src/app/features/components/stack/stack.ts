@@ -1,8 +1,6 @@
 import { Component, inject, computed, ElementRef, signal, ChangeDetectorRef } from '@angular/core';
 import { LanguageService } from '../../../core/services/language.service';
-import { SharedSection } from '../../../shared/components/section/section';
 import { TechIcon } from './tech-icon';
-import { CodeTag } from '../../../shared/components/code-tag/code-tag';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import gsap from 'gsap';
@@ -13,7 +11,7 @@ gsap.registerPlugin(Flip, ScrollTrigger);
 
 @Component({
   selector: 'app-stack',
-  imports: [SharedSection, TechIcon, CodeTag, FaIconComponent],
+  imports: [TechIcon, FaIconComponent],
   templateUrl: './stack.html',
   styleUrl: './stack.css',
 })
@@ -36,14 +34,12 @@ export class Stack {
         'angular',
         'typescript',
         'rxjs',
-        'javascript',
         'html',
         'css',
         'scss',
         'bootstrap',
         'tailwind',
         'primeng',
-        'swiper',
         'gsap',
       ],
     },
@@ -145,6 +141,22 @@ export class Stack {
     return [];
   }
 
+  protected getThirdBlockTitle(key: string): string {
+    const translations = this.t() as unknown as Record<string, string>;
+    if (key === 'frontend') {
+      return translations['futureTitle'] || 'A futuro:';
+    }
+    return '';
+  }
+
+  protected getThirdBlockItems(key: string): readonly string[] {
+    const translations = this.t() as unknown as Record<string, readonly string[]>;
+    if (key === 'frontend') {
+      return translations['frontendLearning'] || [];
+    }
+    return [];
+  }
+
   protected getCategoryTechs(key: string): string[] {
     const cat = this.categories.find((c) => c.key === key);
     return cat ? cat.techs : [];
@@ -191,11 +203,22 @@ export class Stack {
     if (originCard && detailPanel) {
       this.activeTl.to(originCard, { opacity: 0, duration: 0.3, ease: 'power2.out' }, 0);
 
+      const backdrop = host.querySelector('.global-backdrop');
+      if (backdrop) {
+        this.activeTl.fromTo(
+          backdrop,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.6, ease: 'power2.out' },
+          0,
+        );
+      }
+
       this.activeTl.add(
         Flip.from(state, {
           targets: detailPanel,
           duration: 0.8,
           ease: 'power3.inOut',
+          absolute: true,
         }),
         0,
       );
@@ -306,7 +329,13 @@ export class Stack {
     }
   }
 
-  protected onHoverIcon(event: MouseEvent, isEven: boolean): void {
+  protected onBackdropClick(event: MouseEvent): void {
+    if (event.target === event.currentTarget) {
+      this.closeCategory();
+    }
+  }
+
+  protected onHoverIcon(event: MouseEvent | FocusEvent, isEven: boolean): void {
     const wrapper = event.currentTarget as HTMLElement;
     const btn = wrapper.querySelector('.tech-symbol-btn') as HTMLElement;
     if (!btn) return;
@@ -320,7 +349,7 @@ export class Stack {
       .to(btn, { rotate: naturalTilt, duration: 0.2, ease: 'power1.out' });
   }
 
-  protected onLeaveIcon(event: MouseEvent, isEven: boolean): void {
+  protected onLeaveIcon(event: MouseEvent | FocusEvent, isEven: boolean): void {
     const wrapper = event.currentTarget as HTMLElement;
     const btn = wrapper.querySelector('.tech-symbol-btn') as HTMLElement;
     if (!btn) return;

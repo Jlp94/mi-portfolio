@@ -772,6 +772,40 @@ import { Component, input } from '@angular/core';
           />
         </svg>
       }
+      @case ('nestjs') {
+        <svg [class]="customClass()" viewBox="0 0 264.6 255.6" xmlns="http://www.w3.org/2000/svg">
+          <path d="M153.3 4.2c-1.8 0-3.5.4-5 1 3.3 2.1 5.1 5 6 8.3 0 .5.2.8.3 1.3l.1 1.1c.3 5.7-1.5 6.4-2.7 9.8-1.9 4.3-1.4 9 .9 12.7.2.5.4 1 .8 1.4-2.5-16.3 11.1-18.8 13.7-23.9.2-4.4-3.5-7.4-6.4-9.5a14.3 14.3 0 0 0-7.7-2.2zM174 8c-.3 1.5 0 1.1-.1 1.9l-.2 1.7-.4 1.5-.5 1.6-.8 1.5-.5.7-.4.6c-.3.5-.6 1-1 1.3-.3.4-.6.9-1 1.2l-1.3 1c-1.4 1.1-3 1.9-4.3 2.9-.5.3-1 .5-1.3 1-.5.2-.9.6-1.3 1l-1.1 1.2-1 1.3-.9 1.3-.7 1.5-.5 1.5a21 21 0 0 0-.5 1.6l-.1.9-.1.7-.1 1.7v1.1l.3 1.6c0 .6.1 1 .3 1.6l.5 1.5.4 1-14.8-5.8-7.5-2-4-1a120 120 0 0 0-11.8-1.7h-.4A115.5 115.5 0 0 0 87 34.9l-3 .6c-2 .3-3.9.8-5.7 1.2l-3 .8-2.7 1.2-2.2 1-.3.1-1.8 1-.5.1-2 1-1.2.7-.6.3-1.7 1-1.6 1-1.3.9-.1.1-1.3 1H58l-1 .8-.4.3-1 .8c0 .2-.1.2-.2.3l-1.2 1v.2c-.5.3-.9.7-1.2 1.1l-.2.1-1 1c0 .2-.3.3-.4.5l-1 1.1-.4.3-1.4 1.6-.2.2a38.1 38.1 0 0 1-7 6 48.9 48.9 0 0 1-12.1 6c-2.7.5-5.5 1.6-7.9 1.8l-1.6.2-1.6.4-1.6.6-1.5.7-1.4.9c-.5.3-1 .7-1.3 1.1-.5.3-1 .8-1.3 1.2l-1.1 1.3-1 1.4-.9 1.5-.7 1.7-.6 1.7-.3 1.5v.2L6 86.2v2.1a6.9 6.9 0 0 0 .7 2.4l.7 1.2.8 1.2a17.1 17.1 0 0 0 2.4 2c1.5 1.4 1.9 1.9 3.9 2.9l1 .5h.2v.4a13.3 13.3 0 0 0 1 3.1l.5 1.2.1.3a28.3 28.3 0 0 0 1.8 2.8l1 1.2 1.3 1.1h.1a14.2 14.2 0 0 0 5.4 3l.3.1.8.2c-.2 3.5-.3 6.8.3 8 .5 1.2 3.4-2.7 6.2-7.2-.4 4.4-.6 9.7 0 11.2.7 1.6 4.6-3.4 8-9a74.7 74.7 0 0 1 92 65.8c-.8-7-9.4-10.8-13.4-9.9-2 4.8-5.2 11-10.5 14.8.4-4.3.2-8.7-.7-13-1.4 6-4.2 11.5-8 16.3a18 18 0 0 1-15.5-7l-.5-.8-.5-1.4-.4-1.3V176c0-.5.1-1 .3-1.4 0-.4.2-.9.4-1.3l.8-1.4c1-3 1-5.6-1-7l-1.1-.7-.9-.3-.5-.2-1.4-.3a5 5 0 0 0-1.3-.2l-1.4-.1h-1l-1.4.2-1.4.3-1.3.4-1.3.6-1.3.7c-15 9.8-6 32.8 4.2 39.5-3.8.7-7.8 1.5-8.9 2.3l-.1.2a60.9 60.9 0 0 0 19.2 7.4 61.5 61.5 0 0 0 72.6-51.3l.4 1.7c.2 1.2.5 2.4.6 3.7l.2 1.7v.3l.2 1.6.1 2.2v5.4l-.1.8v1.5c-.2.2-.2.4-.2.5 0 .6 0 1-.2 1.5v.6c0 .7-.2 1.2-.3 1.9v.1l-.4 1.8v.2c0 .6-.2 1.2-.4 1.8v.2l-.5 1.8v.2l-.5 1.8v.1l-.6 2-.7 1.8-.8 1.9-.7 1.9c-.4.5-.6 1.2-1 1.8l-.1.4s0 .2-.2.2a61.2 61.2 0 0 1-18.1 21.7l-1.6 1.1c0 .2-.3.2-.4.4l-1.4 1 .2.3 2.7-.4h.1a137.7 137.7 0 0 0 6.5-1.2l.9-.2 1.3-.3 1.2-.3c6.4-1.5 12.7-3.7 18.7-6.2-10.2 14-24 25.3-40.1 32.8a103.2 103.2 0 0 0 83.1-52.6c-2.7 15-8.6 29.1-17.4 41.5a101.7 101.7 0 0 0 44.5-69.2c2.2 10.2 2.8 20.7 1.8 31.1 46.7-65 4-132.5-14-150.3l-.1-.3v.1l-.1-.1-.2 2.3a87 87 0 0 1-.6 4.3l-1.1 4.3a53.7 53.7 0 0 1-3.5 8 44 44 0 0 1-9.9 12l-1.5 1.4a36 36 0 0 1-7.4 4.7l-4 1.8a45.5 45.5 0 0 1-8.6 2.3l-4.4.6a49.7 49.7 0 0 1-11.9-.8l-4.3-1.1a48 48 0 0 0 20.7-6.8l3.6-2.6 3.3-2.9 3-3.2c1-1.1 1.9-2.3 2.7-3.5.2-.1.3-.4.4-.6l1.9-3.1a44.5 44.5 0 0 0 3.5-8c.4-1.4.8-2.9 1-4.3.3-1.5.6-2.9.7-4.3l.3-4.4-.1-3.1-.6-4.3c-.2-1.5-.5-3-1-4.4-.4-1.3-.8-2.7-1.4-4.1-.5-1.4-1.1-2.7-1.8-4l-2.2-3.8a71.3 71.3 0 0 0-5.5-6.9 40.4 40.4 0 0 0-12-8.6C178 9.3 176 8.6 174 8z" fill="#e0234e" fill-rule="evenodd"/>
+        </svg>
+      }
+      @case ('vitest') {
+        <svg [class]="customClass()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45 43" fill="none">
+          <path fill="#22ff84" d="M21.266 42.207a1.13 1.13 0 0 1-1.652.36L.465 28.64A1.13 1.13 0 0 1 0 27.724V10.94c0-.924 1.05-1.458 1.797-.915l11.712 8.517a2.262 2.262 0 0 0 3.302-.72l9.7-17.244c.2-.355.578-.577.987-.577h15.575c.865 0 1.41.933.986 1.687L21.266 42.205z"/>
+          <mask id="vitest__mask0" width="45" height="43" x="0" y="0" maskUnits="userSpaceOnUse" style="mask-type:alpha">
+            <path fill="#000" d="M21.266 42.207a1.13 1.13 0 0 1-1.652.36L.465 28.64A1.13 1.13 0 0 1 0 27.724V10.94c0-.924 1.05-1.459 1.797-.916l11.712 8.518a2.262 2.262 0 0 0 3.302-.72l9.7-17.244c.2-.355.578-.577.987-.577h15.575c.865 0 1.41.933.986 1.687L21.266 42.204z"/>
+          </mask>
+          <g mask="url(#vitest__mask0)">
+            <g filter="url(#vitest__f0)"><ellipse cx="14.031" cy="3.391" fill="#00ccc6" rx="14.031" ry="3.391" transform="rotate(130.547 17.088 5.676)scale(1 -1)"/></g>
+            <g filter="url(#vitest__f1)"><ellipse cx="14.031" cy="6.087" fill="#00ccc6" rx="14.031" ry="6.087" transform="rotate(53.967 -28.777 34.573)scale(-1 1)"/></g>
+            <g filter="url(#vitest__f2)"><ellipse cx="6.443" cy="12.195" fill="#7f0" rx="6.374" ry="5.551" transform="rotate(23.13 6.443 12.195)"/></g>
+            <g filter="url(#vitest__f3)"><ellipse cx="40.775" cy="15.951" fill="#7f0" rx="5.615" ry="24.534" transform="rotate(23.13 40.775 15.95)"/></g>
+            <g filter="url(#vitest__f4)"><ellipse cx="4.985" cy="10.069" fill="#97ffe2" rx="4.985" ry="10.069" transform="rotate(135 17.458 13.64)scale(-1 1)"/></g>
+          </g>
+          <defs>
+            <filter id="vitest__f0" width="37.343" height="40.162" x="7.293" y="-10.833" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur" stdDeviation="4.596"/></filter>
+            <filter id="vitest__f1" width="37.605" height="42.185" x="-15.869" y="8.648" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur" stdDeviation="4.596"/></filter>
+            <filter id="vitest__f2" width="30.894" height="29.756" x="-9.004" y="-2.683" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur" stdDeviation="4.596"/></filter>
+            <filter id="vitest__f3" width="40.253" height="63.725" x="20.648" y="-15.912" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur" stdDeviation="4.596"/></filter>
+            <filter id="vitest__f4" width="34.276" height="34.275" x="18.716" y="-16.841" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur" stdDeviation="4.596"/></filter>
+          </defs>
+        </svg>
+      }
+      @case ('swagger') {
+        <svg [class]="customClass()" preserveAspectRatio="xMidYMid" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+          <path d="M128 250a122 122 0 1 1 0-244 122 122 0 0 1 0 244Z" fill="#85EA2D"/>
+          <path d="M128 12a116 116 0 1 1 0 232 116 116 0 0 1 0-232m0-12a128 128 0 1 0 0 256 128 128 0 0 0 0-256Z" fill="#173647"/>
+          <path d="m81 87-1 13-1 13c-2 6-5 11-11 15 11 7 12 17 13 28v17c1 5 2 6 7 6h6v14c-14 2-25-2-27-13l-2-13v-14c-1-12-3-17-15-17v-16h3c6-1 9-3 11-9l1-11 1-22c2-10 8-15 19-15h9v14h-4c-8 0-9 3-9 10Zm16 32a9 9 0 0 0-1 18c5 0 10-3 10-8v-1c0-5-4-9-9-9Zm31 0a9 9 0 0 0-9 9c0 6 4 9 9 9 6 0 9-4 9-9s-4-9-9-9Zm31 0a9 9 0 0 0 0 18c5 1 9-4 10-9 0-5-5-9-10-9Zm44 1c-6-1-9-2-10-8l-2-10-1-20c-1-16-12-21-28-19v14h6c4 0 6 1 7 5v11l3 21c1 6 5 11 10 14-9 6-11 14-12 24l-1 19c0 6-2 8-8 8h-5v14h10c10 0 16-5 18-15l1-16 1-15c1-7 4-10 12-11h2v-16h-3Z" fill="#173647"/>
+        </svg>
+      }
     }
   `,
 })
