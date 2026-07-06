@@ -74,7 +74,7 @@
 
 .highlight {
   display: inline-block;
-  font-weight: 800;
+  font-weight: normal;
   color: var(--color-sky-500);
   transform-origin: center;
   transition:
