@@ -14,6 +14,12 @@
 }
 
 :root {
+  --color-navy-900: #052f4a;
+  --color-dark-bg: #14151d;
+  --color-dark-panel: #1e1f29;
+  --color-dracula-dark: #181922;
+  --color-violet-hover-ring: rgba(124, 58, 237, 0.2);
+
   --theme-body-bg: #ffffff;
   --theme-body-color: var(--color-sky-950);
   --theme-scrollbar-track: #ffffff;
@@ -114,22 +120,45 @@
   --theme-name-prieto: var(--theme-accent-tertiary);
   --theme-noise-opacity: 0.28;
   --theme-noise-bg: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1   0 0 0 0 1   0 0 0 0 1   1 0 0 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+
+  --theme-ring-hover-accent: var(--color-violet-hover-ring);
+
+  --theme-navbar-scrolled-bg: var(--color-dracula-dark);
+  --theme-navbar-scrolled-border: var(--color-cyan-500);
+  --theme-navbar-scrolled-text: #ffffff;
+  --theme-navbar-scrolled-shadow: rgba(0, 0, 0, 0.25);
+  --theme-navbar-scrolled-accent: var(--color-cyan-500);
+  --theme-logo-bracket: var(--color-violet-900);
+  --theme-logo-dot: var(--color-dracula-dark);
+  --theme-toggle-icon: var(--color-purple-900);
+
+  /* Timeline Section Semantic Tokens */
+  --theme-timeline-accent: var(--theme-accent-soft);
+  --theme-timeline-accent-muted: color-mix(in srgb, var(--theme-accent-soft) 10%, transparent);
+  --theme-timeline-accent-border: color-mix(in srgb, var(--theme-accent-soft) 15%, transparent);
+  --theme-timeline-card-bg: rgba(226, 230, 240, 0.45);
+  --theme-timeline-text-title: var(--theme-surface-special-text);
+  --theme-timeline-text-subtitle: var(--theme-title-accent-1);
+  --theme-timeline-text-body: var(--theme-surface-special-text);
+  --theme-timeline-body-bg-solid: var(--color-slate-50);
+  --theme-timeline-date-color: var(--theme-surface-special-text);
+  --theme-timeline-border-color: var(--color-cyan-500);
 }
 
 html.dark {
-  --theme-body-bg: #14151d;
+  --theme-body-bg: var(--color-dark-bg);
   --theme-body-color: var(--color-rose-100);
   --theme-scrollbar-track: #1e1f29;
   --theme-scrollbar-thumb: var(--color-violet-500);
   --theme-scrollbar-thumb-hover: var(--color-violet-600);
 
-  --theme-panel-bg: color-mix(in srgb, #1e1f29 80%, transparent);
+  --theme-panel-bg: color-mix(in srgb, var(--color-dark-panel) 80%, transparent);
   --theme-panel-border: color-mix(in srgb, var(--color-violet-500) 15%, transparent);
   --theme-panel-link: rgb(255, 255, 255);
   --theme-panel-link-hover: var(--color-rose-400);
   --theme-panel-button: var(--color-yellow-400);
   --theme-toggle-hover-bg: color-mix(in srgb, var(--color-violet-500) 15%, transparent);
-  --theme-mobile-menu-bg: color-mix(in srgb, #1e1f29 98%, transparent);
+  --theme-mobile-menu-bg: color-mix(in srgb, var(--color-dark-panel) 98%, transparent);
   --theme-mobile-menu-border: color-mix(in srgb, var(--color-violet-500) 15%, transparent);
   --theme-burger-color: var(--color-rose-300);
 
@@ -218,6 +247,28 @@ html.dark {
 
   --theme-noise-opacity: 0.035;
   --theme-noise-bg: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+
+  --theme-ring-hover-accent: var(--color-violet-hover-ring);
+
+  --theme-navbar-scrolled-bg: var(--color-neutral-300);
+  --theme-navbar-scrolled-border: var(--color-violet-900);
+  --theme-navbar-scrolled-text: var(--color-dracula-dark);
+  --theme-navbar-scrolled-shadow: rgba(0, 0, 0, 0.15);
+  --theme-navbar-scrolled-accent: var(--color-violet-900);
+  --theme-logo-bracket: var(--color-red-400);
+  --theme-logo-dot: #ffffff;
+  --theme-toggle-icon: var(--theme-panel-button);
+
+  /* Timeline Section Semantic Tokens */
+  --theme-timeline-accent: var(--theme-timeline-border-color);
+  --theme-timeline-accent-muted: color-mix(in srgb, var(--theme-accent-soft) 10%, transparent);
+  --theme-timeline-accent-border: color-mix(in srgb, var(--theme-accent-soft) 15%, transparent);
+  --theme-timeline-card-bg: var(--theme-surface-card-bg);
+  --theme-timeline-text-title: rgba(255, 255, 255, 0.85);
+  --theme-timeline-text-body: rgba(255, 255, 255, 0.85);
+  --theme-timeline-body-bg-solid: var(--color-dracula-dark);
+  --theme-timeline-date-color: var(--color-violet-300);
+  --theme-timeline-border-color: var(--color-violet-900);
 }
 
 html {

@@ -7,6 +7,8 @@
   --accent-color: var(--color-cyan-500);
   --card-bg: rgba(255, 255, 255, 0.75);
   --card-border: var(--color-cyan-500);
+  --card-shadow: 0 10px 30px rgba(12, 74, 110, 0.08);
+  --card-title-color: var(--color-navy-900);
   --pill-bg: color-mix(in srgb, var(--color-cyan-500) 12%, transparent);
   --pill-color: var(--color-cyan-800);
   --pill-border: color-mix(in srgb, var(--color-cyan-500) 30%, transparent);
@@ -22,6 +24,8 @@
   --accent-color: var(--theme-title-accent-2);
   --card-bg: rgba(24, 25, 34, 0.7);
   --card-border: var(--color-violet-900);
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  --card-title-color: var(--color-rose-100);
   --pill-bg: color-mix(in srgb, var(--color-violet-400) 10%, transparent);
   --pill-color: var(--color-violet-300);
   --pill-border: color-mix(in srgb, var(--color-violet-400) 25%, transparent);

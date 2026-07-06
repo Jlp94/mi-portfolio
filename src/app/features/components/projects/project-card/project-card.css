@@ -63,11 +63,7 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  color: var(--modal-text);
-}
-
-:host-context(.dark) .card-title {
-  color: var(--color-slate-100);
+  color: var(--card-title-color);
 }
 
 .card-title-line {

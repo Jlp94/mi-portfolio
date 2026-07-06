@@ -81,19 +81,19 @@
 }
 
 .bullet-title {
-  color: #1e293b;
+  color: var(--color-slate-800);
   transition: color 0.3s ease;
 }
 
 :host-context(.dark) .bullet-title {
-  color: #f1f5f9;
+  color: var(--color-slate-100);
 }
 
 .bullet-text {
-  color: #475569;
+  color: var(--color-slate-600);
   transition: color 0.3s ease;
 }
 
 :host-context(.dark) .bullet-text {
-  color: #cbd5e1;
+  color: var(--color-slate-300);
 }

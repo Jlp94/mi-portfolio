@@ -23,11 +23,11 @@
 }
 
 .navbar-header.navbar-scrolled {
-  background: #181922;
-  border-bottom: 3px solid var(--color-cyan-500);
+  background: var(--theme-navbar-scrolled-bg);
+  border-bottom: 3px solid var(--theme-navbar-scrolled-border);
   border-bottom-left-radius: 40% 12px;
   border-bottom-right-radius: 80% 28px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 10px 30px var(--theme-navbar-scrolled-shadow);
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 
@@ -36,69 +36,31 @@
   .lang-toggle-btn,
   .theme-toggle-btn,
   .burger-btn {
-    color: #ffffff !important;
+    color: var(--theme-navbar-scrolled-text) !important;
   }
 
   .logo-bracket {
-    color: var(--color-cyan-500) !important;
+    color: var(--theme-navbar-scrolled-accent) !important;
     opacity: 0.95;
   }
 
   .logo-dot {
-    color: var(--color-cyan-500) !important;
+    color: var(--theme-navbar-scrolled-accent) !important;
   }
 
   .nav-link:hover,
   .logo-link:hover,
   .lang-toggle-btn:hover,
   .theme-toggle-btn:hover {
-    color: var(--color-cyan-500) !important;
+    color: var(--theme-navbar-scrolled-accent) !important;
   }
 
   .theme-toggle-btn fa-icon {
-    color: var(--color-cyan-500) !important;
+    color: var(--theme-navbar-scrolled-accent) !important;
   }
 
   .theme-toggle-btn:hover fa-icon {
-    color: var(--color-cyan-500) !important;
-  }
-}
-
-:host-context(.dark) .navbar-header.navbar-scrolled {
-  background: var(--color-neutral-300);
-  border-bottom-color: var(--color-violet-900);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-
-  .logo-link,
-  .nav-link,
-  .lang-toggle-btn,
-  .theme-toggle-btn,
-  .burger-btn {
-    color: #181922 !important;
-  }
-
-  .logo-bracket {
-    color: var(--color-violet-900) !important;
-    opacity: 0.95;
-  }
-
-  .logo-dot {
-    color: var(--color-violet-900) !important;
-  }
-
-  .nav-link:hover,
-  .logo-link:hover,
-  .lang-toggle-btn:hover,
-  .theme-toggle-btn:hover {
-    color: var(--color-violet-900) !important;
-  }
-
-  .theme-toggle-btn fa-icon {
-    color: var(--color-violet-900) !important;
-  }
-
-  .theme-toggle-btn:hover fa-icon {
-    color: var(--color-violet-900) !important;
+    color: var(--theme-navbar-scrolled-accent) !important;
   }
 }
 
@@ -159,24 +121,16 @@
 }
 
 .logo-bracket {
-  color: var(--color-violet-900);
+  color: var(--theme-logo-bracket);
   opacity: 0.65;
   transition:
     color 0.5s ease,
     opacity 0.5s ease;
 }
 
-:host-context(.dark) .logo-bracket {
-  color: var(--color-red-400);
-}
-
 .logo-dot {
-  color: #181922 !important;
+  color: var(--theme-logo-dot) !important;
   transition: color 0.5s ease;
-}
-
-:host-context(.dark) .logo-dot {
-  color: #ffffff !important;
 }
 
 .burger-btn {
@@ -192,12 +146,8 @@
 }
 
 .theme-toggle-btn fa-icon {
-  color: var(--color-purple-900);
+  color: var(--theme-toggle-icon);
   transition: color 0.5s ease;
-}
-
-:host-context(.dark) .theme-toggle-btn fa-icon {
-  color: var(--theme-panel-button);
 }
 
 .theme-toggle-btn:hover {
