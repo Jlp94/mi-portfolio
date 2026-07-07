@@ -2,7 +2,7 @@ import { Component, inject, computed, ElementRef, signal, ChangeDetectorRef } fr
 import { LanguageService } from '../../../core/services/language.service';
 import { TechIcon } from '../../../shared/ui/tech-icon/tech-icon';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faAngleUp, faXmark } from '@fortawesome/free-solid-svg-icons';
 import gsap from 'gsap';
 import { Flip } from 'gsap/Flip';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -23,9 +23,14 @@ export class Stack {
 
   protected readonly faAngleDown = faAngleDown;
   protected readonly faAngleUp = faAngleUp;
+  protected readonly faXmark = faXmark;
 
   protected readonly activeCategory = signal<string | null>(null);
   private activeTl: gsap.core.Timeline | null = null;
+
+  private touchStartX = 0;
+  private touchStartY = 0;
+  private touchStartTime = 0;
 
   protected readonly categories = [
     {
@@ -360,5 +365,34 @@ export class Stack {
       duration: 0.3,
       ease: 'power2.out',
     });
+  }
+
+  protected onTouchStart(event: TouchEvent): void {
+    const touch = event.touches[0];
+    this.touchStartX = touch.clientX;
+    this.touchStartY = touch.clientY;
+    this.touchStartTime = Date.now();
+  }
+
+  protected onTouchEnd(event: TouchEvent): void {
+    const touch = event.changedTouches[0];
+    const deltaX = Math.abs(touch.clientX - this.touchStartX);
+    const deltaY = Math.abs(touch.clientY - this.touchStartY);
+    const deltaTime = Date.now() - this.touchStartTime;
+
+    const TAP_THRESHOLD_PX = 10;
+    const TAP_THRESHOLD_MS = 300;
+
+    if (deltaX < TAP_THRESHOLD_PX && deltaY < TAP_THRESHOLD_PX && deltaTime < TAP_THRESHOLD_MS) {
+      const target = event.target as HTMLElement;
+
+      // Do not close if the tap is inside the scrollable description content side
+      // or on interactive/compact icons
+      if (target.closest('.detail-content-side, .detail-close-btn, .icons-compact, a, button')) {
+        return;
+      }
+
+      this.closeCategory();
+    }
   }
 }

@@ -6,7 +6,7 @@ import { signal } from '@angular/core';
 describe('ProjectCard', () => {
   let component: ProjectCard;
   let fixture: ComponentFixture<ProjectCard>;
-  let mockThemeService: any;
+  let mockThemeService: { currentTheme: ReturnType<typeof signal<'light' | 'dark'>> };
 
   const mockProject = {
     id: 'my-training-app',
