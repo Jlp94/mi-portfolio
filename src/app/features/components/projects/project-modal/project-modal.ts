@@ -90,7 +90,9 @@ export class ProjectModal {
     this.activeSlide.update((s) => (s - 1 + images.length) % images.length);
   }
 
-  protected openExternalLink(url: string): void {
-    window.open(url, '_blank', 'noopener,noreferrer');
+  protected openExternalLink(url: string | undefined): void {
+    if (url) {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
   }
 }
