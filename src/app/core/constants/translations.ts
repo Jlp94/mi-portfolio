@@ -230,6 +230,7 @@ export const TRANSLATIONS = {
             'assets/projects/my-training-app/image16.jpg',
             'assets/projects/my-training-app/image17.jpg',
           ],
+          cardImage: 'assets/projects/my-training-app/portada.png',
           repoUrl: 'https://github.com/Jlp94/my-training',
         },
         {
@@ -250,6 +251,7 @@ export const TRANSLATIONS = {
             'assets/projects/my-training-admin/image19.png',
             'assets/projects/my-training-admin/image20.png',
           ],
+          cardImage: 'assets/projects/my-training-admin/portada.png',
           repoUrl: 'https://github.com/Jlp94/admin-my-training',
         },
         {
@@ -278,6 +280,7 @@ export const TRANSLATIONS = {
             'assets/projects/project-ci4/admin-tabla-edit.PNG',
             'assets/projects/project-ci4/client-edit.PNG',
           ],
+          cardImage: 'assets/projects/project-ci4/portada.png',
           repoUrl: 'https://github.com/Jlp94/Proyecto_CI4.git',
         },
         {
@@ -298,6 +301,7 @@ export const TRANSLATIONS = {
             'assets/projects/kreitefy-web/kreitefy-edit-user.PNG',
             'assets/projects/kreitefy-web/kreitefy-register.PNG',
           ],
+          cardImage: 'assets/projects/kreitefy-web/potada.png',
           // repoUrl: 'https://github.com/Jlp94/kreitefy-web'
         },
         {
@@ -495,6 +499,7 @@ export const TRANSLATIONS = {
             'assets/projects/my-training-app/image16.jpg',
             'assets/projects/my-training-app/image17.jpg',
           ],
+          cardImage: 'assets/projects/my-training-app/portada.png',
           repoUrl: 'https://github.com/Jlp94/my-training',
         },
         {
@@ -515,6 +520,7 @@ export const TRANSLATIONS = {
             'assets/projects/my-training-admin/image19.png',
             'assets/projects/my-training-admin/image20.png',
           ],
+          cardImage: 'assets/projects/my-training-admin/portada.png',
           repoUrl: 'https://github.com/Jlp94/admin-my-training',
         },
         {
@@ -527,7 +533,6 @@ export const TRANSLATIONS = {
           images: ['assets/projects/api.webp', 'assets/projects/my-training-api/image21.png'],
           repoUrl: 'https://github.com/Jlp94/api-my-training',
         },
-
         {
           id: 'proyecto-ci4',
           title: 'Proyecto CI4 - Vehicle Rental',
@@ -544,6 +549,7 @@ export const TRANSLATIONS = {
             'assets/projects/project-ci4/admin-tabla-edit.PNG',
             'assets/projects/project-ci4/client-edit.PNG',
           ],
+          cardImage: 'assets/projects/project-ci4/portada.png',
           repoUrl: 'https://github.com/Jlp94/Proyecto_CI4.git',
         },
         {
@@ -564,6 +570,7 @@ export const TRANSLATIONS = {
             'assets/projects/kreitefy-web/kreitefy-edit-user.PNG',
             'assets/projects/kreitefy-web/kreitefy-register.PNG',
           ],
+          cardImage: 'assets/projects/kreitefy-web/potada.png',
           // repoUrl: 'https://github.com/Jlp94/kreitefy-web'
         },
         {

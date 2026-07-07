@@ -28,14 +28,13 @@ export class ProjectCard {
   });
 
   protected readonly projectImage = computed(() => {
-    const images = this.project().images;
     if (this.project().id === 'portfolio') {
       const theme = this.themeService.currentTheme();
       return theme === 'dark'
         ? 'assets/projects/portfolio/portfolio-light.png'
         : 'assets/projects/portfolio/portfolio-dark.png';
     }
-    return images[0];
+    return this.project().cardImage || this.project().images[0];
   });
 
   protected onOpen(): void {

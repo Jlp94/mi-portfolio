@@ -7,7 +7,8 @@ export interface ProjectItem {
   tags: string[];
   techs: string[];
   images: string[];
-  repoUrl: string;
+  repoUrl?: string;
+  cardImage?: string;
 }
 
 export interface CardLayout {

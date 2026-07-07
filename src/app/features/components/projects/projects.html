@@ -25,7 +25,7 @@
 
   <div class="projects-grid">
     @for (project of filteredProjects(); track trackById($index, project); let i = $index) {
-    <app-project-card [project]="project" [layout]="activeLayout()[i % activeLayout().length]"
+    <app-project-card [project]="project" [layout]="projectLayouts()[project.id]"
       [viewLabel]="t().viewProject" (cardOpen)="openModal($event)" />
     }
   </div>
