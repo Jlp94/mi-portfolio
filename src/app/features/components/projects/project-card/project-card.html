@@ -1,4 +1,4 @@
-<article class="project-card" [style.grid-column]="layout()?.gridColumn" [style.grid-row]="layout()?.gridRow"
+<article class="project-card" [class.project-card--large]="layout()?.gridColumn === 'span 2 / span 2'"
   [class.project-card--hovered]="isHovered()" (mouseenter)="isHovered.set(true)" (mouseleave)="isHovered.set(false)"
   (focus)="isHovered.set(true)" (blur)="isHovered.set(false)" (click)="onOpen()" role="button" tabindex="0"
   (keydown.enter)="onOpen()" (keydown.space)="onOpen()" [attr.aria-label]="ariaLabel()">

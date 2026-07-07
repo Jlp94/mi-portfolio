@@ -31,7 +31,7 @@
 }
 
 .availability-code {
-  --theme-code-bracket: var(--color-violet-900);
+  --theme-code-bracket: var(--theme-logo-bracket);
   --theme-code-tag: var(--name-jose);
   --theme-code-attr: var(--hero-role);
   --theme-code-val: var(--hero-role);
