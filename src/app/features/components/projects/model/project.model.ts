@@ -7,7 +7,8 @@ export interface ProjectItem {
   tags: string[];
   techs: string[];
   images: string[];
-  repoUrl: string;
+  repoUrl?: string;
+  cardImage?: string;
 }
 
 export interface CardLayout {
@@ -17,17 +18,23 @@ export interface CardLayout {
 
 export const TECH_KEY_MAP: Record<string, string | null> = {
   Angular: 'angular',
+  Ionic: 'ionic',
   TypeScript: 'typescript',
   'Tailwind CSS': 'tailwind',
+  'Chart.js': 'chartjs',
   'Spring Boot': 'springboot',
+  'Spring Modulith': 'spring-modulith',
   Java: 'java',
   JWT: 'jwt',
   RxJS: 'rxjs',
+  Swiper: 'swiper',
   Bootstrap: 'bootstrap',
   JavaScript: 'javascript',
   HTML5: 'html',
+  CSS: 'css',
   SCSS: 'scss',
   PHP: 'php',
+  CodeIgniter: 'codeigniter',
   PostgreSQL: 'postgres',
   Docker: 'docker',
   MongoDB: 'mongodb',

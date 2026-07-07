@@ -1,11 +1,4 @@
-import {
-  Component,
-  inject,
-  computed,
-  signal,
-  ElementRef,
-  afterNextRender,
-} from '@angular/core';
+import { Component, inject, computed, signal, ElementRef, afterNextRender } from '@angular/core';
 import { LanguageService } from '../../../core/services/language.service';
 import { ProjectCard } from './project-card/project-card';
 import { ProjectModal } from './project-modal/project-modal';
@@ -14,37 +7,6 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
-
-const LAYOUTS: CardLayout[][] = [
-  [
-    { gridColumn: 'span 2 / span 2', gridRow: 'span 2 / span 2' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-  ],
-  [
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 2 / span 2', gridRow: 'span 2 / span 2' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-  ],
-  [
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 2 / span 2', gridRow: 'span 2 / span 2' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-  ],
-  [
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 2 / span 2', gridRow: 'span 2 / span 2' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-    { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' },
-  ],
-];
 
 @Component({
   selector: 'app-projects',
@@ -59,15 +21,40 @@ export class Projects {
 
   protected readonly activeFilter = signal<FilterKey>('all');
   protected readonly activeModal = signal<ProjectItem | null>(null);
-  protected readonly activeLayout = signal<CardLayout[]>(LAYOUTS[0]);
 
   protected readonly filterKeys: FilterKey[] = ['all', 'angular', 'spring', 'nest', 'php'];
 
   protected readonly filteredProjects = computed(() => {
     const filter = this.activeFilter();
     const items = this.t().items as unknown as ProjectItem[];
-    if (filter === 'all') return items;
-    return items.filter((p) => p.tags.includes(filter));
+    const filtered = filter === 'all' 
+      ? items 
+      : items.filter((p) => p.tags.includes(filter));
+
+    const clientIdx = filtered.findIndex((p) => p.id === 'my-training-app');
+    if (clientIdx !== -1 && filtered.length > 4) {
+      const result = [...filtered];
+      const [clientProject] = result.splice(clientIdx, 1);
+      result.splice(4, 0, clientProject);
+      return result;
+    }
+
+    return filtered;
+  });
+
+  protected readonly projectLayouts = computed(() => {
+    const projects = this.filteredProjects();
+    const layouts: Record<string, CardLayout> = {};
+
+    for (const project of projects) {
+      if (project.id === 'my-training-app') {
+        layouts[project.id] = { gridColumn: 'span 2 / span 2', gridRow: 'span 2 / span 2' };
+      } else {
+        layouts[project.id] = { gridColumn: 'span 1 / span 1', gridRow: 'span 1 / span 1' };
+      }
+    }
+
+    return layouts;
   });
 
   protected readonly projectCount = computed(() => {
@@ -81,8 +68,6 @@ export class Projects {
 
   constructor() {
     afterNextRender(() => {
-      const randomIndex = Math.floor(Math.random() * LAYOUTS.length);
-      this.activeLayout.set(LAYOUTS[randomIndex]);
 
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReducedMotion) return;
@@ -97,7 +82,7 @@ export class Projects {
       if (headerTitle && headerLine) {
         gsap.set(headerTitle, { opacity: 0, x: -200 });
         gsap.set(headerLine, { scaleX: 0, transformOrigin: 'left center' });
-        
+
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: host.querySelector('.section-header-centered'),
@@ -112,12 +97,15 @@ export class Projects {
           x: 0,
           duration: 1.2,
           ease: 'power2.out',
-        })
-        .to(headerLine, {
-          scaleX: 1,
-          duration: 0.8,
-          ease: 'power2.out',
-        }, '-=0.8');
+        }).to(
+          headerLine,
+          {
+            scaleX: 1,
+            duration: 0.8,
+            ease: 'power2.out',
+          },
+          '-=0.8',
+        );
       }
 
       if (breadcrumb) {

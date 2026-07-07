@@ -3,8 +3,10 @@
   (focus)="isHovered.set(true)" (blur)="isHovered.set(false)" (click)="onOpen()" role="button" tabindex="0"
   (keydown.enter)="onOpen()" (keydown.space)="onOpen()" [attr.aria-label]="ariaLabel()">
 
-  <div class="card-image-wrap">
-    <img [src]="project().images[0]" [alt]="project().title" class="card-image" loading="lazy" />
+  <div class="card-image-wrap" [style.background-color]="isApiProject() ? '#ffffff' : '#0f172a'">
+    <img [src]="projectImage()" [alt]="project().title" class="card-image"
+         [style.object-fit]="isApiProject() ? 'contain' : 'cover'"
+         [style.padding]="isApiProject() ? '1.25rem' : '0'" loading="lazy" />
   </div>
 
   <div class="card-footer px-4 py-3">

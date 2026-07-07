@@ -1,6 +1,6 @@
 import { Component, inject, computed, signal, ElementRef, afterNextRender } from '@angular/core';
 import { LanguageService } from '../../../core/services/language.service';
-import { TechIcon } from '../stack/tech-icon';
+import { TechIcon } from '../../../shared/ui/tech-icon/tech-icon';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import gsap from 'gsap';
@@ -36,7 +36,7 @@ export class Experience {
       if (headerTitle && headerLine) {
         gsap.set(headerTitle, { opacity: 0, x: 200 });
         gsap.set(headerLine, { scaleX: 0, transformOrigin: 'right center' });
-        
+
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: host.querySelector('.section-header-centered'),

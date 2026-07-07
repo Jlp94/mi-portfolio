@@ -139,3 +139,18 @@
   opacity: 1;
   transform: rotate(90deg);
 }
+
+.animate-fade-in {
+  animation: fadeInZoom 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes fadeInZoom {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(4px);
+  }
+}

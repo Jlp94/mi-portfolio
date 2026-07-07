@@ -2,13 +2,16 @@
   animate.enter="modal-overlay-enter" animate.leave="modal-overlay-leave" (click)="onOverlayClick($event)"
   (keydown.escape)="onClose()" role="dialog" aria-modal="true" tabindex="-1"
   [attr.aria-labelledby]="'modal-title-' + project().id">
-  <div class="modal-inner relative w-full max-w-[44rem] max-h-[90vh] overflow-y-auto"
-    animate.enter="modal-inner-enter" animate.leave="modal-inner-leave" role="document">
+  <div class="modal-inner relative w-full max-w-[54rem] max-h-[90vh] overflow-y-auto" animate.enter="modal-inner-enter"
+    animate.leave="modal-inner-leave" role="document">
 
-    <div class="modal-carousel relative w-full aspect-video overflow-hidden bg-slate-900">
-      <img [src]="project().images[activeSlide()]" [alt]="project().title" class="w-full h-full object-cover block" />
+    <div class="modal-carousel relative w-full aspect-video overflow-hidden"
+      [style.background-color]="isApiProject() ? '#ffffff' : '#0f172a'">
+      <img [src]="projectImages()[activeSlide()]" [alt]="project().title" class="w-full h-full block cursor-zoom-in"
+        [style.object-fit]="isApiProject() ? 'contain' : 'cover'" [style.padding]="isApiProject() ? '2rem' : '0'"
+        (click)="isZoomed.set(true)" />
 
-      @if (project().images.length > 1) {
+      @if (projectImages().length > 1) {
       <button class="carousel-btn absolute top-1/2 left-3 -translate-y-1/2" (click)="prevSlide()"
         aria-label="Imagen anterior">
         <svg class="w-[1.1rem] h-[1.1rem]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -24,7 +27,7 @@
         </svg>
       </button>
       <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
-        @for (img of project().images; track $index) {
+        @for (img of projectImages(); track $index) {
         <button
           class="carousel-dot w-[0.45rem] h-[0.45rem] rounded-full border-none p-0 cursor-pointer transition-all duration-200"
           [class.carousel-dot--active]="activeSlide() === $index" (click)="activeSlide.set($index)"
@@ -65,11 +68,52 @@
     <button
       class="modal-close-btn absolute bottom-4 right-5 w-11 h-11 flex items-center justify-center cursor-pointer transition-all duration-200"
       (click)="onClose()" [attr.aria-label]="t().closeModal">
-      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round" aria-hidden="true">
         <line x1="18" y1="6" x2="6" y2="18" />
         <line x1="6" y1="6" x2="18" y2="18" />
       </svg>
     </button>
   </div>
+
+  @if (isZoomed()) {
+  <div class="fixed inset-0 z-[2000] bg-black/90 flex items-center justify-center p-4 cursor-zoom-out animate-fade-in"
+    (click)="isZoomed.set(false)" role="dialog" aria-modal="true" tabindex="-1">
+
+    @if (projectImages().length > 1) {
+    <button
+      class="absolute left-6 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-black/40 hover:bg-black/75 text-white/75 hover:text-white flex items-center justify-center cursor-pointer transition-all duration-200 focus:outline-none border border-white/10 z-50"
+      (click)="prevSlide(); $event.stopPropagation()" aria-label="Imagen anterior">
+      <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="15 18 9 12 15 6" />
+      </svg>
+    </button>
+    <button
+      class="absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-black/40 hover:bg-black/75 text-white/75 hover:text-white flex items-center justify-center cursor-pointer transition-all duration-200 focus:outline-none border border-white/10 z-50"
+      (click)="nextSlide(); $event.stopPropagation()" aria-label="Imagen siguiente">
+      <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="9 18 15 12 9 6" />
+      </svg>
+    </button>
+    }
+
+    <div class="relative max-w-full max-h-full flex items-center justify-center" (click)="$event.stopPropagation()">
+      <img [src]="projectImages()[activeSlide()]" [alt]="project().title"
+        class="max-w-[95vw] max-h-[95vh] object-contain rounded shadow-2xl select-none cursor-zoom-out"
+        [style.background-color]="isApiProject() ? '#ffffff' : 'transparent'"
+        [style.padding]="isApiProject() ? '3rem' : '0'" (click)="isZoomed.set(false)" />
+      <button
+        class="absolute top-4 right-4 text-white/70 hover:text-white transition-colors duration-200 p-2 cursor-pointer focus:outline-none"
+        (click)="isZoomed.set(false)" aria-label="Cerrar vista ampliada">
+        <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+    </div>
+  </div>
+  }
 </div>

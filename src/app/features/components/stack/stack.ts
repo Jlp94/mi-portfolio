@@ -1,6 +1,6 @@
 import { Component, inject, computed, ElementRef, signal, ChangeDetectorRef } from '@angular/core';
 import { LanguageService } from '../../../core/services/language.service';
-import { TechIcon } from './tech-icon';
+import { TechIcon } from '../../../shared/ui/tech-icon/tech-icon';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import gsap from 'gsap';
