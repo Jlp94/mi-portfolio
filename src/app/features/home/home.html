@@ -9,24 +9,44 @@
   </section>
 
   <section id="about-me" class="w-full min-h-screen">
-    <app-about-stack class="w-full" />
+    @defer (on idle; on viewport) {
+      <app-about-stack class="w-full" />
+    } @placeholder {
+      <div class="w-full min-h-screen bg-transparent"></div>
+    }
   </section>
 
 
   <section id="projects" class="w-full min-h-screen flex items-center justify-center relative pt-10">
-    <app-projects class="w-full" />
+    @defer (on idle; on viewport) {
+      <app-projects class="w-full" />
+    } @placeholder {
+      <div class="w-full min-h-screen bg-transparent"></div>
+    }
   </section>
 
   <section id="experience" class="w-full flex items-center justify-center relative pt-20 pb-30">
     <div class="container mx-auto px-4 max-w-4xl flex flex-col gap-16 relative">
-      <app-experience class="w-full" />
-      <app-education class="w-full" />
+      @defer (on idle; on viewport) {
+        <app-experience class="w-full" />
+        <app-education class="w-full" />
+      } @placeholder {
+        <div class="w-full h-[925px] md:h-[902px] bg-transparent"></div>
+      }
     </div>
   </section>
 
   <section id="contact" class="w-full flex relative mt-20">
-    <app-contact class="w-full flex flex-col flex-grow" />
+    @defer (on idle; on viewport) {
+      <app-contact class="w-full flex flex-col flex-grow" />
+    } @placeholder {
+      <div class="w-full h-[1340px] md:h-[860px] bg-transparent"></div>
+    }
   </section>
 </main>
 
-<app-footer />
+@defer (on idle; on viewport) {
+  <app-footer />
+} @placeholder {
+  <div class="w-full h-[150px] md:h-[217px] bg-transparent"></div>
+}

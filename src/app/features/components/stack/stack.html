@@ -41,7 +41,8 @@
 </div>
 <div class="details-overlay-container" (click)="onBackdropClick($event)" (keydown.escape)="closeCategory()"
   role="presentation">
-  <div class="detail-panel" [attr.data-flip-id]="activeCat" role="document">
+  <div class="detail-panel" [attr.data-flip-id]="activeCat" role="document"
+    (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)">
     <div class="detail-content-wrapper">
       <div class="detail-icons-side">
         <div class="icons-area icons-compact select-none">
@@ -84,6 +85,11 @@
             </div>
             }
             }
+          </div>
+          <div class="flex justify-end mt-4">
+            <button class="detail-close-btn" (click)="closeCategory()" aria-label="Cerrar detalles">
+              <fa-icon [icon]="faXmark" />
+            </button>
           </div>
         </div>
       </div>

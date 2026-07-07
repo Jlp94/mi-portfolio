@@ -466,3 +466,26 @@
     transform: translateY(-4px);
   }
 }
+
+.detail-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-slate-500);
+  font-size: 1.5rem;
+  opacity: 0.55;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+}
+
+:host-context(.dark) .detail-close-btn {
+  color: var(--color-slate-400);
+}
+
+.detail-close-btn:hover {
+  opacity: 1;
+  transform: rotate(90deg);
+}
+
