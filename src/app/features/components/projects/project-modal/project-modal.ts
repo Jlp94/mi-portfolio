@@ -2,7 +2,7 @@ import { Component, inject, computed, signal, HostListener, input, output } from
 import { LanguageService } from '../../../../core/services/language.service';
 import { ThemeService } from '../../../../core/services/theme.service';
 import { ProjectItem } from '../model/project.model';
-import { TechIcon } from '../../stack/tech-icon';
+import { TechIcon } from '../../../../shared/ui/tech-icon/tech-icon';
 import { ButtonFill1 } from '../../../../shared/components/button-fill-1/button-fill-1';
 
 @Component({

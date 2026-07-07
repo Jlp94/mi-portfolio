@@ -197,7 +197,7 @@ export const TRANSLATIONS = {
       items: [
         {
           id: 'portfolio',
-          title: 'Portfolio Personal',
+          title: 'Portfolio v1',
           description:
             'Portfolio personal desarrollado con Angular 22, GSAP (ScrollTrigger, Flip) y Tailwind CSS v4. Diseño 100% personalizado con modo oscuro/claro, soporte multiidioma ES/EN, animaciones de entrada con scroll y sección de contacto con Formspree.',
           tags: ['angular'],
@@ -214,54 +214,23 @@ export const TRANSLATIONS = {
           description:
             'Aplicación móvil híbrida para clientes de My Training, desarrollada con Ionic 8 y Angular 19+. Permite seguir planes de entrenamiento, registrar peso y pasos, y consultar la dieta asignada, con gráficos de progreso y navegación táctil optimizada para móvil.',
           tags: ['angular', 'ionic'],
-          techs: ['Ionic', 'Angular', 'TypeScript', 'RxJS', 'Swiper', 'Chart.js', 'SCSS', 'HTML5', 'Docker'],
+          techs: [
+            'Ionic',
+            'Angular',
+            'TypeScript',
+            'RxJS',
+            'Swiper',
+            'Chart.js',
+            'SCSS',
+            'HTML5',
+            'Docker',
+          ],
           images: [
             'assets/projects/my-training-app/image15.jpg',
             'assets/projects/my-training-app/image16.jpg',
             'assets/projects/my-training-app/image17.jpg',
           ],
           repoUrl: 'https://github.com/Jlp94/my-training',
-        },
-        {
-          id: 'proyecto-ci4',
-          title: 'Proyecto CI4 - Alquiler de Vehículos',
-          description:
-            'Aplicación web de alquiler de vehículos desarrollada con CodeIgniter 4 bajo el patrón MVC. Incluye una zona de cliente para registrarse y realizar reservas, y un panel de administración completo para la gestión de la flota de vehículos, el seguimiento de reservas y el control de usuarios.',
-          tags: ['php'],
-          techs: ['CodeIgniter', 'PHP', 'Bootstrap', 'HTML5', 'MySQL'],
-          images: [
-            'assets/projects/project-ci4/admin-home.PNG',
-            'assets/projects/project-ci4/client-home.PNG',
-            'assets/projects/project-ci4/admin-tabla.PNG',
-            'assets/projects/project-ci4/admin-control-users.PNG',
-            'assets/projects/project-ci4/client-filters.PNG',
-            'assets/projects/project-ci4/admin-tabla-edit.PNG',
-            'assets/projects/project-ci4/client-edit.PNG',
-          ],
-          repoUrl: 'https://github.com/Jlp94/Proyecto_CI4.git',
-        },
-        {
-          id: 'kreitefy-api',
-          title: 'Kreitefy API',
-          description:
-            'API REST para una plataforma de streaming musical diseñada como un monolito modular con arquitectura hexagonal y principios de DDD. Implementa seguridad con JWT, límites de módulos estrictos con Spring Modulith y validación automática de la arquitectura con ArchUnit.',
-          tags: ['spring'],
-          techs: ['Spring Boot', 'Java', 'Spring Modulith', 'PostgreSQL', 'Docker', 'JWT'],
-          images: ['assets/projects/api.webp'],
-          repoUrl: 'https://github.com/Jlp94/spring-api-kreitefy',
-        },
-        {
-          id: 'my-training-api',
-          title: 'My Training API',
-          description:
-            'API REST para la gestión de rutinas de entrenamiento, dietas, cardio y usuarios de la app My Training. Incluye autenticación JWT, gestión de ejercicios y planes nutricionales (desarrollado con Mongoose, Passport JWT y class-validator).',
-          tags: ['nest'],
-          techs: ['NestJS', 'MongoDB', 'JWT', 'Docker', 'TypeScript'],
-          images: [
-            'assets/projects/api.webp',
-            'assets/projects/my-training-api/image21.png',
-          ],
-          repoUrl: 'https://github.com/Jlp94/api-my-training',
         },
         {
           id: 'my-training-admin',
@@ -282,6 +251,84 @@ export const TRANSLATIONS = {
             'assets/projects/my-training-admin/image20.png',
           ],
           repoUrl: 'https://github.com/Jlp94/admin-my-training',
+        },
+        {
+          id: 'my-training-api',
+          title: 'My Training API',
+          description:
+            'API REST para la gestión de rutinas de entrenamiento, dietas, cardio y usuarios de la app My Training. Incluye autenticación JWT, gestión de ejercicios y planes nutricionales (desarrollado con Mongoose, Passport JWT y class-validator).',
+          tags: ['nest'],
+          techs: ['NestJS', 'MongoDB', 'JWT', 'Docker', 'TypeScript'],
+          images: ['assets/projects/api.webp', 'assets/projects/my-training-api/image21.png'],
+          repoUrl: 'https://github.com/Jlp94/api-my-training',
+        },
+        {
+          id: 'proyecto-ci4',
+          title: 'Proyecto CI4 - Alquiler de Vehículos',
+          description:
+            'Aplicación web de alquiler de vehículos desarrollada con CodeIgniter 4 bajo el patrón MVC. Incluye una zona de cliente para registrarse y realizar reservas, y un panel de administración completo para la gestión de la flota de vehículos, el seguimiento de reservas y el control de usuarios.',
+          tags: ['php'],
+          techs: ['CodeIgniter', 'PHP', 'Bootstrap', 'HTML5', 'MySQL'],
+          images: [
+            'assets/projects/project-ci4/admin-home.PNG',
+            'assets/projects/project-ci4/client-home.PNG',
+            'assets/projects/project-ci4/admin-tabla.PNG',
+            'assets/projects/project-ci4/admin-control-users.PNG',
+            'assets/projects/project-ci4/client-filters.PNG',
+            'assets/projects/project-ci4/admin-tabla-edit.PNG',
+            'assets/projects/project-ci4/client-edit.PNG',
+          ],
+          repoUrl: 'https://github.com/Jlp94/Proyecto_CI4.git',
+        },
+        {
+          id: 'kreitefy-web',
+          title: 'Kreitefy - Cliente Web',
+          description:
+            'Cliente web para la plataforma de streaming musical Kreitefy, desarrollado con Angular 19 y Bootstrap 5. Incluye reproductor de canciones, gestión de usuarios y panel de administración con tablas editables. Autenticación mediante JWT con estrategia de doble token: access token en memoria (sin persistencia en localStorage, para mitigar el robo por XSS) y refresh token en cookie httpOnly con renovación automática de sesión.',
+          tags: ['angular'],
+          techs: ['Angular', 'TypeScript', 'Bootstrap', 'SCSS', 'HTML5', 'JWT'],
+          images: [
+            'assets/projects/kreitefy-web/kreitefy-home.PNG',
+            'assets/projects/kreitefy-web/kreitefy-home-user.PNG',
+            'assets/projects/kreitefy-web/kreitefy-repro.PNG',
+            'assets/projects/kreitefy-web/kreitefy-allSongs.PNG',
+            'assets/projects/kreitefy-web/kreitefy-table.PNG',
+            'assets/projects/kreitefy-web/kreitefy-edit-table.PNG',
+            'assets/projects/kreitefy-web/kreitefy-panel-admin.PNG',
+            'assets/projects/kreitefy-web/kreitefy-edit-user.PNG',
+            'assets/projects/kreitefy-web/kreitefy-register.PNG',
+          ],
+          // repoUrl: 'https://github.com/Jlp94/kreitefy-web'
+        },
+        {
+          id: 'kreitefy-api',
+          title: 'Kreitefy API',
+          description:
+            'API REST para una plataforma de streaming musical diseñada como un monolito modular con arquitectura hexagonal y principios de DDD (dominio modelado con Java Records inmutables). Fronteras de módulo verificadas automáticamente con Spring Modulith y 7 reglas de arquitectura como tests con ArchUnit. Control de concurrencia optimista con @Version (HTTP 409 ante colisiones) y consultas dinámicas con QueryDSL optimizadas con fetchJoin() para evitar el problema N+1. Autenticación stateless con JWT (access token + refresh token con rotación en cookie httpOnly) y login federado con OAuth2 (Google, GitHub). Pirámide de testing completa: unitarios, integración y E2E.',
+          tags: ['spring'],
+          techs: ['Spring Boot', 'Java', 'Spring Modulith', 'PostgreSQL', 'Docker', 'JWT'],
+          images: ['assets/projects/api.webp', 'assets/projects/kreitefy-api/bd-kreitefy.png'],
+          repoUrl: 'https://github.com/Jlp94/spring-api-kreitefy',
+        },
+        {
+          id: 'my-training-api-spring',
+          title: 'En Desarrollo - My Training API (Spring Boot)',
+          description:
+            'Migración completa de la API de My Training (actualmente en NestJS con MongoDB) a Spring Boot, aplicando la misma arquitectura hexagonal, DDD y monolito modular con Spring Modulith de Kreitefy API, junto con la migración del modelo de datos de MongoDB a una base de datos relacional.',
+          tags: ['spring'],
+          techs: ['Spring Boot', 'Java', 'Spring Modulith', 'PostgreSQL', 'Docker', 'JWT'],
+          images: ['assets/projects/api.webp'],
+          // repoUrl: null,
+        },
+        {
+          id: 'kreitefy-microservices',
+          title: 'En Desarrollo - Kreitefy API Microservicios',
+          description:
+            'Separación del monolito modular de Kreitefy API en microservicios independientes, comunicados de forma asíncrona mediante Apache Kafka como bus de eventos.',
+          tags: ['spring'],
+          techs: ['Spring Boot', 'Java', 'Spring Modulith', 'PostgreSQL', 'Docker', 'JWT', 'Kafka'],
+          images: ['assets/projects/api.webp'],
+          // repoUrl: null,
         },
       ],
     },
@@ -415,7 +462,7 @@ export const TRANSLATIONS = {
       items: [
         {
           id: 'portfolio',
-          title: 'Personal Portfolio',
+          title: 'Portfolio v1',
           description:
             'Personal portfolio built with Angular 22, GSAP (ScrollTrigger, Flip) and Tailwind CSS v4. Fully custom design with dark/light mode, ES/EN multilingual support, scroll-driven entry animations and contact section powered by Formspree.',
           tags: ['angular'],
@@ -432,54 +479,23 @@ export const TRANSLATIONS = {
           description:
             'Hybrid mobile app for My Training clients, built with Ionic 8 and Angular 19+. Lets users follow training plans, log weight and steps, and check assigned diet plans, with progress charts and touch-optimized navigation.',
           tags: ['angular', 'ionic'],
-          techs: ['Ionic', 'Angular', 'TypeScript', 'RxJS', 'Swiper', 'Chart.js', 'SCSS', 'HTML5', 'Docker'],
+          techs: [
+            'Ionic',
+            'Angular',
+            'TypeScript',
+            'RxJS',
+            'Swiper',
+            'Chart.js',
+            'SCSS',
+            'HTML5',
+            'Docker',
+          ],
           images: [
             'assets/projects/my-training-app/image15.jpg',
             'assets/projects/my-training-app/image16.jpg',
             'assets/projects/my-training-app/image17.jpg',
           ],
           repoUrl: 'https://github.com/Jlp94/my-training',
-        },
-        {
-          id: 'proyecto-ci4',
-          title: 'Proyecto CI4 - Vehicle Rental',
-          description:
-            'Web application for vehicle rentals built with CodeIgniter 4 following the MVC pattern. It features a client portal for registration and booking reservations, and a comprehensive admin panel for fleet management, booking tracking, and user control.',
-          tags: ['php'],
-          techs: ['CodeIgniter', 'PHP', 'Bootstrap', 'HTML5', 'MySQL'],
-          images: [
-            'assets/projects/project-ci4/admin-home.PNG',
-            'assets/projects/project-ci4/client-home.PNG',
-            'assets/projects/project-ci4/admin-tabla.PNG',
-            'assets/projects/project-ci4/admin-control-users.PNG',
-            'assets/projects/project-ci4/client-filters.PNG',
-            'assets/projects/project-ci4/admin-tabla-edit.PNG',
-            'assets/projects/project-ci4/client-edit.PNG',
-          ],
-          repoUrl: 'https://github.com/Jlp94/Proyecto_CI4.git',
-        },
-        {
-          id: 'kreitefy-api',
-          title: 'Kreitefy API',
-          description:
-            'REST API for a music streaming platform designed as a modular monolith with hexagonal architecture and DDD principles. Implements JWT security, strict module boundaries with Spring Modulith, and automatic architecture validation with ArchUnit.',
-          tags: ['spring'],
-          techs: ['Spring Boot', 'Java', 'Spring Modulith', 'PostgreSQL', 'Docker', 'JWT'],
-          images: ['assets/projects/api.webp'],
-          repoUrl: 'https://github.com/Jlp94/spring-api-kreitefy',
-        },
-        {
-          id: 'my-training-api',
-          title: 'My Training API',
-          description:
-            'REST API for managing training routines, diets, cardio and users for the My Training app. Includes JWT authentication, exercise library and nutrition plan management (developed with Mongoose, Passport JWT, and class-validator).',
-          tags: ['nest'],
-          techs: ['NestJS', 'MongoDB', 'JWT', 'Docker', 'TypeScript'],
-          images: [
-            'assets/projects/api.webp',
-            'assets/projects/my-training-api/image21.png',
-          ],
-          repoUrl: 'https://github.com/Jlp94/api-my-training',
         },
         {
           id: 'my-training-admin',
@@ -500,6 +516,85 @@ export const TRANSLATIONS = {
             'assets/projects/my-training-admin/image20.png',
           ],
           repoUrl: 'https://github.com/Jlp94/admin-my-training',
+        },
+        {
+          id: 'my-training-api',
+          title: 'My Training API',
+          description:
+            'REST API for managing training routines, diets, cardio and users for the My Training app. Includes JWT authentication, exercise library and nutrition plan management (developed with Mongoose, Passport JWT, and class-validator).',
+          tags: ['nest'],
+          techs: ['NestJS', 'MongoDB', 'JWT', 'Docker', 'TypeScript'],
+          images: ['assets/projects/api.webp', 'assets/projects/my-training-api/image21.png'],
+          repoUrl: 'https://github.com/Jlp94/api-my-training',
+        },
+
+        {
+          id: 'proyecto-ci4',
+          title: 'Proyecto CI4 - Vehicle Rental',
+          description:
+            'Web application for vehicle rentals built with CodeIgniter 4 following the MVC pattern. It features a client portal for registration and booking reservations, and a comprehensive admin panel for fleet management, booking tracking, and user control.',
+          tags: ['php'],
+          techs: ['CodeIgniter', 'PHP', 'Bootstrap', 'HTML5', 'MySQL'],
+          images: [
+            'assets/projects/project-ci4/admin-home.PNG',
+            'assets/projects/project-ci4/client-home.PNG',
+            'assets/projects/project-ci4/admin-tabla.PNG',
+            'assets/projects/project-ci4/admin-control-users.PNG',
+            'assets/projects/project-ci4/client-filters.PNG',
+            'assets/projects/project-ci4/admin-tabla-edit.PNG',
+            'assets/projects/project-ci4/client-edit.PNG',
+          ],
+          repoUrl: 'https://github.com/Jlp94/Proyecto_CI4.git',
+        },
+        {
+          id: 'kreitefy-web',
+          title: 'Kreitefy - Web Client',
+          description:
+            'Web client for the Kreitefy music streaming platform, built with Angular 19 and Bootstrap 5. Includes a song player, user management and an admin panel with editable tables. JWT authentication with a dual-token strategy: an in-memory access token (never persisted to localStorage, to mitigate XSS-based theft) and a refresh token in an httpOnly cookie with automatic session renewal.',
+          tags: ['angular'],
+          techs: ['Angular', 'TypeScript', 'Bootstrap', 'SCSS', 'HTML5', 'JWT'],
+          images: [
+            'assets/projects/kreitefy-web/kreitefy-home.PNG',
+            'assets/projects/kreitefy-web/kreitefy-home-user.PNG',
+            'assets/projects/kreitefy-web/kreitefy-repro.PNG',
+            'assets/projects/kreitefy-web/kreitefy-allSongs.PNG',
+            'assets/projects/kreitefy-web/kreitefy-table.PNG',
+            'assets/projects/kreitefy-web/kreitefy-edit-table.PNG',
+            'assets/projects/kreitefy-web/kreitefy-panel-admin.PNG',
+            'assets/projects/kreitefy-web/kreitefy-edit-user.PNG',
+            'assets/projects/kreitefy-web/kreitefy-register.PNG',
+          ],
+          // repoUrl: 'https://github.com/Jlp94/kreitefy-web'
+        },
+        {
+          id: 'kreitefy-api',
+          title: 'Kreitefy API',
+          description:
+            'REST API for a music streaming platform designed as a modular monolith with hexagonal architecture and DDD principles (domain modeled with immutable Java Records). Module boundaries automatically verified with Spring Modulith and 7 architecture rules enforced as ArchUnit tests. Optimistic concurrency control with @Version (HTTP 409 on conflicts) and dynamic queries with QueryDSL optimized via fetchJoin() to avoid the N+1 problem. Stateless JWT authentication (access token + rotating refresh token in an httpOnly cookie) and federated login via OAuth2 (Google, GitHub). Full testing pyramid: unit, integration and E2E.',
+          tags: ['spring'],
+          techs: ['Spring Boot', 'Java', 'Spring Modulith', 'PostgreSQL', 'Docker', 'JWT'],
+          images: ['assets/projects/api.webp', 'assets/projects/kreitefy-api/bd-kreitefy.png'],
+          repoUrl: 'https://github.com/Jlp94/spring-api-kreitefy',
+        },
+        {
+          id: 'my-training-api-spring',
+          title: 'In Development - My Training API (Spring Boot)',
+          description:
+            'Full migration of the My Training API (currently NestJS with MongoDB) to Spring Boot, applying the same hexagonal architecture, DDD and modular monolith with Spring Modulith used in Kreitefy API, alongside a data model migration from MongoDB to a relational database.',
+          tags: ['spring'],
+          techs: ['Spring Boot', 'Java', 'Spring Modulith', 'PostgreSQL', 'Docker', 'JWT'],
+          images: ['assets/projects/api.webp'],
+          // repoUrl: null,
+        },
+        {
+          id: 'kreitefy-microservices',
+          title: 'In Development - Kreitefy API Microservices',
+          description:
+            'Splitting the Kreitefy API modular monolith into independent microservices, communicating asynchronously via Apache Kafka as an event bus.',
+          tags: ['spring'],
+          techs: ['Spring Boot', 'Java', 'Spring Modulith', 'PostgreSQL', 'Docker', 'JWT', 'Kafka'],
+          images: ['assets/projects/api.webp'],
+          //repoUrl: null,
         },
       ],
     },

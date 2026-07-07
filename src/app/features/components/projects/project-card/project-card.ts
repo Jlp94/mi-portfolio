@@ -1,6 +1,6 @@
 import { Component, input, output, computed, signal, inject } from '@angular/core';
 import { ProjectItem, CardLayout, TECH_KEY_MAP } from '../model/project.model';
-import { TechIcon } from '../../stack/tech-icon';
+import { TechIcon } from '../../../../shared/ui/tech-icon/tech-icon';
 import { ThemeService } from '../../../../core/services/theme.service';
 
 @Component({

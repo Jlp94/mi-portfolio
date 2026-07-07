@@ -4,14 +4,45 @@ import { Component, input } from '@angular/core';
   selector: 'app-code-tag',
   template: `
     @if (isClose()) {
-      <span class="code-bracket">&lt;/</span><span class="code-tag">{{ tag() }}</span><span class="code-bracket">&gt;</span>
+      <span class="code-bracket">&lt;/</span><span class="code-tag">{{ tag() }}</span
+      ><span class="code-bracket">&gt;</span>
     } @else {
-      <span class="code-bracket">&lt;</span><span class="code-tag">{{ tag() }}</span>@if (attrName()) {<span class="code-attr"> {{ attrName() }}=</span><span class="code-val">"{{ attrVal() }}"</span>}@if (classVal()) {<span class="code-attr"> class=</span><span class="code-val">"{{ classVal() }}"</span>}<span class="code-bracket">&gt;</span>
+      <span class="code-bracket">&lt;</span><span class="code-tag">{{ tag() }}</span>
+      @if (attrName()) {
+        <span class="code-attr"> {{ attrName() }}=</span
+        ><span class="code-val">"{{ attrVal() }}"</span>
+      }
+      @if (classVal()) {
+        <span class="code-attr"> class=</span><span class="code-val">"{{ classVal() }}"</span>
+      }
+      @if (selfClose()) {
+        <span class="code-bracket">/&gt;</span>
+      } @else {
+        <span class="code-bracket">&gt;</span>
+      }
+    }
+  `,
+  styles: `
+    :host {
+      display: inline;
+    }
+    .code-bracket {
+      color: var(--theme-code-bracket, #6b7280);
+    }
+    .code-tag {
+      color: var(--theme-code-tag, var(--theme-accent-deep));
+      font-weight: 600;
+    }
+    .code-attr {
+      color: var(--theme-code-attr, #a78bfa);
+    }
+    .code-val {
+      color: var(--theme-code-val, #34d399);
     }
   `,
   host: {
-    '[style.display]': '"inline"'
-  }
+    '[style.display]': '"inline"',
+  },
 })
 export class CodeTag {
   tag = input.required<string>();
@@ -19,4 +50,5 @@ export class CodeTag {
   attrName = input<string>('');
   attrVal = input<string>('');
   classVal = input<string>('');
+  selfClose = input<boolean>(false);
 }

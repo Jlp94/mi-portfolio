@@ -30,6 +30,13 @@
   transition: background-color 0.5s ease;
 }
 
+.availability-code {
+  --theme-code-bracket: var(--color-violet-900);
+  --theme-code-tag: var(--name-jose);
+  --theme-code-attr: var(--hero-role);
+  --theme-code-val: var(--hero-role);
+}
+
 .hero-subtitle {
   color: var(--hero-subtitle);
   opacity: 0.7;
