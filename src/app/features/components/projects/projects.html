@@ -14,7 +14,8 @@
       class="breadcrumb-item px-2 py-1 bg-transparent border-none font-sans text-sm font-semibold cursor-pointer leading-none transition-all duration-200"
       [class.breadcrumb-item--active]="activeFilter() === key" (click)="setFilter(key)"
       [attr.aria-pressed]="activeFilter() === key">
-      {{ getFilterLabel(key) }}<sup class="text-[0.5rem] font-bold ml-[0.1rem] opacity-80">{{ projectCount()[key]
+      {{ getFilterLabel(key) }}<sup class="text-[0.65rem] font-bold ml-[0.2rem] opacity-80 relative -top-[6px]">{{
+        projectCount()[key]
         }}</sup>
     </button>
     @if (!last) {
@@ -25,8 +26,8 @@
 
   <div class="projects-grid">
     @for (project of filteredProjects(); track trackById($index, project); let i = $index) {
-    <app-project-card [project]="project" [layout]="projectLayouts()[project.id]"
-      [viewLabel]="t().viewProject" (cardOpen)="openModal($event)" />
+    <app-project-card [project]="project" [layout]="projectLayouts()[project.id]" [viewLabel]="t().viewProject"
+      (cardOpen)="openModal($event)" />
     }
   </div>
 
