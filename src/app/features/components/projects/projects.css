@@ -55,6 +55,7 @@
 }
 
 .projects-grid {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.5rem;
@@ -97,4 +98,8 @@
 [appFillHover] > :not(.fill-hover-bg) {
   position: relative;
   z-index: 1;
+}
+
+::ng-deep app-project-card.is-hidden .project-card {
+  display: none;
 }

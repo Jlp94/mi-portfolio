@@ -25,9 +25,10 @@
   </nav>
 
   <div class="projects-grid">
-    @for (project of filteredProjects(); track trackById($index, project); let i = $index) {
+    @for (project of orderedProjects(); track project.id) {
     <app-project-card [project]="project" [layout]="projectLayouts()[project.id]" [viewLabel]="t().viewProject"
-      (cardOpen)="openModal($event)" />
+      (cardOpen)="openModal($event)" [class.is-hidden]="!isProjectActive(project)"
+      [attr.data-tags]="project.tags.join(',')" />
     }
   </div>
 

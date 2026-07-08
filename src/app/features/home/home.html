@@ -8,20 +8,20 @@
     <app-hero class="w-full h-full relative z-10" />
   </section>
 
-  <section id="about-me" class="w-full min-h-screen">
+  <section id="about-me" class="w-full relative pt-10 pb-0">
     @defer (on idle; on viewport) {
       <app-about-stack class="w-full" />
     } @placeholder {
-      <div class="w-full min-h-screen bg-transparent"></div>
+      <div class="w-full h-[500px] bg-transparent"></div>
     }
   </section>
 
 
-  <section id="projects" class="w-full min-h-screen flex items-center justify-center relative pt-10">
+  <section id="projects" class="w-full relative pt-0 pb-10">
     @defer (on idle; on viewport) {
       <app-projects class="w-full" />
     } @placeholder {
-      <div class="w-full min-h-screen bg-transparent"></div>
+      <div class="w-full h-[500px] bg-transparent"></div>
     }
   </section>
 

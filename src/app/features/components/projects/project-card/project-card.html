@@ -1,7 +1,8 @@
 <article class="project-card" [class.project-card--large]="layout()?.gridColumn === 'span 2 / span 2'"
   [class.project-card--hovered]="isHovered()" (mouseenter)="isHovered.set(true)" (mouseleave)="isHovered.set(false)"
   (focus)="isHovered.set(true)" (blur)="isHovered.set(false)" (click)="onOpen()" role="button" tabindex="0"
-  (keydown.enter)="onOpen()" (keydown.space)="onOpen()" [attr.aria-label]="ariaLabel()">
+  (keydown.enter)="onOpen()" (keydown.space)="onOpen()" [attr.aria-label]="ariaLabel()"
+  [attr.data-flip-id]="project().id">
 
   <div class="card-image-wrap" [style.background-color]="isApiProject() ? '#ffffff' : '#0f172a'">
     <img [src]="projectImage()" [alt]="project().title" class="card-image"

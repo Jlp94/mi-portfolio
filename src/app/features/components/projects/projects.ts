@@ -1,4 +1,4 @@
-import { Component, inject, computed, signal, ElementRef, afterNextRender } from '@angular/core';
+import { Component, inject, computed, signal, ElementRef, afterNextRender, ChangeDetectorRef } from '@angular/core';
 import { LanguageService } from '../../../core/services/language.service';
 import { ImagePreloadService } from '../../../core/services/image-preload.service';
 import { ProjectCard } from './project-card/project-card';
@@ -6,8 +6,9 @@ import { ProjectModal } from './project-modal/project-modal';
 import { ProjectItem, CardLayout, FilterKey } from './model/project.model';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Flip } from 'gsap/Flip';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, Flip);
 
 @Component({
   selector: 'app-projects',
@@ -20,6 +21,7 @@ export class Projects {
   protected readonly t = computed(() => this.languageService.translations().projects);
   private readonly elementRef = inject(ElementRef);
   private readonly imagePreload = inject(ImagePreloadService);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   protected readonly activeFilter = signal<FilterKey>('all');
   protected readonly activeModal = signal<ProjectItem | null>(null);
@@ -44,11 +46,31 @@ export class Projects {
     return filtered;
   });
 
+  protected readonly orderedProjects = computed(() => {
+    const filter = this.activeFilter();
+    const items = this.t().items as unknown as ProjectItem[];
+
+    if (filter === 'all') {
+      return this.filteredProjects();
+    }
+
+    const active = this.filteredProjects();
+    const activeIds = new Set(active.map((p) => p.id));
+    const inactive = items.filter((p) => !activeIds.has(p.id));
+
+    return [...active, ...inactive];
+  });
+
+  protected isProjectActive(project: ProjectItem): boolean {
+    const filter = this.activeFilter();
+    return filter === 'all' || project.tags.includes(filter);
+  }
+
   protected readonly projectLayouts = computed(() => {
-    const projects = this.filteredProjects();
+    const items = this.t().items as unknown as ProjectItem[];
     const layouts: Record<string, CardLayout> = {};
 
-    for (const project of projects) {
+    for (const project of items) {
       if (project.id === 'my-training-app') {
         layouts[project.id] = { gridColumn: 'span 2 / span 2', gridRow: 'span 2 / span 2' };
       } else {
@@ -131,18 +153,23 @@ export class Projects {
 
       if (cards.length > 0) {
         gsap.set(cards, { opacity: 0, y: 100, filter: 'blur(6px)' });
-        ScrollTrigger.create({
+        const trigger = ScrollTrigger.create({
+          id: 'cards-trigger',
           trigger: host.querySelector('.projects-grid'),
           start: 'top 82%',
+          once: true,
           onEnter: () => {
             gsap.to(cards, {
               opacity: 1,
               y: 0,
               filter: 'blur(0px)',
-              clearProps: 'filter,transform',
+              clearProps: 'filter,transform,opacity',
               duration: 1.2,
               ease: 'power3.out',
               stagger: 0.25,
+              onComplete: () => {
+                trigger.kill();
+              }
             });
           },
         });
@@ -152,25 +179,67 @@ export class Projects {
 
   protected setFilter(key: FilterKey): void {
     if (this.activeFilter() === key) return;
+
+    const host = this.elementRef.nativeElement as HTMLElement;
+    const container = host.querySelector('.projects-grid') as HTMLElement;
+
+    if (!container) return;
+
+    // Kill any active scroll entrance tweens on the cards
+    const cards = host.querySelectorAll('.project-card');
+    gsap.killTweensOf(cards);
+
+    // Kill ScrollTrigger if it exists and reset cards to visible
+    const activeTrigger = ScrollTrigger.getById('cards-trigger');
+    if (activeTrigger) {
+      activeTrigger.kill();
+      gsap.set(cards, { clearProps: 'opacity,transform,filter' });
+    }
+
+    // 1. Capture container height before updating DOM
+    const startHeight = container.offsetHeight;
+
+    // 2. Lock container height and apply overflow hidden to prevent collapse/jump
+    container.style.height = `${startHeight}px`;
+    container.style.overflow = 'hidden';
+
+    // 3. Capture state of currently visible cards before the filter change
+    const visibleCardsBefore = host.querySelectorAll('app-project-card:not(.is-hidden) .project-card');
+    const state = Flip.getState(visibleCardsBefore);
+
+    // 4. Update active filter signal
     this.activeFilter.set(key);
 
-    setTimeout(() => {
-      const host = this.elementRef.nativeElement as HTMLElement;
-      const cards = host.querySelectorAll('.project-card');
-      gsap.fromTo(
-        cards,
-        { opacity: 0, y: 100, filter: 'blur(6px)' },
-        {
-          opacity: 1,
-          y: 0,
-          filter: 'blur(0px)',
-          clearProps: 'filter,transform',
-          duration: 1.2,
-          ease: 'power3.out',
-          stagger: 0.25,
-        },
-      );
-    }, 0);
+    // 5. Force Angular to synchronously update the DOM
+    this.cdr.detectChanges();
+
+    // 6. Query cards that are visible after the DOM update
+    const visibleCardsAfter = host.querySelectorAll('app-project-card:not(.is-hidden) .project-card');
+
+    // 7. Measure new auto height of container and lock it back to startHeight
+    container.style.height = 'auto';
+    const endHeight = container.offsetHeight;
+    container.style.height = `${startHeight}px`;
+
+    // 8. Smoothly animate container height
+    gsap.killTweensOf(container);
+    gsap.fromTo(container,
+      { height: startHeight },
+      {
+        height: endHeight,
+        duration: 0.6,
+        ease: 'power2.inOut',
+        clearProps: 'height,overflow'
+      }
+    );
+
+    // 9. Run Flip layout transition with absolute positioning (Step 2)
+    Flip.from(state, {
+      targets: visibleCardsAfter,
+      duration: 0.6,
+      ease: 'power2.inOut',
+      absolute: true,
+    });
   }
 
   protected openModal(project: ProjectItem): void {
