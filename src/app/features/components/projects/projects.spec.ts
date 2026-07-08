@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { vi } from 'vitest';
 import { Projects } from './projects';
+import { ImagePreloadService } from '../../../core/services/image-preload.service';
 
 describe('Projects', () => {
   let component: Projects;
@@ -25,7 +26,7 @@ describe('Projects', () => {
     fixture.detectChanges();
     
     const projects = component['filteredProjects']();
-    const myTrainingAppIndex = projects.findIndex((p: any) => p.id === 'my-training-app');
+    const myTrainingAppIndex = projects.findIndex((p) => p.id === 'my-training-app');
     
     expect(myTrainingAppIndex).toBe(4);
   });
@@ -45,5 +46,14 @@ describe('Projects', () => {
       gridColumn: 'span 1 / span 1',
       gridRow: 'span 1 / span 1'
     });
+  });
+
+  it('should call enqueue on ImagePreloadService with all project images', () => {
+    const preloadService = TestBed.inject(ImagePreloadService);
+    const enqueueSpy = vi.spyOn(preloadService, 'enqueue');
+
+    component['preloadProjectImages']();
+
+    expect(enqueueSpy).toHaveBeenCalledWith(expect.any(Array), 'low');
   });
 });
