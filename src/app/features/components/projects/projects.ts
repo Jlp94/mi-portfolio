@@ -1,4 +1,4 @@
-import { Component, inject, computed, signal, ElementRef, afterNextRender } from '@angular/core';
+import { Component, inject, computed, signal, ElementRef, afterNextRender, ChangeDetectorRef } from '@angular/core';
 import { LanguageService } from '../../../core/services/language.service';
 import { ImagePreloadService } from '../../../core/services/image-preload.service';
 import { ProjectCard } from './project-card/project-card';
@@ -6,8 +6,9 @@ import { ProjectModal } from './project-modal/project-modal';
 import { ProjectItem, CardLayout, FilterKey } from './model/project.model';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Flip } from 'gsap/Flip';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, Flip);
 
 @Component({
   selector: 'app-projects',
@@ -20,6 +21,7 @@ export class Projects {
   protected readonly t = computed(() => this.languageService.translations().projects);
   private readonly elementRef = inject(ElementRef);
   private readonly imagePreload = inject(ImagePreloadService);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   protected readonly activeFilter = signal<FilterKey>('all');
   protected readonly activeModal = signal<ProjectItem | null>(null);
@@ -44,11 +46,33 @@ export class Projects {
     return filtered;
   });
 
+  protected readonly orderedProjects = computed(() => {
+    const items = this.t().items as unknown as ProjectItem[];
+
+    // Always return all items in the same fixed order.
+    // Reordering based on activeFilter caused Angular to physically move DOM nodes,
+    // producing a visual flicker. Visibility is controlled by the is-hidden class instead.
+    const clientIdx = items.findIndex((p) => p.id === 'my-training-app');
+    if (clientIdx !== -1 && items.length > 4) {
+      const result = [...items];
+      const [clientProject] = result.splice(clientIdx, 1);
+      result.splice(4, 0, clientProject);
+      return result;
+    }
+
+    return items;
+  });
+
+  protected isProjectActive(project: ProjectItem): boolean {
+    const filter = this.activeFilter();
+    return filter === 'all' || project.tags.includes(filter);
+  }
+
   protected readonly projectLayouts = computed(() => {
-    const projects = this.filteredProjects();
+    const items = this.t().items as unknown as ProjectItem[];
     const layouts: Record<string, CardLayout> = {};
 
-    for (const project of projects) {
+    for (const project of items) {
       if (project.id === 'my-training-app') {
         layouts[project.id] = { gridColumn: 'span 2 / span 2', gridRow: 'span 2 / span 2' };
       } else {
@@ -131,18 +155,23 @@ export class Projects {
 
       if (cards.length > 0) {
         gsap.set(cards, { opacity: 0, y: 100, filter: 'blur(6px)' });
-        ScrollTrigger.create({
+        const trigger = ScrollTrigger.create({
+          id: 'cards-trigger',
           trigger: host.querySelector('.projects-grid'),
           start: 'top 82%',
+          once: true,
           onEnter: () => {
             gsap.to(cards, {
               opacity: 1,
               y: 0,
               filter: 'blur(0px)',
-              clearProps: 'filter,transform',
+              clearProps: 'filter,transform,opacity',
               duration: 1.2,
               ease: 'power3.out',
               stagger: 0.25,
+              onComplete: () => {
+                trigger.kill();
+              }
             });
           },
         });
@@ -152,25 +181,126 @@ export class Projects {
 
   protected setFilter(key: FilterKey): void {
     if (this.activeFilter() === key) return;
-    this.activeFilter.set(key);
 
-    setTimeout(() => {
-      const host = this.elementRef.nativeElement as HTMLElement;
-      const cards = host.querySelectorAll('.project-card');
-      gsap.fromTo(
-        cards,
-        { opacity: 0, y: 100, filter: 'blur(6px)' },
-        {
-          opacity: 1,
-          y: 0,
-          filter: 'blur(0px)',
-          clearProps: 'filter,transform',
-          duration: 1.2,
-          ease: 'power3.out',
-          stagger: 0.25,
+    const host = this.elementRef.nativeElement as HTMLElement;
+    const container = host.querySelector('.projects-grid') as HTMLElement;
+
+    if (!container) return;
+
+    // Kill any active scroll entrance tweens on the cards
+    const cards = host.querySelectorAll('.project-card');
+    gsap.killTweensOf(cards);
+
+    // Kill ScrollTrigger if it exists and reset cards to visible
+    const activeTrigger = ScrollTrigger.getById('cards-trigger');
+    if (activeTrigger) {
+      activeTrigger.kill();
+      gsap.set(cards, { clearProps: 'opacity,transform,filter' });
+    }
+
+    const isMobile = window.innerWidth < 768;
+
+    if (isMobile) {
+      // Mobile: instant change, no animations
+      this.activeFilter.set(key);
+      this.cdr.detectChanges();
+      ScrollTrigger.refresh();
+      return;
+    }
+
+    // Desktop: full two-phase transition with shrink/grow and height animation
+    const currentCards = Array.from(
+      host.querySelectorAll('app-project-card:not(.is-hidden) .project-card')
+    ) as HTMLElement[];
+
+    const leavingCards: HTMLElement[] = [];
+    const remainingCards: HTMLElement[] = [];
+
+    currentCards.forEach((card) => {
+      const hostCard = card.closest('app-project-card') as HTMLElement;
+      if (hostCard) {
+        const tags = hostCard.getAttribute('data-tags')?.split(',') ?? [];
+        if (key === 'all' || tags.includes(key)) {
+          remainingCards.push(card);
+        } else {
+          leavingCards.push(card);
+        }
+      }
+    });
+
+    if (leavingCards.length > 0) {
+      gsap.to(leavingCards, {
+        scale: 0,
+        opacity: 0,
+        duration: 0.3,
+        ease: 'power2.in',
+        onComplete: () => {
+          this.runTransitionPhase2(key, host, container, remainingCards, leavingCards);
         },
-      );
-    }, 0);
+      });
+    } else {
+      this.runTransitionPhase2(key, host, container, remainingCards);
+    }
+  }
+
+  private runTransitionPhase2(
+    key: FilterKey,
+    host: HTMLElement,
+    container: HTMLElement,
+    remainingCards: HTMLElement[],
+    leavingCards?: HTMLElement[]
+  ): void {
+    const startHeight = container.offsetHeight;
+
+    container.style.height = `${startHeight}px`;
+    container.style.overflow = 'hidden';
+
+    const state = Flip.getState(remainingCards);
+
+    this.activeFilter.set(key);
+    this.cdr.detectChanges();
+
+    if (leavingCards && leavingCards.length > 0) {
+      gsap.set(leavingCards, { clearProps: 'transform,opacity' });
+    }
+
+    const visibleCardsAfter = host.querySelectorAll('app-project-card:not(.is-hidden) .project-card');
+
+    container.style.height = 'auto';
+    const endHeight = container.offsetHeight;
+    container.style.height = `${startHeight}px`;
+
+    gsap.killTweensOf(container);
+    gsap.fromTo(container,
+      { height: startHeight },
+      {
+        height: endHeight,
+        duration: 0.5,
+        ease: 'power2.inOut',
+        onComplete: () => {
+          container.style.height = '';
+          container.style.overflow = '';
+          ScrollTrigger.refresh();
+        }
+      }
+    );
+
+    Flip.from(state, {
+      targets: visibleCardsAfter,
+      duration: 0.5,
+      ease: 'power2.inOut',
+      absolute: true,
+      nested: true,
+      onEnter: (elements) => gsap.fromTo(elements,
+        { scale: 0, opacity: 0 },
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 0.4,
+          ease: 'power2.out',
+        }
+      ),
+    });
   }
 
   protected openModal(project: ProjectItem): void {
