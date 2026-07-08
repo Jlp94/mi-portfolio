@@ -1,5 +1,6 @@
 import { Component, inject, computed, signal, ElementRef, afterNextRender } from '@angular/core';
 import { LanguageService } from '../../../core/services/language.service';
+import { ImagePreloadService } from '../../../core/services/image-preload.service';
 import { ProjectCard } from './project-card/project-card';
 import { ProjectModal } from './project-modal/project-modal';
 import { ProjectItem, CardLayout, FilterKey } from './model/project.model';
@@ -18,6 +19,7 @@ export class Projects {
   protected readonly languageService = inject(LanguageService);
   protected readonly t = computed(() => this.languageService.translations().projects);
   private readonly elementRef = inject(ElementRef);
+  private readonly imagePreload = inject(ImagePreloadService);
 
   protected readonly activeFilter = signal<FilterKey>('all');
   protected readonly activeModal = signal<ProjectItem | null>(null);
@@ -68,6 +70,13 @@ export class Projects {
 
   constructor() {
     afterNextRender(() => {
+      if (typeof window !== 'undefined') {
+        if (typeof requestIdleCallback !== 'undefined') {
+          requestIdleCallback(() => this.preloadProjectImages(), { timeout: 2000 });
+        } else {
+          setTimeout(() => this.preloadProjectImages(), 1000);
+        }
+      }
 
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReducedMotion) return;
@@ -180,5 +189,17 @@ export class Projects {
 
   protected trackById(_: number, item: ProjectItem): string {
     return item.id;
+  }
+
+  private preloadProjectImages(): void {
+    const items = this.t().items as unknown as ProjectItem[];
+    if (!items) return;
+
+    const urls = items.flatMap((p) => [
+      ...(p.cardImage ? [p.cardImage] : []),
+      ...(p.images ?? []),
+    ]);
+
+    this.imagePreload.enqueue(urls, 'low');
   }
 }

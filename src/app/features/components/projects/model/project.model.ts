@@ -44,4 +44,5 @@ export const TECH_KEY_MAP: Record<string, string | null> = {
   Vitest: 'vitest',
   GSAP: null,
   Swagger: 'swagger',
+  Kafka: 'kafka',
 };
