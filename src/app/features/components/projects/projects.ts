@@ -47,18 +47,20 @@ export class Projects {
   });
 
   protected readonly orderedProjects = computed(() => {
-    const filter = this.activeFilter();
     const items = this.t().items as unknown as ProjectItem[];
 
-    if (filter === 'all') {
-      return this.filteredProjects();
+    // Always return all items in the same fixed order.
+    // Reordering based on activeFilter caused Angular to physically move DOM nodes,
+    // producing a visual flicker. Visibility is controlled by the is-hidden class instead.
+    const clientIdx = items.findIndex((p) => p.id === 'my-training-app');
+    if (clientIdx !== -1 && items.length > 4) {
+      const result = [...items];
+      const [clientProject] = result.splice(clientIdx, 1);
+      result.splice(4, 0, clientProject);
+      return result;
     }
 
-    const active = this.filteredProjects();
-    const activeIds = new Set(active.map((p) => p.id));
-    const inactive = items.filter((p) => !activeIds.has(p.id));
-
-    return [...active, ...inactive];
+    return items;
   });
 
   protected isProjectActive(project: ProjectItem): boolean {
@@ -196,6 +198,52 @@ export class Projects {
       gsap.set(cards, { clearProps: 'opacity,transform,filter' });
     }
 
+    // Get currently visible card elements before the filter change
+    const currentCards = Array.from(
+      host.querySelectorAll('app-project-card:not(.is-hidden) .project-card')
+    ) as HTMLElement[];
+
+    const leavingCards: HTMLElement[] = [];
+    const remainingCards: HTMLElement[] = [];
+
+    // Classify which cards are leaving and which ones are remaining
+    currentCards.forEach((card) => {
+      const hostCard = card.closest('app-project-card') as HTMLElement;
+      if (hostCard) {
+        const tags = hostCard.getAttribute('data-tags')?.split(',') ?? [];
+        if (key === 'all' || tags.includes(key)) {
+          remainingCards.push(card);
+        } else {
+          leavingCards.push(card);
+        }
+      }
+    });
+
+    if (leavingCards.length > 0) {
+      // Phase 1: Animate leaving cards out (shrink and fade)
+      gsap.to(leavingCards, {
+        scale: 0,
+        opacity: 0,
+        duration: 0.3,
+        ease: 'power2.in',
+        onComplete: () => {
+          // Defer style clearing to Phase 2 after the DOM updates
+          this.runTransitionPhase2(key, host, container, remainingCards, leavingCards);
+        },
+      });
+    } else {
+      // No cards leaving, transition directly to Phase 2
+      this.runTransitionPhase2(key, host, container, remainingCards);
+    }
+  }
+
+  private runTransitionPhase2(
+    key: FilterKey,
+    host: HTMLElement,
+    container: HTMLElement,
+    remainingCards: HTMLElement[],
+    leavingCards?: HTMLElement[]
+  ): void {
     // 1. Capture container height before updating DOM
     const startHeight = container.offsetHeight;
 
@@ -203,15 +251,19 @@ export class Projects {
     container.style.height = `${startHeight}px`;
     container.style.overflow = 'hidden';
 
-    // 3. Capture state of currently visible cards before the filter change
-    const visibleCardsBefore = host.querySelectorAll('app-project-card:not(.is-hidden) .project-card');
-    const state = Flip.getState(visibleCardsBefore);
+    // 3. Capture layout state of remaining cards before they glide
+    const state = Flip.getState(remainingCards);
 
     // 4. Update active filter signal
     this.activeFilter.set(key);
 
     // 5. Force Angular to synchronously update the DOM
     this.cdr.detectChanges();
+
+    // 5.5. Clear leaving cards' inline styles now that they are hidden by CSS
+    if (leavingCards && leavingCards.length > 0) {
+      gsap.set(leavingCards, { clearProps: 'transform,opacity' });
+    }
 
     // 6. Query cards that are visible after the DOM update
     const visibleCardsAfter = host.querySelectorAll('app-project-card:not(.is-hidden) .project-card');
@@ -227,18 +279,32 @@ export class Projects {
       { height: startHeight },
       {
         height: endHeight,
-        duration: 0.6,
+        duration: 0.5,
         ease: 'power2.inOut',
-        clearProps: 'height,overflow'
+        onComplete: () => {
+          container.style.height = '';
+          container.style.overflow = '';
+          ScrollTrigger.refresh();
+        }
       }
     );
 
-    // 9. Run Flip layout transition with absolute positioning (Step 2)
+    // 9. Run Flip layout transition with absolute positioning and grow entering cards
     Flip.from(state, {
       targets: visibleCardsAfter,
-      duration: 0.6,
+      duration: 0.5,
       ease: 'power2.inOut',
       absolute: true,
+      nested: true,
+      onEnter: (elements) => gsap.fromTo(elements,
+        { scale: 0, opacity: 0 },
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 0.4,
+          ease: 'power2.out',
+        }
+      ),
     });
   }
 
