@@ -198,7 +198,17 @@ export class Projects {
       gsap.set(cards, { clearProps: 'opacity,transform,filter' });
     }
 
-    // Get currently visible card elements before the filter change
+    const isMobile = window.innerWidth < 768;
+
+    if (isMobile) {
+      // Mobile: instant change, no animations
+      this.activeFilter.set(key);
+      this.cdr.detectChanges();
+      ScrollTrigger.refresh();
+      return;
+    }
+
+    // Desktop: full two-phase transition with shrink/grow and height animation
     const currentCards = Array.from(
       host.querySelectorAll('app-project-card:not(.is-hidden) .project-card')
     ) as HTMLElement[];
@@ -206,7 +216,6 @@ export class Projects {
     const leavingCards: HTMLElement[] = [];
     const remainingCards: HTMLElement[] = [];
 
-    // Classify which cards are leaving and which ones are remaining
     currentCards.forEach((card) => {
       const hostCard = card.closest('app-project-card') as HTMLElement;
       if (hostCard) {
@@ -220,19 +229,16 @@ export class Projects {
     });
 
     if (leavingCards.length > 0) {
-      // Phase 1: Animate leaving cards out (shrink and fade)
       gsap.to(leavingCards, {
         scale: 0,
         opacity: 0,
         duration: 0.3,
         ease: 'power2.in',
         onComplete: () => {
-          // Defer style clearing to Phase 2 after the DOM updates
           this.runTransitionPhase2(key, host, container, remainingCards, leavingCards);
         },
       });
     } else {
-      // No cards leaving, transition directly to Phase 2
       this.runTransitionPhase2(key, host, container, remainingCards);
     }
   }
@@ -244,36 +250,26 @@ export class Projects {
     remainingCards: HTMLElement[],
     leavingCards?: HTMLElement[]
   ): void {
-    // 1. Capture container height before updating DOM
     const startHeight = container.offsetHeight;
 
-    // 2. Lock container height and apply overflow hidden to prevent collapse/jump
     container.style.height = `${startHeight}px`;
     container.style.overflow = 'hidden';
 
-    // 3. Capture layout state of remaining cards before they glide
     const state = Flip.getState(remainingCards);
 
-    // 4. Update active filter signal
     this.activeFilter.set(key);
-
-    // 5. Force Angular to synchronously update the DOM
     this.cdr.detectChanges();
 
-    // 5.5. Clear leaving cards' inline styles now that they are hidden by CSS
     if (leavingCards && leavingCards.length > 0) {
       gsap.set(leavingCards, { clearProps: 'transform,opacity' });
     }
 
-    // 6. Query cards that are visible after the DOM update
     const visibleCardsAfter = host.querySelectorAll('app-project-card:not(.is-hidden) .project-card');
 
-    // 7. Measure new auto height of container and lock it back to startHeight
     container.style.height = 'auto';
     const endHeight = container.offsetHeight;
     container.style.height = `${startHeight}px`;
 
-    // 8. Smoothly animate container height
     gsap.killTweensOf(container);
     gsap.fromTo(container,
       { height: startHeight },
@@ -289,7 +285,6 @@ export class Projects {
       }
     );
 
-    // 9. Run Flip layout transition with absolute positioning and grow entering cards
     Flip.from(state, {
       targets: visibleCardsAfter,
       duration: 0.5,

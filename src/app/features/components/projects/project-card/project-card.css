@@ -16,8 +16,6 @@
   cursor: pointer;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  /* transition: */
-  /* box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1); */
 }
 
 .card-image-wrap {
