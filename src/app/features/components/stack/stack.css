@@ -489,3 +489,12 @@
   transform: rotate(90deg);
 }
 
+.split-char {
+  display: inline-block;
+}
+
+.split-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+

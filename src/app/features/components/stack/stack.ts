@@ -1,4 +1,4 @@
-import { Component, inject, computed, ElementRef, signal, ChangeDetectorRef } from '@angular/core';
+import { Component, inject, computed, ElementRef, signal, ChangeDetectorRef, afterNextRender } from '@angular/core';
 import { LanguageService } from '../../../core/services/language.service';
 import { TechIcon } from '../../../shared/ui/tech-icon/tech-icon';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
@@ -7,11 +7,13 @@ import gsap from 'gsap';
 import { Flip } from 'gsap/Flip';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+import { StackModal } from './stack-modal/stack-modal';
+
 gsap.registerPlugin(Flip, ScrollTrigger);
 
 @Component({
   selector: 'app-stack',
-  imports: [TechIcon, FaIconComponent],
+  imports: [TechIcon, FaIconComponent, StackModal],
   templateUrl: './stack.html',
   styleUrl: './stack.css',
 })
@@ -26,6 +28,7 @@ export class Stack {
   protected readonly faXmark = faXmark;
 
   protected readonly activeCategory = signal<string | null>(null);
+  protected readonly isMobile = signal(false);
   private activeTl: gsap.core.Timeline | null = null;
 
   private touchStartX = 0;
@@ -68,6 +71,21 @@ export class Stack {
     },
   ];
 
+  constructor() {
+    afterNextRender(() => {
+      if (typeof window !== 'undefined') {
+        this.updateIsMobile();
+        window.addEventListener('resize', () => this.updateIsMobile());
+      }
+    });
+  }
+
+  private updateIsMobile(): void {
+    if (typeof window !== 'undefined') {
+      this.isMobile.set(window.innerWidth < 768);
+    }
+  }
+
   protected getCategoryTitle(key: string): string {
     const translations = this.t();
     if (key === 'frontend') return translations.frontend;
@@ -100,9 +118,9 @@ export class Stack {
         if (!word) return '';
         const chars = word
           .split('')
-          .map((char) => `<span class="split-char" style="display: inline-block;">${char}</span>`)
+          .map((char) => `<span class="split-char">${char}</span>`)
           .join('');
-        return `<span class="split-word" style="display: inline-block; white-space: nowrap;">${chars}</span>`;
+        return `<span class="split-word">${chars}</span>`;
       })
       .join(' ');
   }
@@ -184,6 +202,18 @@ export class Stack {
   }
 
   protected openCategory(catKey: string): void {
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+    }
+
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    if (isMobile) {
+      this.activeCategory.set(catKey);
+      this.cdr.detectChanges();
+      return;
+    }
+
     this.activeTl?.kill();
 
     const state = Flip.getState(`[data-flip-id="${catKey}"]`);
@@ -264,8 +294,21 @@ export class Stack {
   }
 
   protected closeCategory(onCompleteCallback?: () => void): void {
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    }
+
     const categoryKey = this.activeCategory();
     if (!categoryKey) {
+      if (onCompleteCallback) onCompleteCallback();
+      return;
+    }
+
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    if (isMobile) {
+      this.activeCategory.set(null);
+      this.cdr.detectChanges();
       if (onCompleteCallback) onCompleteCallback();
       return;
     }

@@ -37,63 +37,67 @@
 </div>
 
 @if (activeCategory(); as activeCat) {
-<div class="global-backdrop" (click)="onBackdropClick($event)" (keydown.escape)="closeCategory()" role="presentation">
-</div>
-<div class="details-overlay-container" (click)="onBackdropClick($event)" (keydown.escape)="closeCategory()"
-  role="presentation">
-  <div class="detail-panel" [attr.data-flip-id]="activeCat" role="document"
-    (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)">
-    <div class="detail-content-wrapper">
-      <div class="detail-icons-side">
-        <div class="icons-area icons-compact select-none">
-          @for (tech of getCategoryTechs(activeCat); track tech) {
-          <div class="tech-wrapper">
-            <div class="tech-content">
-              <div class="tech-symbol-btn tech-{{tech}}">
-                <app-tech-icon [key]="tech" customClass="w-8 h-8 md:w-9 md:h-9" />
+  @if (!isMobile()) {
+    <div class="global-backdrop" (click)="onBackdropClick($event)" (keydown.escape)="closeCategory()" role="presentation">
+    </div>
+    <div class="details-overlay-container" (click)="onBackdropClick($event)" (keydown.escape)="closeCategory()"
+      role="presentation">
+      <div class="detail-panel" [attr.data-flip-id]="activeCat" role="document"
+        (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)">
+        <div class="detail-content-wrapper">
+          <div class="detail-icons-side">
+            <div class="icons-area icons-compact select-none">
+              @for (tech of getCategoryTechs(activeCat); track tech) {
+              <div class="tech-wrapper">
+                <div class="tech-content">
+                  <div class="tech-symbol-btn tech-{{tech}}">
+                    <app-tech-icon [key]="tech" customClass="w-8 h-8 md:w-9 md:h-9" />
+                  </div>
+                </div>
+              </div>
+              }
+            </div>
+          </div>
+          <div class="detail-content-side">
+            <div class="text-drawer">
+              <div class="tech-details-card">
+                <p class="details-tech-desc main-desc" [innerHTML]="getSplitTechDesc(activeCat)"></p>
+                @if (hasExtraDetails(activeCat)) {
+                <div class="details-block">
+                  <h4 class="details-subtitle" [innerHTML]="getSplitText(getFirstBlockTitle())"></h4>
+                  <ul class="details-list">
+                    @for (item of getEcosystem(activeCat); track item) {
+                    <li [innerHTML]="getSplitText('• ' + item)"></li>
+                    }
+                  </ul>
+                </div>
+                @if (getSecondBlockItems(activeCat).length > 0) {
+                <div class="details-block">
+                  <h4 class="details-subtitle" [innerHTML]="getSplitText(getSecondBlockTitle(activeCat))"></h4>
+                  <p class="details-inline-text" [innerHTML]="getSplitText(getSecondBlockItems(activeCat).join(' • '))">
+                  </p>
+                </div>
+                }
+                @if (getThirdBlockItems(activeCat).length > 0) {
+                <div class="details-block">
+                  <h4 class="details-subtitle" [innerHTML]="getSplitText(getThirdBlockTitle(activeCat))"></h4>
+                  <p class="details-inline-text" [innerHTML]="getSplitText(getThirdBlockItems(activeCat).join(' • '))">
+                  </p>
+                </div>
+                }
+                }
+              </div>
+              <div class="flex justify-end mt-4">
+                <button class="detail-close-btn" (click)="closeCategory()" aria-label="Cerrar detalles">
+                  <fa-icon [icon]="faXmark" />
+                </button>
               </div>
             </div>
-          </div>
-          }
-        </div>
-      </div>
-      <div class="detail-content-side">
-        <div class="text-drawer">
-          <div class="tech-details-card">
-            <p class="details-tech-desc main-desc" [innerHTML]="getSplitTechDesc(activeCat)"></p>
-            @if (hasExtraDetails(activeCat)) {
-            <div class="details-block">
-              <h4 class="details-subtitle" [innerHTML]="getSplitText(getFirstBlockTitle())"></h4>
-              <ul class="details-list">
-                @for (item of getEcosystem(activeCat); track item) {
-                <li [innerHTML]="getSplitText('• ' + item)"></li>
-                }
-              </ul>
-            </div>
-            @if (getSecondBlockItems(activeCat).length > 0) {
-            <div class="details-block">
-              <h4 class="details-subtitle" [innerHTML]="getSplitText(getSecondBlockTitle(activeCat))"></h4>
-              <p class="details-inline-text" [innerHTML]="getSplitText(getSecondBlockItems(activeCat).join(' • '))">
-              </p>
-            </div>
-            }
-            @if (getThirdBlockItems(activeCat).length > 0) {
-            <div class="details-block">
-              <h4 class="details-subtitle" [innerHTML]="getSplitText(getThirdBlockTitle(activeCat))"></h4>
-              <p class="details-inline-text" [innerHTML]="getSplitText(getThirdBlockItems(activeCat).join(' • '))">
-              </p>
-            </div>
-            }
-            }
-          </div>
-          <div class="flex justify-end mt-4">
-            <button class="detail-close-btn" (click)="closeCategory()" aria-label="Cerrar detalles">
-              <fa-icon [icon]="faXmark" />
-            </button>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+  } @else {
+    <app-stack-modal [category]="activeCat" (close)="closeCategory()" />
+  }
 }

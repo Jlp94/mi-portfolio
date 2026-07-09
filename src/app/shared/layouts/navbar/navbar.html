@@ -1,6 +1,7 @@
 <header class="navbar-header fixed top-0 left-0 w-full z-50 pt-[5px] md:pt-0"
         [class.navbar-scrolled]="isScrolled()"
-        [class.navbar-hidden]="isHidden()">
+        [class.navbar-hidden]="isHidden()"
+        [class.navbar-menu-open]="isMenuOpen()">
   <div class="max-w-7xl mx-auto px-6 h-12 flex items-center justify-between">
     <div class="md:flex-1 flex items-center">
       <a href="#"
@@ -59,7 +60,7 @@
   </div>
 
   <div id="mobile-nav"
-    class="mobile-menu-container md:hidden fixed top-[53px] left-0 w-full h-[calc(100vh-53px)] backdrop-blur-lg transition-all duration-300 ease-in-out transform flex flex-col items-center justify-center gap-8 z-40"
+    class="mobile-menu-container md:hidden absolute top-full left-0 w-full h-[calc(100svh-100%)] backdrop-blur-lg transition-all duration-300 ease-in-out transform flex flex-col items-center justify-center gap-8 z-40"
     [class.translate-x-0]="isMenuOpen()" [class.opacity-100]="isMenuOpen()" [class.pointer-events-auto]="isMenuOpen()"
     [class.translate-x-full]="!isMenuOpen()" [class.opacity-0]="!isMenuOpen()"
     [class.pointer-events-none]="!isMenuOpen()" aria-label="Navegación móvil">
