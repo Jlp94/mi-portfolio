@@ -384,6 +384,7 @@ export class Stack {
   }
 
   protected onHoverIcon(event: MouseEvent | FocusEvent, isEven: boolean): void {
+    if (!window.matchMedia('(hover: hover)').matches) return;
     const wrapper = event.currentTarget as HTMLElement;
     const btn = wrapper.querySelector('.tech-symbol-btn') as HTMLElement;
     if (!btn) return;
@@ -398,6 +399,7 @@ export class Stack {
   }
 
   protected onLeaveIcon(event: MouseEvent | FocusEvent, isEven: boolean): void {
+    if (!window.matchMedia('(hover: hover)').matches) return;
     const wrapper = event.currentTarget as HTMLElement;
     const btn = wrapper.querySelector('.tech-symbol-btn') as HTMLElement;
     if (!btn) return;

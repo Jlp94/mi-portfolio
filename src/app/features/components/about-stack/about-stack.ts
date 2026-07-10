@@ -65,6 +65,8 @@ export class AboutStack {
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReducedMotion) return;
 
+      if (window.innerWidth < 768) return;
+
       const host = this.elementRef.nativeElement as HTMLElement;
 
       const headerTitle = host.querySelector('.section-header-centered h2');

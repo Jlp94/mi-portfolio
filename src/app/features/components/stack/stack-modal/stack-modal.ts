@@ -1,4 +1,4 @@
-import { Component, inject, computed, ElementRef, signal, input, output, afterNextRender, viewChild } from '@angular/core';
+import { Component, inject, computed, ElementRef, signal, input, output, afterNextRender, viewChild, ChangeDetectionStrategy } from '@angular/core';
 import { LanguageService } from '../../../../core/services/language.service';
 import { TechIcon } from '../../../../shared/ui/tech-icon/tech-icon';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
@@ -9,6 +9,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
   imports: [TechIcon, FaIconComponent],
   templateUrl: './stack-modal.html',
   styleUrl: './stack-modal.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StackModal {
   protected readonly languageService = inject(LanguageService);

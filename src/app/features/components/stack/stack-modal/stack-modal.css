@@ -285,3 +285,10 @@
     color: #ffffff;
   }
 }
+
+@media (max-width: 767px) {
+  .detail-panel.is-mobile-dialog {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
