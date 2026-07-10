@@ -72,12 +72,14 @@
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.bullet-wrap:hover .core-value-shape {
-  transform: rotate(135deg);
-}
+@media (hover: hover) {
+  .bullet-wrap:hover .core-value-shape {
+    transform: rotate(135deg);
+  }
 
-.bullet-wrap:hover .core-value-shape fa-icon {
-  transform: rotate(-135deg);
+  .bullet-wrap:hover .core-value-shape fa-icon {
+    transform: rotate(-135deg);
+  }
 }
 
 .bullet-title {

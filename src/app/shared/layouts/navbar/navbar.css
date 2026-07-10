@@ -64,6 +64,12 @@
   }
 }
 
+.navbar-header.navbar-menu-open {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: none;
+}
+
 .nav-link {
   display: inline-block;
   color: var(--theme-panel-link);

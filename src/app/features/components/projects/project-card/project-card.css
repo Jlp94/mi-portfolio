@@ -35,8 +35,10 @@
   display: block;
 }
 
-.project-card:hover .card-image {
-  transform: scale(1.1);
+@media (hover: hover) {
+  .project-card:hover .card-image {
+    transform: scale(1.1);
+  }
 }
 
 .card-footer {
@@ -125,5 +127,12 @@
   .project-card--large {
     grid-column: span 2 / span 2;
     grid-row: span 2 / span 2;
+  }
+}
+
+@media (max-width: 767px) {
+  .project-card {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 }

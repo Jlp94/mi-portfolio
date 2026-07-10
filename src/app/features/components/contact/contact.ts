@@ -78,6 +78,8 @@ export class Contact {
         return;
       }
 
+      if (window.innerWidth < 768) return;
+
       const hostElement = this.elementRef.nativeElement;
 
       const title = hostElement.querySelector('.contact-title');

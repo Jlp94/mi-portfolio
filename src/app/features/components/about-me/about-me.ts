@@ -1,4 +1,4 @@
-import { Component, inject, computed } from '@angular/core';
+import { Component, inject, computed, ChangeDetectionStrategy } from '@angular/core';
 import { LanguageService } from '../../../core/services/language.service';
 
 @Component({
@@ -6,6 +6,7 @@ import { LanguageService } from '../../../core/services/language.service';
   imports: [],
   templateUrl: './about-me.html',
   styleUrl: './about-me.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AboutMe {
   protected readonly languageService = inject(LanguageService);

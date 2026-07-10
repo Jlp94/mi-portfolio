@@ -105,6 +105,8 @@ export class Projects {
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReducedMotion) return;
 
+      if (window.innerWidth < 768) return;
+
       const host = this.elementRef.nativeElement as HTMLElement;
 
       const headerTitle = host.querySelector('.section-header-centered h2');
@@ -201,10 +203,19 @@ export class Projects {
     const isMobile = window.innerWidth < 768;
 
     if (isMobile) {
-      // Mobile: instant change, no animations
-      this.activeFilter.set(key);
-      this.cdr.detectChanges();
-      ScrollTrigger.refresh();
+      // Mobile: lightweight CSS fade transition instead of GSAP
+      container.style.transition = 'opacity 0.2s ease-out';
+      container.style.opacity = '0';
+      setTimeout(() => {
+        this.activeFilter.set(key);
+        this.cdr.detectChanges();
+        container.style.opacity = '1';
+        setTimeout(() => {
+          container.style.transition = '';
+          container.style.opacity = '';
+          ScrollTrigger.refresh();
+        }, 200);
+      }, 200);
       return;
     }
 

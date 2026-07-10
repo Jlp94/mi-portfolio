@@ -13,33 +13,35 @@
   cursor: pointer;
 }
 
-.clickable-card:hover {
-  transform: translateY(-4px);
+@media (hover: hover) {
+  .clickable-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .shared-card:hover .card-glow-effect {
+    opacity: 1;
+  }
+
+  .glow-sky:hover {
+    box-shadow: 0 10px 30px -10px rgba(14, 165, 233, 0.15);
+    border-color: var(--color-sky-400);
+  }
+
+  .glow-violet:hover {
+    box-shadow: 0 10px 30px -10px rgba(139, 92, 246, 0.15);
+    border-color: var(--color-violet-400);
+  }
+
+  .glow-emerald:hover {
+    box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.15);
+    border-color: var(--color-emerald-400);
+  }
 }
 
-.card-glow-effect {
-  background: radial-gradient(
-    800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(255, 255, 255, 0.06),
-    transparent 40%
-  );
+@media (max-width: 767px) {
+  .shared-card {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 }
 
-.shared-card:hover .card-glow-effect {
-  opacity: 1;
-}
-
-.glow-sky:hover {
-  box-shadow: 0 10px 30px -10px rgba(14, 165, 233, 0.15);
-  border-color: var(--color-sky-400);
-}
-
-.glow-violet:hover {
-  box-shadow: 0 10px 30px -10px rgba(139, 92, 246, 0.15);
-  border-color: var(--color-violet-400);
-}
-
-.glow-emerald:hover {
-  box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.15);
-  border-color: var(--color-emerald-400);
-}
