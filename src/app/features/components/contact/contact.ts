@@ -15,10 +15,7 @@ import { FormValidators } from '../../../validators/FormValidators';
 import { gsap } from '../../../core/constants/gsap-setup';
 import { ButtonFill1 } from '../../../shared/components/button-fill-1/button-fill-1';
 
-interface CardLayout {
-  gridColumn: string;
-  gridRow: string;
-}
+
 
 
 
@@ -62,12 +59,7 @@ export class Contact {
 
   protected readonly submissionStatus = signal<'idle' | 'success' | 'error'>('idle');
 
-  protected readonly activeLayout = signal<CardLayout[]>([
-    { gridColumn: '2 / 3', gridRow: '1 / 2' },
-    { gridColumn: '2 / 4', gridRow: '2 / 3' },
-    { gridColumn: '3 / 4', gridRow: '1 / 2' },
-    { gridColumn: '1 / 2', gridRow: '1 / 3' },
-  ]);
+
 
   constructor() {
     afterNextRender(() => {
