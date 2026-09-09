@@ -149,15 +149,15 @@ export class StackModal {
   }
 
   protected getTechName(key: string): string {
-    const techs = this.t().technologies as unknown as Record<string, string>;
+    const techs = this.t().technologies as Record<string, string>;
     return techs[key] || key;
   }
 
   protected getCategoryDesc(key: string): string {
-    const translations = this.t() as unknown as Record<string, string>;
-    if (key === 'frontend') return translations['frontendDesc'] || '';
-    if (key === 'backend') return translations['backendDesc'] || '';
-    if (key === 'tools') return translations['toolsDesc'] || '';
+    const t = this.t();
+    if (key === 'frontend') return t.frontendDesc || '';
+    if (key === 'backend') return t.backendDesc || '';
+    if (key === 'tools') return t.toolsDesc || '';
     return '';
   }
 
@@ -184,52 +184,52 @@ export class StackModal {
   }
 
   protected getFirstBlockTitle(): string {
-    const translations = this.t() as unknown as Record<string, string>;
-    return translations['ecosystemTitle'] || 'Ecosistema:';
+    return this.t().ecosystemTitle || 'Ecosistema:';
   }
 
   protected getSecondBlockTitle(key: string): string {
-    const translations = this.t() as unknown as Record<string, string>;
+    const t = this.t();
     if (key === 'frontend') {
-      return translations['librariesTitle'] || 'Librerías:';
+      return t.librariesTitle || 'Librerías:';
     }
     if (key === 'backend' || key === 'tools') {
-      return (translations['learningTitle'] || 'Aprendiendo') + ':';
+      return (t.learningTitle || 'Aprendiendo') + ':';
     }
     return '';
   }
 
   protected getEcosystem(key: string): readonly string[] {
-    const translations = this.t() as unknown as Record<string, readonly string[]>;
-    return translations[`${key}Ecosystem`] || [];
+    const t = this.t();
+    if (key === 'frontend') return t.frontendEcosystem || [];
+    if (key === 'backend') return t.backendEcosystem || [];
+    if (key === 'tools') return t.toolsEcosystem || [];
+    return [];
   }
 
   protected getSecondBlockItems(key: string): readonly string[] {
-    const translations = this.t() as unknown as Record<string, readonly string[]>;
+    const t = this.t();
     if (key === 'frontend') {
-      return translations['frontendLibraries'] || [];
+      return t.frontendLibraries || [];
     }
     if (key === 'backend') {
-      return translations['backendLearning'] || [];
+      return t.backendLearning || [];
     }
     if (key === 'tools') {
-      return translations['toolsLearning'] || [];
+      return t.toolsLearning || [];
     }
     return [];
   }
 
   protected getThirdBlockTitle(key: string): string {
-    const translations = this.t() as unknown as Record<string, string>;
     if (key === 'frontend') {
-      return translations['futureTitle'] || 'A futuro:';
+      return this.t().futureTitle || 'A futuro:';
     }
     return '';
   }
 
   protected getThirdBlockItems(key: string): readonly string[] {
-    const translations = this.t() as unknown as Record<string, readonly string[]>;
     if (key === 'frontend') {
-      return translations['frontendLearning'] || [];
+      return this.t().frontendLearning || [];
     }
     return [];
   }
