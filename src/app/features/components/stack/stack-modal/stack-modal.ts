@@ -1,4 +1,15 @@
-import { Component, inject, computed, ElementRef, input, output, afterNextRender, viewChild, ChangeDetectionStrategy, DestroyRef } from '@angular/core';
+import {
+  Component,
+  inject,
+  computed,
+  ElementRef,
+  input,
+  output,
+  afterNextRender,
+  viewChild,
+  ChangeDetectionStrategy,
+  DestroyRef,
+} from '@angular/core';
 import { LanguageService } from '../../../../core/services/language.service';
 import { TechIcon } from '../../../../shared/ui/tech-icon/tech-icon';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
