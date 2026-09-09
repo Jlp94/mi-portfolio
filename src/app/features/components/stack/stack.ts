@@ -3,13 +3,9 @@ import { LanguageService } from '../../../core/services/language.service';
 import { TechIcon } from '../../../shared/ui/tech-icon/tech-icon';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faAngleDown, faAngleUp, faXmark } from '@fortawesome/free-solid-svg-icons';
-import gsap from 'gsap';
-import { Flip } from 'gsap/Flip';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { gsap, Flip } from '../../../core/constants/gsap-setup';
 
 import { StackModal } from './stack-modal/stack-modal';
-
-gsap.registerPlugin(Flip, ScrollTrigger);
 
 @Component({
   selector: 'app-stack',

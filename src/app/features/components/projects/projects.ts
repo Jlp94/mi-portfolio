@@ -4,11 +4,7 @@ import { ImagePreloadService } from '../../../core/services/image-preload.servic
 import { ProjectCard } from './project-card/project-card';
 import { ProjectModal } from './project-modal/project-modal';
 import { ProjectItem, CardLayout, FilterKey } from './model/project.model';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Flip } from 'gsap/Flip';
-
-gsap.registerPlugin(ScrollTrigger, Flip);
+import { gsap, ScrollTrigger, Flip } from '../../../core/constants/gsap-setup';
 
 @Component({
   selector: 'app-projects',

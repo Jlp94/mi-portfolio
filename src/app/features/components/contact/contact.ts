@@ -12,8 +12,7 @@ import {
 import { LanguageService } from '../../../core/services/language.service';
 import { EmailService } from '../../../core/services/email-service';
 import { FormValidators } from '../../../validators/FormValidators';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { gsap } from '../../../core/constants/gsap-setup';
 import { ButtonFill1 } from '../../../shared/components/button-fill-1/button-fill-1';
 
 interface CardLayout {
@@ -71,7 +70,6 @@ export class Contact {
   ]);
 
   constructor() {
-    gsap.registerPlugin(ScrollTrigger);
     afterNextRender(() => {
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReducedMotion) {

@@ -4,10 +4,7 @@ import { Stack } from '../stack/stack';
 import { LanguageService } from '../../../core/services/language.service';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faGauge, faLaptop, faLightbulb, faRocket } from '@fortawesome/free-solid-svg-icons';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import { gsap } from '../../../core/constants/gsap-setup';
 
 @Component({
   selector: 'app-about-stack',
