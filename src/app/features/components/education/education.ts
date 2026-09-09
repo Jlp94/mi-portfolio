@@ -3,10 +3,7 @@ import { LanguageService } from '../../../core/services/language.service';
 import { TechIcon } from '../../../shared/ui/tech-icon/tech-icon';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import { gsap } from '../../../core/constants/gsap-setup';
 
 @Component({
   selector: 'app-education',

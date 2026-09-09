@@ -1,13 +1,10 @@
-import { Component, inject, computed, ElementRef, afterNextRender, signal } from '@angular/core';
+import { Component, inject, computed, ElementRef, afterNextRender } from '@angular/core';
 import { AboutMe } from '../about-me/about-me';
 import { Stack } from '../stack/stack';
 import { LanguageService } from '../../../core/services/language.service';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faGauge, faLaptop, faLightbulb, faRocket } from '@fortawesome/free-solid-svg-icons';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import { gsap } from '../../../core/constants/gsap-setup';
 
 @Component({
   selector: 'app-about-stack',
@@ -20,45 +17,15 @@ export class AboutStack {
   protected readonly t = computed(() => this.languageService.translations().aboutMe);
   private readonly elementRef = inject(ElementRef);
 
-  protected readonly faGauge = faGauge;
-  protected readonly faLaptop = faLaptop;
-  protected readonly faLightbulb = faLightbulb;
-  protected readonly faRocket = faRocket;
-
-  protected readonly bulletIcons = signal(['gauge', 'laptop', 'lightbulb', 'rocket']);
-
-  protected getIcon(index: number) {
-    const name = this.bulletIcons()[index];
-    switch (name) {
-      case 'gauge': return this.faGauge;
-      case 'laptop': return this.faLaptop;
-      case 'lightbulb': return this.faLightbulb;
-      case 'rocket': return this.faRocket;
-      default: return this.faGauge;
-    }
-  }
-
-  protected getTitle(index: number): string {
+  protected readonly bullets = computed(() => {
     const translations = this.t();
-    switch (index) {
-      case 0: return translations.valFastTitle;
-      case 1: return translations.valResponsiveTitle;
-      case 2: return translations.valIntuitiveTitle;
-      case 3: return translations.valDynamicTitle;
-      default: return '';
-    }
-  }
-
-  protected getDesc(index: number): string {
-    const translations = this.t();
-    switch (index) {
-      case 0: return translations.valFastDesc;
-      case 1: return translations.valResponsiveDesc;
-      case 2: return translations.valIntuitiveDesc;
-      case 3: return translations.valDynamicDesc;
-      default: return '';
-    }
-  }
+    return [
+      { icon: faGauge, title: translations.valFastTitle, desc: translations.valFastDesc },
+      { icon: faLaptop, title: translations.valResponsiveTitle, desc: translations.valResponsiveDesc },
+      { icon: faLightbulb, title: translations.valIntuitiveTitle, desc: translations.valIntuitiveDesc },
+      { icon: faRocket, title: translations.valDynamicTitle, desc: translations.valDynamicDesc },
+    ];
+  });
 
   constructor() {
     afterNextRender(() => {

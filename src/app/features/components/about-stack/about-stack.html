@@ -9,16 +9,16 @@
   </div>
 
   <div class="bullets-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
-    @for (icon of bulletIcons(); track $index; let i = $index) {
+    @for (bullet of bullets(); track $index; let i = $index) {
     <div class="bullet-wrap flex flex-col items-center text-center" [class.bullet-left]="i < 2"
       [class.bullet-right]="i >= 2">
       <div class="shape-wrap mb-4">
         <div class="core-value-shape">
-          <fa-icon [icon]="getIcon(i)"></fa-icon>
+          <fa-icon [icon]="bullet.icon"></fa-icon>
         </div>
       </div>
-      <h3 class="bullet-title font-sans text-xl font-bold mb-2">{{ getTitle(i) }}</h3>
-      <p class="bullet-text font-sans text-md opacity-85 max-w-[240px] leading-relaxed">{{ getDesc(i) }}</p>
+      <h3 class="bullet-title font-sans text-xl font-bold mb-2">{{ bullet.title }}</h3>
+      <p class="bullet-text font-sans text-md opacity-85 max-w-[240px] leading-relaxed">{{ bullet.desc }}</p>
     </div>
     }
   </div>

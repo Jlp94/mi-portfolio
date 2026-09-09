@@ -1,15 +1,11 @@
-import { Component, inject, computed, ElementRef, signal, ChangeDetectorRef, afterNextRender } from '@angular/core';
+import { Component, inject, computed, ElementRef, signal, ChangeDetectorRef, DestroyRef, afterNextRender } from '@angular/core';
 import { LanguageService } from '../../../core/services/language.service';
 import { TechIcon } from '../../../shared/ui/tech-icon/tech-icon';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faAngleDown, faAngleUp, faXmark } from '@fortawesome/free-solid-svg-icons';
-import gsap from 'gsap';
-import { Flip } from 'gsap/Flip';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { gsap, Flip } from '../../../core/constants/gsap-setup';
 
 import { StackModal } from './stack-modal/stack-modal';
-
-gsap.registerPlugin(Flip, ScrollTrigger);
 
 @Component({
   selector: 'app-stack',
@@ -22,6 +18,8 @@ export class Stack {
   protected readonly t = computed(() => this.languageService.translations().stacks);
   private readonly elementRef = inject(ElementRef);
   private readonly cdr = inject(ChangeDetectorRef);
+  private readonly destroyRef = inject(DestroyRef);
+
 
   protected readonly faAngleDown = faAngleDown;
   protected readonly faAngleUp = faAngleUp;
@@ -72,10 +70,22 @@ export class Stack {
   ];
 
   constructor() {
+    this.destroyRef.onDestroy(() => {
+      this.activeTl?.kill();
+      if (typeof document !== 'undefined') {
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+      }
+    });
+
     afterNextRender(() => {
       if (typeof window !== 'undefined') {
         this.updateIsMobile();
-        window.addEventListener('resize', () => this.updateIsMobile());
+        const onResize = () => this.updateIsMobile();
+        window.addEventListener('resize', onResize);
+        this.destroyRef.onDestroy(() => {
+          window.removeEventListener('resize', onResize);
+        });
       }
     });
   }
@@ -95,15 +105,15 @@ export class Stack {
   }
 
   protected getTechName(key: string): string {
-    const techs = this.t().technologies as unknown as Record<string, string>;
+    const techs = this.t().technologies as Record<string, string>;
     return techs[key] || key;
   }
 
   protected getCategoryDesc(key: string): string {
-    const translations = this.t() as unknown as Record<string, string>;
-    if (key === 'frontend') return translations['frontendDesc'] || '';
-    if (key === 'backend') return translations['backendDesc'] || '';
-    if (key === 'tools') return translations['toolsDesc'] || '';
+    const t = this.t();
+    if (key === 'frontend') return t.frontendDesc || '';
+    if (key === 'backend') return t.backendDesc || '';
+    if (key === 'tools') return t.toolsDesc || '';
     return '';
   }
 
@@ -130,52 +140,52 @@ export class Stack {
   }
 
   protected getFirstBlockTitle(): string {
-    const translations = this.t() as unknown as Record<string, string>;
-    return translations['ecosystemTitle'] || 'Ecosistema:';
+    return this.t().ecosystemTitle || 'Ecosistema:';
   }
 
   protected getSecondBlockTitle(key: string): string {
-    const translations = this.t() as unknown as Record<string, string>;
+    const t = this.t();
     if (key === 'frontend') {
-      return translations['librariesTitle'] || 'Librerías:';
+      return t.librariesTitle || 'Librerías:';
     }
     if (key === 'backend' || key === 'tools') {
-      return (translations['learningTitle'] || 'Aprendiendo') + ':';
+      return (t.learningTitle || 'Aprendiendo') + ':';
     }
     return '';
   }
 
   protected getEcosystem(key: string): readonly string[] {
-    const translations = this.t() as unknown as Record<string, readonly string[]>;
-    return translations[`${key}Ecosystem`] || [];
+    const t = this.t();
+    if (key === 'frontend') return t.frontendEcosystem || [];
+    if (key === 'backend') return t.backendEcosystem || [];
+    if (key === 'tools') return t.toolsEcosystem || [];
+    return [];
   }
 
   protected getSecondBlockItems(key: string): readonly string[] {
-    const translations = this.t() as unknown as Record<string, readonly string[]>;
+    const t = this.t();
     if (key === 'frontend') {
-      return translations['frontendLibraries'] || [];
+      return t.frontendLibraries || [];
     }
     if (key === 'backend') {
-      return translations['backendLearning'] || [];
+      return t.backendLearning || [];
     }
     if (key === 'tools') {
-      return translations['toolsLearning'] || [];
+      return t.toolsLearning || [];
     }
     return [];
   }
 
   protected getThirdBlockTitle(key: string): string {
-    const translations = this.t() as unknown as Record<string, string>;
     if (key === 'frontend') {
-      return translations['futureTitle'] || 'A futuro:';
+      return this.t().futureTitle || 'A futuro:';
     }
     return '';
   }
 
   protected getThirdBlockItems(key: string): readonly string[] {
-    const translations = this.t() as unknown as Record<string, readonly string[]>;
     if (key === 'frontend') {
-      return translations['frontendLearning'] || [];
+      return this.t().frontendLearning || [];
     }
     return [];
   }
@@ -210,7 +220,6 @@ export class Stack {
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
     if (isMobile) {
       this.activeCategory.set(catKey);
-      this.cdr.detectChanges();
       return;
     }
 
@@ -219,6 +228,7 @@ export class Stack {
     const state = Flip.getState(`[data-flip-id="${catKey}"]`);
 
     this.activeCategory.set(catKey);
+    // Necesario para que Angular renderice síncronamente .detail-panel en el DOM antes de Flip
     this.cdr.detectChanges();
 
     this.activeTl = gsap.timeline();
@@ -308,7 +318,6 @@ export class Stack {
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
     if (isMobile) {
       this.activeCategory.set(null);
-      this.cdr.detectChanges();
       if (onCompleteCallback) onCompleteCallback();
       return;
     }
@@ -372,7 +381,6 @@ export class Stack {
       );
     } else {
       this.activeCategory.set(null);
-      this.cdr.detectChanges();
       if (onCompleteCallback) onCompleteCallback();
     }
   }

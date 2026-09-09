@@ -4,11 +4,7 @@ import { ImagePreloadService } from '../../../core/services/image-preload.servic
 import { ProjectCard } from './project-card/project-card';
 import { ProjectModal } from './project-modal/project-modal';
 import { ProjectItem, CardLayout, FilterKey } from './model/project.model';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Flip } from 'gsap/Flip';
-
-gsap.registerPlugin(ScrollTrigger, Flip);
+import { gsap, ScrollTrigger, Flip } from '../../../core/constants/gsap-setup';
 
 @Component({
   selector: 'app-projects',
@@ -208,7 +204,6 @@ export class Projects {
       container.style.opacity = '0';
       setTimeout(() => {
         this.activeFilter.set(key);
-        this.cdr.detectChanges();
         container.style.opacity = '1';
         setTimeout(() => {
           container.style.transition = '';
@@ -269,6 +264,7 @@ export class Projects {
     const state = Flip.getState(remainingCards);
 
     this.activeFilter.set(key);
+    // Necesario para que Angular aplique el filtro al DOM antes de que Flip mida la posición final
     this.cdr.detectChanges();
 
     if (leavingCards && leavingCards.length > 0) {

@@ -5,7 +5,6 @@ import {
   afterNextRender,
   DestroyRef,
   inject,
-  OnInit,
 } from '@angular/core';
 import { Navbar } from '../../shared/layouts/navbar/navbar';
 import { Footer } from '../../shared/layouts/footer/footer';
@@ -34,7 +33,7 @@ interface Trace {
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-export class Home implements OnInit {
+export class Home {
   @ViewChild('meteorCanvas', { static: true })
   canvasRef!: ElementRef<HTMLCanvasElement>;
 
@@ -43,7 +42,10 @@ export class Home implements OnInit {
   private traces: Trace[] = [];
   private animFrameId = 0;
   private isDark = false;
+  private isCanvasVisible = true;
   private mouse = { x: -9999, y: -9999 };
+  private width = 0;
+  private height = 0;
 
   private readonly LIGHT_COLORS = [
     '#2dd4bf',
@@ -70,16 +72,9 @@ export class Home implements OnInit {
       this.setupCanvas();
       this.generateTraces();
       this.bindEvents();
+      this.observeVisibility();
       this.loop(0);
     });
-  }
-
-  ngOnInit(): void {
-    if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', () => {
-        sessionStorage.setItem('scrollPosition', window.scrollY.toString());
-      });
-    }
   }
 
   private setupCanvas(): void {
@@ -92,10 +87,12 @@ export class Home implements OnInit {
   private resizeCanvas(): void {
     const canvas = this.canvasRef.nativeElement;
     const dpr = window.devicePixelRatio || 1;
-    canvas.width = window.innerWidth * dpr;
-    canvas.height = window.innerHeight * dpr;
-    canvas.style.width = window.innerWidth + 'px';
-    canvas.style.height = window.innerHeight + 'px';
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
+    canvas.width = this.width * dpr;
+    canvas.height = this.height * dpr;
+    canvas.style.width = this.width + 'px';
+    canvas.style.height = this.height + 'px';
     this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
@@ -125,6 +122,22 @@ export class Home implements OnInit {
     });
   }
 
+  private observeVisibility(): void {
+    const canvas = this.canvasRef.nativeElement;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const wasVisible = this.isCanvasVisible;
+        this.isCanvasVisible = entry.isIntersecting;
+        if (!wasVisible && this.isCanvasVisible) {
+          this.loop(performance.now());
+        }
+      },
+      { threshold: 0 }
+    );
+    observer.observe(canvas);
+    this.destroyRef.onDestroy(() => observer.disconnect());
+  }
+
   private watchTheme(): void {
     const update = () => {
       const wasDark = this.isDark;
@@ -144,15 +157,15 @@ export class Home implements OnInit {
   }
 
   private get traceCount(): number {
-    const w = window.innerWidth;
-    const h = window.innerHeight;
+    const w = this.width || window.innerWidth;
+    const h = this.height || window.innerHeight;
     return Math.min(60, Math.max(28, Math.round((w * h) / 18000)));
   }
 
   private generateTraces(): void {
     this.traces = [];
-    const w = window.innerWidth;
-    const h = window.innerHeight;
+    const w = this.width;
+    const h = this.height;
     const pal = this.palette;
 
     for (let i = 0; i < this.traceCount; i++) {
@@ -196,7 +209,7 @@ export class Home implements OnInit {
   }
 
   private scrollFactor(): number {
-    const fadeDistance = window.innerHeight * 0.85;
+    const fadeDistance = this.height * 0.85;
     const t = Math.min(Math.max(window.scrollY / fadeDistance, 0), 1);
     return 1 - t * t;
   }
@@ -224,8 +237,8 @@ export class Home implements OnInit {
     }
 
     const margin = 250;
-    const w = window.innerWidth;
-    const h = window.innerHeight;
+    const w = this.width;
+    const h = this.height;
     const xs = trace.points.map((p) => p.x);
     const ys = trace.points.map((p) => p.y);
     const minX = Math.min(...xs),
@@ -287,11 +300,11 @@ export class Home implements OnInit {
   }
 
   private loop = (now: number): void => {
+    if (!this.isCanvasVisible) return;
+
     this.animFrameId = requestAnimationFrame(this.loop);
 
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-    this.ctx.clearRect(0, 0, w, h);
+    this.ctx.clearRect(0, 0, this.width, this.height);
 
     const sf = this.scrollFactor();
 
