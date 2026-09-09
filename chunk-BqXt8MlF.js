@@ -1,0 +1,2 @@
+import {o as oL,k as kE,t as eu,A as Ec,P as Cp,I as Ic,a as uD,X as Xy,D as Dp}from'./main-OBWJAQJO.js';var p=class t{key=oL.required();customClass=oL("w-full h-full");static \u0275fac=function(e){return new(e||t)};static \u0275cmp=kE({type:t,selectors:[["app-tech-icon"]],inputs:{key:[1,"key"],customClass:[1,"customClass"]},decls:2,vars:3,consts:[["xmlns","http://www.w3.org/2000/svg"]],template:function(e,n){e&1&&(eu(),Ec(0,"svg",0),Cp(1,"use"),Ic()),e&2&&(uD(n.customClass()),Xy(),Dp("href","svg/tech-sprite.svg#icon-"+n.key()));},encapsulation:2})};
+export{p};
