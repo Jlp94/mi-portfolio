@@ -4,6 +4,7 @@ import { Injectable, signal } from '@angular/core';
 export class ImagePreloadService {
   private readonly loadedUrls = signal<Set<string>>(new Set());
   private readonly queue: string[] = [];
+  private readonly queuedUrls = new Set<string>();
   private readonly activeLoads = new Map<string, HTMLImageElement>();
   private readonly maxConcurrent = 2;
   private inFlight = 0;
@@ -12,8 +13,11 @@ export class ImagePreloadService {
 
   enqueue(urls: string[], priority: 'high' | 'low' = 'low'): void {
     const newUrls = urls.filter(
-      (u) => !this.loadedUrls().has(u) && !this.queue.includes(u) && !this.activeLoads.has(u)
+      (u) => !this.loadedUrls().has(u) && !this.queuedUrls.has(u) && !this.activeLoads.has(u)
     );
+    for (const u of newUrls) {
+      this.queuedUrls.add(u);
+    }
     if (priority === 'high') {
       this.queue.unshift(...newUrls);
     } else {
@@ -25,6 +29,7 @@ export class ImagePreloadService {
   private processQueue(): void {
     while (this.inFlight < this.maxConcurrent && this.queue.length > 0) {
       const url = this.queue.shift()!;
+      this.queuedUrls.delete(url);
       this.loadOne(url);
     }
   }
