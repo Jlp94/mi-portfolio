@@ -5,7 +5,6 @@ import {
   afterNextRender,
   DestroyRef,
   inject,
-  OnInit,
 } from '@angular/core';
 import { Navbar } from '../../shared/layouts/navbar/navbar';
 import { Footer } from '../../shared/layouts/footer/footer';
@@ -34,7 +33,7 @@ interface Trace {
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-export class Home implements OnInit {
+export class Home {
   @ViewChild('meteorCanvas', { static: true })
   canvasRef!: ElementRef<HTMLCanvasElement>;
 
@@ -43,6 +42,7 @@ export class Home implements OnInit {
   private traces: Trace[] = [];
   private animFrameId = 0;
   private isDark = false;
+  private isCanvasVisible = true;
   private mouse = { x: -9999, y: -9999 };
 
   private readonly LIGHT_COLORS = [
@@ -70,16 +70,9 @@ export class Home implements OnInit {
       this.setupCanvas();
       this.generateTraces();
       this.bindEvents();
+      this.observeVisibility();
       this.loop(0);
     });
-  }
-
-  ngOnInit(): void {
-    if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', () => {
-        sessionStorage.setItem('scrollPosition', window.scrollY.toString());
-      });
-    }
   }
 
   private setupCanvas(): void {
@@ -123,6 +116,22 @@ export class Home implements OnInit {
       window.removeEventListener('mouseleave', onMouseLeave);
       window.removeEventListener('resize', onResize);
     });
+  }
+
+  private observeVisibility(): void {
+    const canvas = this.canvasRef.nativeElement;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const wasVisible = this.isCanvasVisible;
+        this.isCanvasVisible = entry.isIntersecting;
+        if (!wasVisible && this.isCanvasVisible) {
+          this.loop(performance.now());
+        }
+      },
+      { threshold: 0 }
+    );
+    observer.observe(canvas);
+    this.destroyRef.onDestroy(() => observer.disconnect());
   }
 
   private watchTheme(): void {
@@ -287,6 +296,8 @@ export class Home implements OnInit {
   }
 
   private loop = (now: number): void => {
+    if (!this.isCanvasVisible) return;
+
     this.animFrameId = requestAnimationFrame(this.loop);
 
     const w = window.innerWidth;
