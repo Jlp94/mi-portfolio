@@ -1,4 +1,4 @@
-import { Component, inject, computed, ElementRef, signal, ChangeDetectorRef, afterNextRender } from '@angular/core';
+import { Component, inject, computed, ElementRef, signal, ChangeDetectorRef, DestroyRef, afterNextRender } from '@angular/core';
 import { LanguageService } from '../../../core/services/language.service';
 import { TechIcon } from '../../../shared/ui/tech-icon/tech-icon';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
@@ -18,6 +18,8 @@ export class Stack {
   protected readonly t = computed(() => this.languageService.translations().stacks);
   private readonly elementRef = inject(ElementRef);
   private readonly cdr = inject(ChangeDetectorRef);
+  private readonly destroyRef = inject(DestroyRef);
+
 
   protected readonly faAngleDown = faAngleDown;
   protected readonly faAngleUp = faAngleUp;
@@ -68,10 +70,22 @@ export class Stack {
   ];
 
   constructor() {
+    this.destroyRef.onDestroy(() => {
+      this.activeTl?.kill();
+      if (typeof document !== 'undefined') {
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+      }
+    });
+
     afterNextRender(() => {
       if (typeof window !== 'undefined') {
         this.updateIsMobile();
-        window.addEventListener('resize', () => this.updateIsMobile());
+        const onResize = () => this.updateIsMobile();
+        window.addEventListener('resize', onResize);
+        this.destroyRef.onDestroy(() => {
+          window.removeEventListener('resize', onResize);
+        });
       }
     });
   }

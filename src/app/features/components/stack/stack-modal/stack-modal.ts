@@ -1,4 +1,4 @@
-import { Component, inject, computed, ElementRef, signal, input, output, afterNextRender, viewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, computed, ElementRef, input, output, afterNextRender, viewChild, ChangeDetectionStrategy, DestroyRef } from '@angular/core';
 import { LanguageService } from '../../../../core/services/language.service';
 import { TechIcon } from '../../../../shared/ui/tech-icon/tech-icon';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
@@ -16,10 +16,11 @@ export class StackModal {
   protected readonly t = computed(() => this.languageService.translations().stacks);
 
   category = input.required<string>();
-  close = output<void>();
+  closeModal = output<void>();
 
   protected readonly faXmark = faXmark;
   private readonly dialogRef = viewChild<ElementRef<HTMLDialogElement>>('stackDialog');
+  private readonly destroyRef = inject(DestroyRef);
 
   private touchStartX = 0;
   private touchStartY = 0;
@@ -63,6 +64,13 @@ export class StackModal {
   ];
 
   constructor() {
+    this.destroyRef.onDestroy(() => {
+      if (typeof document !== 'undefined') {
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+      }
+    });
+
     afterNextRender(() => {
       const dialog = this.dialogRef()?.nativeElement;
       if (dialog && !dialog.open) {
@@ -89,7 +97,7 @@ export class StackModal {
           document.body.style.overflow = '';
           document.documentElement.style.overflow = '';
         }
-        this.close.emit();
+        this.closeModal.emit();
       };
 
       dialog.addEventListener('transitionend', cleanup, { once: true });
@@ -105,7 +113,7 @@ export class StackModal {
         document.body.style.overflow = '';
         document.documentElement.style.overflow = '';
       }
-      this.close.emit();
+      this.closeModal.emit();
     }
   }
 
