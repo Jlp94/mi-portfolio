@@ -206,7 +206,6 @@ export class Stack {
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
     if (isMobile) {
       this.activeCategory.set(catKey);
-      this.cdr.detectChanges();
       return;
     }
 
@@ -215,6 +214,7 @@ export class Stack {
     const state = Flip.getState(`[data-flip-id="${catKey}"]`);
 
     this.activeCategory.set(catKey);
+    // Necesario para que Angular renderice síncronamente .detail-panel en el DOM antes de Flip
     this.cdr.detectChanges();
 
     this.activeTl = gsap.timeline();
@@ -304,7 +304,6 @@ export class Stack {
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
     if (isMobile) {
       this.activeCategory.set(null);
-      this.cdr.detectChanges();
       if (onCompleteCallback) onCompleteCallback();
       return;
     }
@@ -368,7 +367,6 @@ export class Stack {
       );
     } else {
       this.activeCategory.set(null);
-      this.cdr.detectChanges();
       if (onCompleteCallback) onCompleteCallback();
     }
   }
