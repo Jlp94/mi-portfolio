@@ -9,7 +9,7 @@
   </section>
 
   <section id="about-me" class="w-full min-h-screen">
-    @defer (on idle; on viewport) {
+    @defer (on idle; prefetch on immediate) {
       <app-about-stack class="w-full" />
     } @placeholder {
       <div class="w-full min-h-screen bg-transparent"></div>
@@ -18,7 +18,7 @@
 
 
   <section id="projects" class="w-full relative pt-0 pb-10">
-    @defer (on idle; on viewport) {
+    @defer (on idle; prefetch on immediate) {
       <app-projects class="w-full" />
     } @placeholder {
       <div class="w-full min-h-screen bg-transparent"></div>
@@ -27,7 +27,7 @@
 
   <section id="experience" class="w-full flex items-center justify-center relative pt-20 pb-30">
     <div class="container mx-auto px-4 max-w-4xl flex flex-col gap-16 relative">
-      @defer (on idle; on viewport) {
+      @defer (on idle; prefetch on immediate) {
         <app-experience class="w-full" />
         <app-education class="w-full" />
       } @placeholder {
@@ -37,7 +37,7 @@
   </section>
 
   <section id="contact" class="w-full flex relative mt-20">
-    @defer (on idle; on viewport) {
+    @defer (on idle; prefetch on immediate) {
       <app-contact class="w-full flex flex-col flex-grow" />
     } @placeholder {
       <div class="w-full h-[1340px] md:h-[860px] bg-transparent"></div>
@@ -45,7 +45,7 @@
   </section>
 </main>
 
-@defer (on idle; on viewport) {
+@defer (on idle; prefetch on immediate) {
   <app-footer />
 } @placeholder {
   <div class="w-full h-[150px] md:h-[217px] bg-transparent"></div>
