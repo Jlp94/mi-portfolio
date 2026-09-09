@@ -44,6 +44,8 @@ export class Home {
   private isDark = false;
   private isCanvasVisible = true;
   private mouse = { x: -9999, y: -9999 };
+  private width = 0;
+  private height = 0;
 
   private readonly LIGHT_COLORS = [
     '#2dd4bf',
@@ -85,10 +87,12 @@ export class Home {
   private resizeCanvas(): void {
     const canvas = this.canvasRef.nativeElement;
     const dpr = window.devicePixelRatio || 1;
-    canvas.width = window.innerWidth * dpr;
-    canvas.height = window.innerHeight * dpr;
-    canvas.style.width = window.innerWidth + 'px';
-    canvas.style.height = window.innerHeight + 'px';
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
+    canvas.width = this.width * dpr;
+    canvas.height = this.height * dpr;
+    canvas.style.width = this.width + 'px';
+    canvas.style.height = this.height + 'px';
     this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
@@ -153,15 +157,15 @@ export class Home {
   }
 
   private get traceCount(): number {
-    const w = window.innerWidth;
-    const h = window.innerHeight;
+    const w = this.width || window.innerWidth;
+    const h = this.height || window.innerHeight;
     return Math.min(60, Math.max(28, Math.round((w * h) / 18000)));
   }
 
   private generateTraces(): void {
     this.traces = [];
-    const w = window.innerWidth;
-    const h = window.innerHeight;
+    const w = this.width;
+    const h = this.height;
     const pal = this.palette;
 
     for (let i = 0; i < this.traceCount; i++) {
@@ -205,7 +209,7 @@ export class Home {
   }
 
   private scrollFactor(): number {
-    const fadeDistance = window.innerHeight * 0.85;
+    const fadeDistance = this.height * 0.85;
     const t = Math.min(Math.max(window.scrollY / fadeDistance, 0), 1);
     return 1 - t * t;
   }
@@ -233,8 +237,8 @@ export class Home {
     }
 
     const margin = 250;
-    const w = window.innerWidth;
-    const h = window.innerHeight;
+    const w = this.width;
+    const h = this.height;
     const xs = trace.points.map((p) => p.x);
     const ys = trace.points.map((p) => p.y);
     const minX = Math.min(...xs),
@@ -300,9 +304,7 @@ export class Home {
 
     this.animFrameId = requestAnimationFrame(this.loop);
 
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-    this.ctx.clearRect(0, 0, w, h);
+    this.ctx.clearRect(0, 0, this.width, this.height);
 
     const sf = this.scrollFactor();
 
