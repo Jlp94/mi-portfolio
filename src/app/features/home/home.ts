@@ -304,9 +304,14 @@ export class Home {
 
     this.animFrameId = requestAnimationFrame(this.loop);
 
-    this.ctx.clearRect(0, 0, this.width, this.height);
-
     const sf = this.scrollFactor();
+
+    if (sf <= 0) {
+      this.ctx.clearRect(0, 0, this.width, this.height);
+      return;
+    }
+
+    this.ctx.clearRect(0, 0, this.width, this.height);
 
     for (const trace of this.traces) {
       this.moveTrace(trace);

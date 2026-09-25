@@ -34,6 +34,21 @@
   width: 100%;
   box-sizing: border-box;
   will-change: transform, opacity;
+  opacity: 0;
+}
+
+.about-stack-left,
+.about-stack-right {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bullet-wrap,
+  .about-stack-left,
+  .about-stack-right {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .shape-wrap {
