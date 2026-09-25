@@ -66,10 +66,9 @@ export class AboutStack {
 
       const bullets = host.querySelectorAll('.bullet-wrap');
       if (bullets.length > 0) {
-        gsap.set(bullets, { 
-          opacity: 0, 
-          rotationY: -180, 
-          transformPerspective: 1000 
+        gsap.set(bullets, {
+          rotationY: -180,
+          transformPerspective: 1000,
         });
         gsap.to(bullets, {
           opacity: 1,
@@ -77,6 +76,7 @@ export class AboutStack {
           duration: 1.2,
           stagger: 0.35,
           ease: 'back.out(1.3)',
+          clearProps: 'will-change',
           scrollTrigger: {
             trigger: host.querySelector('.bullets-container'),
             start: 'top 85%',
@@ -86,14 +86,13 @@ export class AboutStack {
 
       const leftColumn = host.querySelector('.about-stack-left');
       if (leftColumn) {
-        gsap.set(leftColumn, { opacity: 0, x: -160, filter: 'blur(12px)' });
+        gsap.set(leftColumn, { x: -160 });
         gsap.to(leftColumn, {
           opacity: 1,
           x: 0,
-          filter: 'blur(0px)',
           duration: 1.4,
           ease: 'power3.out',
-          clearProps: 'transform,filter',
+          clearProps: 'transform',
           scrollTrigger: {
             trigger: leftColumn,
             start: 'top 88%',
@@ -103,14 +102,13 @@ export class AboutStack {
 
       const rightColumn = host.querySelector('.about-stack-right');
       if (rightColumn) {
-        gsap.set(rightColumn, { opacity: 0, x: 160, filter: 'blur(12px)' });
+        gsap.set(rightColumn, { x: 160 });
         gsap.to(rightColumn, {
           opacity: 1,
           x: 0,
-          filter: 'blur(0px)',
           duration: 1.4,
           ease: 'power3.out',
-          clearProps: 'transform,filter',
+          clearProps: 'transform',
           scrollTrigger: {
             trigger: rightColumn,
             start: 'top 88%',
